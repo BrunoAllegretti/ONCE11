@@ -1,0 +1,71 @@
+/* fontes */
+@font-face {
+    font-family: 'Jost';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
+}
+
+/* ------- */
+
+@font-face {
+    font-family: 'MSBold';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Bold.ttf') format('truetype');
+}
+
+.card {
+    background: linear-gradient(to bottom, #FFFFFF 0%, #999999 100%);
+    width: 300px;
+    height: 450px;
+    border-radius: 20px;
+}
+
+.card:first-child {
+    margin-left: 100px;
+}
+
+.card-img {
+    border-radius: 32px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.card-title {
+    margin-left: 10%;
+    font-size: 28px;
+    font-family: 'Jost', Arial, Helvetica, sans-serif;
+}
+
+.card-description {
+    margin-left: 10%;
+    color: #373737;
+    font-size: 14px;
+    font-family: 'Jost';
+}
+
+.old-price {
+    margin-left: 100px;
+    font-size: 18px;
+    color: red;
+}
+
+.new-price {
+    margin-left: 18px;
+    color: #008F2B;
+}
+
+.card-button {
+    margin-left: 90px;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #008F2B 0%, #00AC34 100%);
+    border: none;
+    color: white;
+    font-family: 'MSBold', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transition: transform 0.25s ease-in-out;
+}
+
+.card-button:hover {
+    transform: scale(1.05);
+}
