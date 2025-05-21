@@ -22,15 +22,19 @@
 .tenis {
     width: 720px;
     height: 720px;
+    padding: 20px;
 }
 
 .banner h2 {
-    font-size: 100px;
+    font-size: 120px;
     color: green;
     font-family: 'vl', Arial, Helvetica, sans-serif;
+    margin-left: 150px;
 }
 
 .onceB {
     width: 700px;
     height: auto;
+    margin-bottom: 50px;
+    margin-left: 150px;
 }
