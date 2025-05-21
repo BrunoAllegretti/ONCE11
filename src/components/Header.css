@@ -54,3 +54,40 @@ nav ul li:hover {
     border-bottom-left-radius: 30px;
     color: black;
 }
+
+/*------------------------- BUSCA ----------------------------*/
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 200px;
+  }
+  
+  .search h2 {
+    font-size: 20px;
+    margin: 0;
+    color: white;
+    font-family: 'tr',Arial, Helvetica, sans-serif;
+    font-weight: normal;
+  }
+  
+  /* Ícones Material Symbols */
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+  }
+  
+/*------------------------- CARRINHO DE COMPRAS ----------------------------*/
+  .cart {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+}
