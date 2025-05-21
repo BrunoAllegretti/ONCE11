@@ -2,6 +2,7 @@ import './App.css'
 import Header from './components/Header';
 import Banner from './components/Banner';
 import Carousel from './components/Carousel';
+import Promo from './components/PromoBanner'
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <Header />  
       <Banner />  
       <Carousel />
+      <Promo />
     </>
   );
 }
