@@ -7,20 +7,24 @@ type CardProps = {
     description: string;
     priceOld: number;
     price: number;
-  };
-  
-  export default function Card({ id, name, image, description, priceOld, price }: CardProps) {
-    return (
-      <div>
-        <img src={image} alt={name} />
-        <h2>{name}</h2>
-        <p>{description}</p>
-        <div>
-          <span>{priceOld}</span>
-          <span>{price.toFixed(2)}</span>
-        </div>
-        <button>Adicionar ao Carrinho</button>
+};
+
+export default function Card({ id, name, image, description, priceOld, price }: CardProps) {
+  return (
+    <div className="card" key={id}>
+      <img  draggable={false} src={image} alt={name} className="card-img" />
+      <h2 className="card-title">{name}</h2>
+      <p className="card-description">
+        {description}
+      </p>
+      <div className="card-price">
+        <span className="old-price">{priceOld}</span>
+        <span className="new-price">{price.toFixed(2)}</span>
       </div>
-    );
-  }
-  
+      <button className="card-button">
+        Adicionar ao Carrinho
+      </button>
+    </div>
+  );
+}
+
