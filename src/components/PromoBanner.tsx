@@ -13,6 +13,13 @@ export default function Promo() {
                       <div className="colec">
                         <p className="colecao">Ver outras<br></br> <span>Coleções</span></p>
                         <p className="colecao1">Visite a Coleção<br></br>
+                          <span className="b">B</span>
+                          <span className="r">R</span>
+                          <span className="a">A</span>
+                          <span className="z">Z</span>
+                          <span className="a">U</span>
+                          <span className="r">C</span>
+                          <span className="b">A</span>
                         </p>   
                     </div>
                 </div>

@@ -115,3 +115,27 @@
     height: 150px;
     border-radius: 10px;
 }
+
+.colecao1 span{
+    font-size: 40px;
+}
+
+.b {
+    font-family: 'frijole', Arial, Helvetica, sans-serif;
+    color: #0C4412;
+}
+
+.r {
+    font-family: 'frijole', Arial, Helvetica, sans-serif;
+    color: #CEAF00;
+}
+
+.a {
+    font-family: 'frijole', Arial, Helvetica, sans-serif;
+    color: #0029CE;
+}
+
+.z {
+    font-family: 'frijole', Arial, Helvetica, sans-serif;
+    color: #0726A3;
+}
