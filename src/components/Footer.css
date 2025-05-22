@@ -1,0 +1,22 @@
+/* FONTES */
+@font-face {
+  font-family: 'tr';
+  src: url('../assets/fonts/turret-road/TurretRoad-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+footer {
+    position: relative;
+    bottom: 0px;
+    left: 0px;
+    height: 500px;
+}
+
+.containerFooter {
+    font-family: 'tr',Arial, Helvetica, sans-serif ;
+    height: 100%;
+    background: linear-gradient(to bottom, #4b5c4a, #6d7e69);
+    display: flex;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
