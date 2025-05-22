@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'MSBold';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.section-products {
+    width: 90%;
+    margin-left: 5%;
+    display: grid;
+    gap: 50px;
+    grid-template-columns: repeat(4, 1fr); 
+    justify-items: center;
+}
+
+.containerB {
+    display: flex;
+    justify-content: center;
+}
+
+.section-button {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.productImg {
+    display: flex;
+    margin-top: 150px;
+    margin-bottom: 75px;
+    margin-left: 12.5%;
+    width: 75%;
+    height: auto;
+}
+
