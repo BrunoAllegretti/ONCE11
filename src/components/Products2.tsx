@@ -25,7 +25,14 @@ export default function Products2() {
         <img src={lebron} alt="" className="productImg" />
         <div className="section-products">
               {produtos.map((produto) => (
-                  <Card2  />
+                  <Card2
+                  key={produto.id}
+                  id={produto.id}
+                  name={produto.name}
+                  image={produto.image}
+                  description={produto.description}
+                  price={produto.price}
+                  />
               ))}
         </div>
       </>
