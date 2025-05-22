@@ -1,11 +1,12 @@
-import './Header.css'
+import './Header.css';
+import Logo from '../assets/img/Logo.png';
 
 export default function Header() {
 
   return (
     <>
       <header>
-        <h2>Once 11</h2>
+        <img src={Logo} alt="" className="logoH" />
         <nav>
             <ul>
                 <li>Entrar</li>
