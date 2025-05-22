@@ -1,3 +1,12 @@
+/* FONTES */
+@font-face {
+    font-family: 'tr';
+    src: url('../assets/fonts/turret-road/TurretRoad-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 /*------------------------- HEADER ----------------------------*/
 header {
     width: 100%;
@@ -22,21 +31,21 @@ header {
     color: #00ff66;
   }
   
-/*------------------------- MENU ----------------------------*/
+  /* Menu */
   nav {
     margin-left: 100px;
-}
+  }
 
-nav ul {
+  nav ul {
     font-size: 20px;
     list-style: none;
     display: flex;
     gap: 30px;
     margin: 0;
     padding: 0;
-}
+  }
   
-nav ul li {
+  nav ul li {
     font-family: 'tr',Arial, Helvetica, sans-serif;
     padding: 8px 16px;
     border-radius: 4px;
@@ -46,18 +55,18 @@ nav ul li {
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
     transition: background-color 0.3s;
-}
+  }
 
-nav ul li:hover {
-    background-color: #59fa88; 
+  nav ul li:hover {
+    background-color: #59fa88; /* cor verde */
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
-    color: black;
+    color: black; /* opcional: cor do texto */
 }
 
 /*------------------------- BUSCA ----------------------------*/
 
-.search {
+  .search {
     display: flex;
     align-items: center;
     gap: 10px;
