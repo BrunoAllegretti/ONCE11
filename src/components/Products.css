@@ -25,15 +25,6 @@
     justify-content: center;
 }
 
-.productImg {
-    display: flex;
-    margin-top: 150px;
-    margin-bottom: 75px;
-    margin-left: 12.5%;
-    width: 75%;
-    height: auto;
-}
-
 .ver-mais {
     font-family: 'MSBold',Arial, Helvetica, sans-serif;
     border: none;
@@ -49,3 +40,13 @@
     background-color: BLACK;
     color: white;
 }
+
+.productImg {
+    display: flex;
+    margin-top: 150px;
+    margin-bottom: 75px;
+    margin-left: 12.5%;
+    width: 75%;
+    height: auto;
+}
+

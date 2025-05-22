@@ -1,5 +1,6 @@
 import './Products.css'
 import Card2 from '../components/Card2'
+import { useState } from 'react';
 import { CardProps } from './Card2'
 import run from '../assets/img/run.png'
 
@@ -10,6 +11,19 @@ const produtos : CardProps[] = [
 ];
 
 export default function Products({}) {
+const [quantidade, setQuantidade] = useState(8);
+const total = produtos.length;
+
+const produtosVisiveis = produtos.slice(0, quantidade);
+ 
+function MaisProdutos() {
+  if (quantidade < total) {
+    setQuantidade(quantidade + 8); 
+  } else {
+
+    setQuantidade(8);
+  }
+}
 
     return (
       <>
@@ -29,7 +43,7 @@ export default function Products({}) {
         </div>
 
         <div className="section-button">
-          <button className="ver-mais" onClick={}></button>
+          <button className="ver-mais" onClick={MaisProdutos}>{quantidade < total ? "Ver mais" : "Ver menos"}</button>
         </div>
       </>
     );
