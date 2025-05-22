@@ -40,8 +40,9 @@
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 10%;
-    font-size: 28px;
+    font-size: 22px;
     font-family: 'Jost', Arial, Helvetica, sans-serif;
+    text-align: justify;
 }
 
 .card-description {
