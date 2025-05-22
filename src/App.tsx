@@ -4,6 +4,7 @@ import Banner from './components/Banner';
 import Carousel from './components/Carousel';
 import Promo from './components/PromoBanner';
 import Slide from './components/Slider'
+import Products2 from './components/Products2';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Carousel />
       <Promo />
       <Slide />
+      <Products2 />
     </>
   );
 }
