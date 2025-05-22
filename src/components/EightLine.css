@@ -1,0 +1,141 @@
+/* FONTES */
+@font-face {
+    font-family: 'PS';
+    src: url('../assets/fonts/Prostest_Strike/ProtestStrike-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* FONTES */
+@font-face {
+    font-family: 'MS';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.sectionEight {
+    margin-top: 200px;
+}
+
+.divEight {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    background-color: black;
+}
+
+.title {
+    position: relative;
+    top: 0;
+    color: #FFD96A;
+    -webkit-text-stroke: 1px black; 
+    font-size: 300px;
+    font-weight: bold;
+    font-family: 'PS', Arial, Helvetica, sans-serif;
+    margin: 0;
+    left: 200px;
+}
+
+
+/* CUIDADO UNICA COISA DO CODIGO QUE ESTA EM ABSOLUTE */
+.eight {
+    top: 7880px;
+    position: absolute;
+    left: 70%;
+}
+
+.small-circle {
+    position: relative;
+    top: 50px;
+    margin-top: 200px;
+    margin-bottom: 0;
+    background-color: #FFD96A;
+    border-radius: 50%;
+    width: 450px;
+    height: 450px;
+    border: 6px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: none;
+    z-index: 3;
+    transform: rotate(-20deg); 
+}
+
+.small-circle2 {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    border: 6px solid black;
+    position: relative;
+}
+
+.big-circle {
+    z-index: 2;
+    position: relative;
+    left: 75px;
+    background-color: #FFD96A;
+    border-radius: 50%;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 6px solid black;
+}
+
+.big-circle2 {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    width: 400px;
+    height: 400px;
+    border: 6px solid black;
+    position: relative;
+}
+
+.desc {
+    font-family: 'MS', Arial, Helvetica, sans-serif;
+    font-size: 38px;
+}
+
+#first {
+    width: 65%;
+    position: relative;
+    top: 100px;
+    margin-left: 50px;
+}
+
+#second {
+    width: 65%;
+    position: relative;
+    top: -100px;
+    left: 30%;
+    font-size: 40px;
+}
+
+.img {
+    width: 400px;
+}
+
+#img1 {
+    position: relative;
+    top: 320px;
+    left: 100px;
+}
+
+#img2 {
+    position: relative;
+    bottom: 490px;
+    left: 100px;
+}   
+
+.logo {
+    width: 125px;
+    position: relative;
+    right: 300px;
+    bottom: 100px;
+}
+
