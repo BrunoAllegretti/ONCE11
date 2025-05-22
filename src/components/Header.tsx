@@ -10,8 +10,8 @@ export default function Header() {
             <ul>
                 <li>Entrar</li>
                 <li>Produtos</li>
-                <li>Produtos</li>
-                <li>Produtos</li>
+                <li>Promoções</li>
+                <li>Sobre Nós</li>
             </ul>
         </nav>
 
