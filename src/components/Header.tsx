@@ -1,5 +1,6 @@
 import './Header.css';
 import Logo from '../assets/img/Logo.png';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
 
@@ -21,9 +22,9 @@ export default function Header() {
             <span className="material-symbols-outlined">search</span>
         </div>
 
-        <button className="cart">
-        <span className="material-symbols-outlined">shopping_cart</span>
-        </button>
+        <Link to="/cart" className="cart">
+          <span className="material-symbols-outlined">shopping_cart</span>
+        </Link>
       </header>
     </>
   )
