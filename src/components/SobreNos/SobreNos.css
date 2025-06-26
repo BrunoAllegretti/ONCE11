@@ -1,0 +1,282 @@
+/* FONTES */
+@font-face {
+  font-family: 'vidaloka';
+  src: url('../../assets/fonts/Vidaloka/Vidaloka-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* FONTES */
+@font-face {
+  font-family: 'pro';
+  src: url('../../assets/fonts/Prostest_Strike/ProtestStrike-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sobre-nos {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.texts {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.containerS {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+containerE {
+  margin-top: 500px;
+}
+
+/* Seção Sobre Nós */
+.sobre-nos-section {
+  background-color: #161616;
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+  height: 1200px;
+}
+
+.main-title {
+  text-align: center;
+  font-family: 'vidaloka',Arial, Helvetica, sans-serif;
+  font-size: 6rem;
+  font-weight: bold;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+.main-title2 {
+  text-align: left;
+  margin-left: 50px;
+  font-family: 'pro',Arial, Helvetica, sans-serif;
+  font-size: 6rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+.intro-text {
+  font-family: 'vidaloka',Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  width: 80%;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+}
+
+
+.quem-somos h2 {
+  margin-top: 100px;
+  font-family: 'vidaloka',Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 5rem;
+}
+
+.logo-placeholder {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-box {
+  background-color: #d3d3d3;
+  color: #666;
+  padding: 40px 60px;
+  text-align: center;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Seção Nossos Produtos */
+.produtos-section {
+  margin-top: 175px;
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 60px 0;
+  height: 80vh; 
+}
+
+.once11 {
+  box-shadow: 0 12px 24px black;
+  margin-top: 100px;
+  width: auto;
+  height: 350px;
+}
+
+.produtos-section h2 {
+  font-family: 'vidaloka', Arial, Helvetica, sans-serif;
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #0C4412;
+  margin-left: 170px;
+}
+
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+
+.produtos-section:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
+
+.produtos-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: justify;
+}
+
+.produto-destaque {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.produto-imagem {
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Seção Nossa Equipe */
+.equipe-section {
+background-color: #2c2c2c;
+color: white;
+padding: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.equipe-bloco {
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+
+.membro-box {
+display: flex;
+padding: 20px;
+width: 100%;
+}
+
+.membro1 {
+  background-color: #1a4a3a;
+}
+
+
+
+.membro-box:nth-child(even) {
+flex-direction: row-reverse;
+}
+
+.imagem-bloco {
+flex: 0 0 300px;
+height: 200px;
+background-color: #d3d3d3;
+border-radius: 8px;
+font-weight: bold;
+text-align: center;
+}
+
+.membro1 .nome-membro {
+font-family: 'pro',Arial, Helvetica, sans-serif;
+margin-left: 30px;
+font-size: 2rem;
+font-weight: bold;
+margin-bottom: 10px;
+display: inline;
+
+}
+
+.membro2 .nome-membro {
+text-align: right;
+display: inline;
+font-family: 'pro',Arial, Helvetica, sans-serif;
+margin-right: 30px;
+font-size: 2rem;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.descricao {
+width: 90%;
+font-size: 1rem;
+line-height: 1.6;
+text-align: justify;
+}
+
+.membro1 .descricao {
+  margin-left: 30px;
+width: 90%;
+font-size: 1rem;
+line-height: 1.6;
+}
+
+.membro2 .descricao {
+  margin-left: 50px;
+text-align: right;
+}
+
+.textsS {
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.mini-caixas {
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+}
+
+.caixa {
+background-color: #d3d3d3;
+color: #333;
+padding: 8px 12px;
+border-radius: 4px;
+font-size: 0.8rem;
+font-weight: bold;
+text-align: center;
+}
