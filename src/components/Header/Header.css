@@ -1,20 +1,18 @@
 /* FONTES */
 @font-face {
     font-family: 'tr';
-    src: url('../assets/fonts/turret-road/TurretRoad-Regular.ttf') format('truetype');
+    src: url('../../assets/fonts/turret-road/TurretRoad-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 
 /*------------------------- HEADER ----------------------------*/
-.logoH {
-  width: 75px;
-}
 
 header {
+  z-index: 1000;
     width: 100%;
-    height: 60px;
+    height: 75px;
     font-weight: 500;
     background-color: #373737;
     position: absolute;
@@ -29,11 +27,32 @@ header {
   }
   
 /*------------------------- LOGO ----------------------------*/
-  header h2 {
+
+.home {
+  height: 75px;
+  position: absolute;
+  left: 5px;
+  top: 0;
+}
+
+.imagem-troca {
+  width: 75px;
+  height: 75px;
+  background-image: url('../../assets/img/LogoN.png');
+  background-size: cover;
+  transition: background-image 0.3s ease;
+}
+
+.imagem-troca:hover {
+  background-image: url('../../assets/img/LogoNVerde.png');
+}
+
+
+header h2 {
     margin-left: 40px;
     font-size: 24px;
     color: #00ff66;
-  }
+}
   
   /* Menu */
   nav {
@@ -76,6 +95,14 @@ header {
     gap: 10px;
     margin-left: 200px;
   }
+
+  .search:hover {
+    padding: 10px;
+    background-color: #59fa88; 
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    color: black;
+  }
   
   .search h2 {
     font-size: 20px;
@@ -84,23 +111,13 @@ header {
     font-family: 'tr',Arial, Helvetica, sans-serif;
     font-weight: normal;
   }
-  
-  /* Ícones Material Symbols */
-  .material-symbols-outlined {
-    font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
-    font-size: 24px;
-    cursor: pointer;
-    color: white;
+
+  .search:hover h2 {
+    color: black;
   }
   
-/*------------------------- CARRINHO DE COMPRAS ----------------------------*/
-  .cart {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    margin-right: 20px;
-}
+  .logoESCR {
+    margin-left: 100px;
+    margin-bottom: 5px;
+    height: 100px;
+  }

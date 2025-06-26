@@ -1,8 +1,7 @@
-import './Products.css'
-import Card2 from '../components/Card2'
+import '../Products.css'
+import Card2 from './Card2'
 import { CardProps } from './Card2'
-import lebron from '../assets/img/lebron.png'
-import './Products.css'
+import run from '../../assets/img/run.png'
 
 
 
@@ -22,7 +21,7 @@ export default function Products2() {
 
     return (
       <>
-        <img src={lebron} alt="" className="productImg" />
+        <img src={run} alt="" className="productImg" />
         <div className="section-products">
               {produtos.map((produto) => (
                   <Card2

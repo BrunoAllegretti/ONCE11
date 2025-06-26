@@ -1,4 +1,6 @@
+import { useState } from "react";
 import "./Card.css";
+
 
 type CardProps = {
     id: number;
@@ -10,6 +12,7 @@ type CardProps = {
 };
 
 export default function Card({ id, name, image, description, priceOld, price }: CardProps) {
+
   return (
     <div className="card" key={id}>
       <img  draggable={false} src={image} alt={name} className="card-img" />
@@ -22,7 +25,7 @@ export default function Card({ id, name, image, description, priceOld, price }: 
         <span className="new-price">{price.toFixed(2)}</span>
       </div>
       <button className="card-button">
-        Adicionar ao Carrinho
+        {}
       </button>
     </div>
   );

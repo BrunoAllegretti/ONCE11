@@ -1,0 +1,121 @@
+/* FONTES */
+@font-face {
+    font-family: 'Jost';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MSBold';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.card2 {
+    background-color: #ffffff;
+    width: 350px;
+    height: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+    /* Sombra aumentada: maior blur e opacidade */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.397); /* Ajuste aqui */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card2:hover {
+    transform: translateY(-5px);
+    /* Sombra aumentada no hover: ainda maior blur e opacidade */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25); /* Ajuste aqui */
+}
+
+.card2-img-container {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.card2-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.card2:hover .card2-img {
+    transform: scale(1.05);
+}
+
+.card2-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card2-title {
+    font-family: 'MSBold', Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: #333333;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.card2-description {
+    font-family: 'Jost', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.card2-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.new-price2 {
+    font-family: 'MSBold', Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    color: #008F2B;
+    font-weight: bold;
+}
+
+.card2-button {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'MSBold', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card2-button:hover {
+    background-color: #333333;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.61);
+}
+
+.card2-button:active {
+    transform: translateY(0);
+}

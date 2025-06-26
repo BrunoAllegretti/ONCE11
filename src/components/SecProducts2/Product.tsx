@@ -1,8 +1,8 @@
-import './Products.css'
-import Card2 from '../components/Card2'
+import '../Products.css'
+import Card2 from '../SecProducts1/Card2'
 import { useState } from 'react';
-import { CardProps } from './Card2'
-import run from '../assets/img/run.png'
+import { CardProps } from '../SecProducts1/Card2'
+import lebron from '../../assets/img/lebron.png'
 
 
 
@@ -42,7 +42,7 @@ function MaisProdutos() {
 
     return (
       <>
-      <img src={run} alt="" className="productImg"/>
+      <img src={lebron} alt="" className="productImg"/>
         <div className="section-products">
               {produtosVisiveis.map((produto) => (
                   <Card2
