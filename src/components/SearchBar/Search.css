@@ -1,0 +1,259 @@
+/* Search.css */
+
+/* FONTES */
+@font-face {
+    font-family: 'vl';
+    src: url('../../assets/fonts/Vidaloka/Vidaloka-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'mont';
+    src: url('../../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.busque {
+    margin-top: 150px;
+    width: 100%;
+    text-align: center;
+    font-size: 60px;
+    color: #0C4412;
+    font-family: 'vl', Arial, Helvetica, sans-serif;
+}
+
+/* Barra de busca */
+.search-bar {
+    display: flex;
+    margin-top: 20px;
+    border-radius: 100px;
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 10%;
+    height: 2.75rem;
+    margin-bottom: 3rem;
+}
+  
+.search_input {
+    font-size: 16px;
+    outline: none;
+    flex: 1;
+    border-radius: 100px;
+    border: none;
+    position: relative;
+    font-family: 'mont',Arial, Helvetica, sans-serif;
+    padding-left: 20px;
+}
+
+.search_input::placeholder {
+    color: #999;
+}
+  
+.search_button {
+    margin-left: 20px;
+    margin-right: 10px;
+    border: none;
+    color: black;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.2s;
+}
+
+.search_button:hover {
+    transform: scale(1.1);
+}
+
+/* Container principal dos filtros */
+.filters-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Cabeçalho dos filtros */
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.filters-header h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  font-family: 'vl', Arial, Helvetica, sans-serif;
+}
+
+.clear-filters-btn {
+  background: transparent;
+  border: 1px solid #666;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: 'mont', Arial, Helvetica, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.clear-filters-btn:hover {
+  background: #666;
+  color: white;
+}
+
+/* Layout das colunas de filtros */
+.filters-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.filter-group {
+  background: transparent;
+  border-radius: 8px;
+  overflow: visible;
+}
+
+.filter-group h4 {
+  background: transparent;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: none;
+  letter-spacing: normal;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  text-align: left;
+  font-family: 'vl', Arial, Helvetica, sans-serif;
+}
+
+/* Opções de filtro */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.filter-option {
+  display: block;
+  cursor: pointer;
+  font-family: 'mont', Arial, Helvetica, sans-serif;
+}
+
+.filter-option input[type="checkbox"],
+.filter-option input[type="radio"] {
+  display: none;
+}
+
+.filter-option span {
+  display: block;
+  padding: 16px 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  font-weight: 500;
+}
+
+.filter-option:hover span {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo especial para filtro selecionado */
+.filter-option input[type="checkbox"]:checked + span,
+.filter-option input[type="radio"]:checked + span {
+  background: #0C4412;
+  color: white;
+  box-shadow: 0 4px 8px rgba(12, 68, 18, 0.3);
+}
+
+.filter-option input[type="checkbox"]:checked + span:hover,
+.filter-option input[type="radio"]:checked + span:hover {
+  background: #094910;
+  transform: translateY(-2px);
+}
+
+/* Botão de buscar */
+.search-button {
+  background: #0C4412;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+  font-family: 'mont', Arial, Helvetica, sans-serif;
+}
+
+.search-button:hover {
+  background: #094910;
+}
+
+.search-button:active {
+  background: #073207;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .filters-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .filters-container {
+    padding: 1rem;
+    margin: 0 1rem;
+  }
+  
+  .filters-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .search-bar {
+    width: 90%;
+    margin-left: 5%;
+  }
+  
+  .busque {
+    font-size: 40px;
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .busque {
+    font-size: 30px;
+    margin-top: 80px;
+  }
+  
+  .filter-option {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .search_input {
+    font-size: 14px;
+  }
+  
+  .search-bar {
+    width: 95%;
+    margin-left: 2.5%;
+  }
+}

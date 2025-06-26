@@ -1,0 +1,73 @@
+/* FONTES */
+@font-face {
+    font-family: 'vl';
+    src: url('../../assets/fonts/Vidaloka/Vidaloka-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'mont';
+    src: url('../../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.container {
+    height: 200vh;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card__image {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30%;
+    bottom: 0;
+}
+
+
+.card__infos {
+    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card__name {
+    font-size: 60px;
+    color: #0C4412;
+    font-family: 'vl', Arial, Helvetica, sans-serif;
+}
+
+.card__desc {
+    margin-top: 15px;
+    font-family: 'mont',Arial, Helvetica, sans-serif;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.card__price {
+    margin-top: 20px;
+    font-family: 'mont',Arial, Helvetica, sans-serif;
+    color: #000000;
+    font-size: 2rem;
+}
+
+.button__add-cart {
+    cursor: pointer;
+    font-family: 'mont',Arial, Helvetica, sans-serif;
+    margin-top: 20px;
+    background-color: #0C4412;
+    color: white;
+    font-size: 2rem;
+    width: 25%;
+    height: 75px;
+}
