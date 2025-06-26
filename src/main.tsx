@@ -11,21 +11,26 @@ import Buy from './components/Buy/Buy';
 import SobreNos from './components/SobreNos/SobreNos';
 import Promocional from './components/Collections/Promocional';
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      children: [
+        { path: '/', element: <Home /> },
+        { path: 'cart', element: <Cart /> },
+        { path: 'search', element: <Search /> },
+        { path: 'login', element: <Login /> },
+        { path: 'buy', element: <Buy /> },
+        { path: 'sobrenos', element: <SobreNos /> },
+        { path: 'promocional', element: <Promocional /> },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <App />,
-    children: [
-      { path: '/', element: <Home /> },
-      { path: 'cart', element: <Cart /> },
-      { path: 'search', element: <Search /> },
-      { path: 'login', element: <Login /> },
-      { path: 'buy', element: <Buy /> },
-      { path: 'sobrenos', element: <SobreNos /> },
-      { path: 'promocional', element: <Promocional /> },
-    ],
-  },
-]);
+    basename: '/ONCE11',
+  }
+);
 
 const rootElement = document.getElementById('root');
 

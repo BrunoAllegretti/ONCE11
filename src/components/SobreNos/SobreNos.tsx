@@ -1,6 +1,11 @@
 import './SobreNos.css';
 import ONCE from '../../assets/img/O11CE.png';
 import NP from '../../assets/img/nossosProdutos.png';
+import Tenis from '../../assets/img/tenis.webp';
+import ONCE20 from '../../assets/img/once20.png';
+import Bruno from '../../assets/img/incellbit.png';
+import Martins from '../../assets/img/titan.jpg';
+import João from '../../assets/img/joaohenrique.png';
 
 export default function SobreNos() {
   return (
@@ -11,25 +16,25 @@ export default function SobreNos() {
           <div className="texts">
             <h1 className="main-title">Sobre Nós</h1>
             <p className="intro-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Nosso site de venda de produtos esportivos é resultado do trabalho de uma equipe de desenvolvimento comprometida e multidisciplinar. Contamos com desenvolvedores front-end e back-end, designers e especialistas em segurança, todos focados em oferecer uma plataforma rápida, segura e fácil de usar.
+              A equipe trabalha de forma colaborativa, utilizando metodologias ágeis para implementar melhorias constantes. O objetivo é garantir uma experiência de compra eficiente, com navegação intuitiva e um visual moderno, sempre alinhado ao universo esportivo.
             </p>
           
           <div className="quem-somos">
             <h2 className="quem-somosH2">QUEM SOMOS</h2>
             <p className="intro-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+              Somos uma empresa apaixonada por esporte e tecnologia. Criamos este site com o objetivo de oferecer aos nossos clientes uma experiência prática, segura e agradável na hora de comprar produtos esportivos.
+
+              Nossa equipe é formada por profissionais de diferentes áreas — desenvolvimento, design, atendimento e logística — que trabalham juntos para garantir uma plataforma moderna, com navegação intuitiva e um catálogo completo, sempre atualizado com as melhores marcas e novidades do mercado.
+
+              Acreditamos que o esporte move pessoas, inspira saúde, bem-estar e superação. Por isso, nos dedicamos todos os dias a conectar você ao que há de melhor nesse universo.
+
+              Seja qual for sua modalidade, estamos aqui para ajudar você a alcançar seus objetivos.
             </p>
           </div>
         </div> 
           <div className="logo-placeholder">
-              <img src={ONCE} className='once11' alt="" />
+              <img src={ONCE20} className='once20' alt="" />
           </div>
         </div>
       </section>
@@ -41,15 +46,14 @@ export default function SobreNos() {
             Nossos Produtos
           </h2>
           <p className="intro-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Oferecemos uma ampla variedade de produtos voltados para todos os tipos de esportes. Aqui, você encontra desde roupas, calçados e acessórios até equipamentos completos para atividades como futebol, corrida, musculação e muito mais.
+
+Trabalhamos com marcas reconhecidas no mercado, garantindo qualidade, conforto e desempenho para atletas de todos os níveis. Seja para treinar, competir ou praticar por lazer, temos tudo o que você precisa para se manter em movimento.
           </p>
           
           <div className="produto-destaque">
             <img 
-              src={NP}
+              src={Tenis}
               alt="Tênis verde e branco" 
               className="produto-imagem"
             />
@@ -67,7 +71,7 @@ export default function SobreNos() {
       
       {/* Membro 1 */}
       <div className="membro-box membro1">
-        <img src="" className="imagem-bloco"></img>
+        <img src={Bruno} className="imagem-bloco" alt="Bruno" />
         <div className="textsS">
           <p className="nome-membro">Bruno de Pádua Allegretti Sousa</p>
           <p className="descricao">
@@ -78,7 +82,7 @@ export default function SobreNos() {
 
       {/* Membro 2 */}
       <div className="membro-box membro2">
-        <img src="" className="imagem-bloco"></img>
+        <img src={João} className="imagem-bloco" alt="João" />
         <div className="textsS">
         <p className="nome-membro">João Henrique Ramos Grangeiro</p>
         <p className="descricao">
@@ -89,7 +93,7 @@ export default function SobreNos() {
 
       {/* Membro 3 */}
       <div className="membro-box membro1">
-        <img src="" className="imagem-bloco"></img>
+        <img src={Martins} className="imagem-bloco" alt="Martins" />
         <div className="textsS">
         <p className="nome-membro">Leonardo Martins Borges</p>
         <p className="descricao">
@@ -102,7 +106,7 @@ export default function SobreNos() {
       <div className="membro-box membro2">
         <img src="" className="imagem-bloco"></img>
         <div className="textsS">
-        <p className="nome-membro">Iago Carvalho Cabral</p>
+        <p className="nome-membro">Iago Carvalho Cabral Martins</p>
         <p className="descricao">
           Especialista em marketing digital e SEO, responsável por otimizar o alcance do site e melhorar a performance de buscas.
         </p>
