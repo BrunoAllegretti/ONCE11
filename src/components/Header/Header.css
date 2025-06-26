@@ -1,123 +1,143 @@
 /* FONTES */
 @font-face {
-    font-family: 'tr';
-    src: url('../../assets/fonts/turret-road/TurretRoad-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'tr';
+  src: url('../../assets/fonts/turret-road/TurretRoad-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
-
 
 /*------------------------- HEADER ----------------------------*/
 
 header {
-  z-index: 1000;
-    width: 100%;
-    height: 75px;
-    font-weight: 500;
-    background-color: #373737;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px;
-    color: white;
-    font-family: 'Arial', sans-serif;
-  }
-  
+text-decoration: none;
+z-index: 1000;
+  width: 100%;
+  height: 75px;
+  font-weight: 500;
+  background-color: #373737;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+header a {
+text-decoration: none;
+color: inherit;
+}
+
+header a:visited {
+color: inherit;
+}
+
 /*------------------------- LOGO ----------------------------*/
 
 .home {
-  height: 75px;
-  position: absolute;
-  left: 5px;
-  top: 0;
+text-decoration: none;
+height: 75px;
+position: absolute;
+left: 5px;
+top: 0;
 }
 
 .imagem-troca {
-  width: 75px;
-  height: 75px;
-  background-image: url('../../assets/img/LogoN.png');
-  background-size: cover;
-  transition: background-image 0.3s ease;
+width: 75px;
+height: 75px;
+background-image: url('../../assets/img/LogoN.png');
+background-size: cover;
+transition: background-image 0.3s ease;
 }
 
 .imagem-troca:hover {
-  background-image: url('../../assets/img/LogoNVerde.png');
+background-image: url('../../assets/assets/img/LogoNVerde.png');
 }
 
 
 header h2 {
-    margin-left: 40px;
-    font-size: 24px;
-    color: #00ff66;
+  margin-left: 40px;
+  font-size: 24px;
+  color: #00ff66;
 }
-  
-  /* Menu */
-  nav {
-    margin-left: 100px;
-  }
 
-  nav ul {
-    font-size: 20px;
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav ul li {
-    font-family: 'tr',Arial, Helvetica, sans-serif;
-    padding: 8px 16px;
-    border-radius: 4px;
-    margin: 0 8px;
-    list-style: none;
-    cursor: pointer;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    transition: background-color 0.3s;
-  }
+/* Menu */
+nav {
+  text-decoration: none;
+  margin-left: 100px;
+}
 
-  nav ul li:hover {
-    background-color: #59fa88; /* cor verde */
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    color: black; /* opcional: cor do texto */
+nav ul {
+  text-decoration: none;
+  font-size: 20px;
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  font-family: 'tr',Arial, Helvetica, sans-serif;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin: 0 8px;
+  list-style: none;
+  cursor: pointer;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transition: background-color 0.3s;
+}
+
+nav ul li:hover {
+  background-color: #59fa88;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  color: black;
+}
+
+nav ul li:hover a {
+  color: black;
 }
 
 /*------------------------- BUSCA ----------------------------*/
 
-  .search {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 200px;
-  }
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 200px;
+}
 
-  .search:hover {
-    padding: 10px;
-    background-color: #59fa88; 
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    color: black;
-  }
-  
-  .search h2 {
-    font-size: 20px;
-    margin: 0;
-    color: white;
-    font-family: 'tr',Arial, Helvetica, sans-serif;
-    font-weight: normal;
-  }
+.search:hover {
+  padding: 10px;
+  background-color: #59fa88;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  color: black;
+}
 
-  .search:hover h2 {
-    color: black;
-  }
-  
-  .logoESCR {
-    margin-left: 100px;
-    margin-bottom: 5px;
-    height: 100px;
-  }
+.search h2 {
+  font-size: 20px;
+  margin: 0;
+  color: white;
+  font-family: 'tr',Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+.search:hover h2 {
+  color: black;
+}
+
+.search:hover h2 a {
+  color: black;
+}
+
+.logoESCR {
+  margin-left: 100px;
+  margin-bottom: 5px;
+  height: 100px;
+}
