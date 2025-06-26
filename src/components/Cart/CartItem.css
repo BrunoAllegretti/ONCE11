@@ -1,0 +1,51 @@
+/* FONTES */
+@font-face {
+  font-family: 'mont';
+  src: url('../../assets/fonts/MontSerrat/Montserrat-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.cart-item {
+  font-family: 'mont',Arial, Helvetica, sans-serif;
+  margin-left: 2.5%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 10px;
+  height: 175px;
+  width: 50%;
+  background-color: #C5C5C5;
+}
+
+.cart-item-image {
+  margin-left: 2%;
+  border-radius: 10px;
+  width: 150px;
+}
+
+.cart-item-content {
+  display: flex;
+  align-items: center;
+}
+
+.cart-item-title {
+  margin-left: 15px;
+}
+
+.cart-item-price {
+  color: #008F2B;
+  font-size: 1.5rem;
+  position: relative;
+  margin-left: 100px;
+}
+
+.button__remove-item {
+  border: none;
+  background-color: #C5C5C5;
+  font-size: 24px;
+  top: 100px;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
