@@ -2,6 +2,7 @@
   "name": "once11",
   "private": true,
   "version": "0.0.0",
+  "homepage": "github-pages/",
   "type": "commonjs",
   "scripts": {
     "dev": "vite --port 5173",
