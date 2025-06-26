@@ -1,4 +1,4 @@
-import './EightLine2.css';
+import './oaoa.css';
 import eight from '../../assets/img/eight.png';
 import camisaB from '../../assets/img/camisaB.png';
 import logo8 from '../../assets/img/logo8.png';
@@ -9,7 +9,7 @@ export default function EightL2() {
   return (
     <>
         <section className="sectionEight">
-            <h2 className="title">8 LINE</h2>
+            <h2 className="title82">8 LINE</h2>
 
             <img src={eight8} className='img8' alt="" />
 

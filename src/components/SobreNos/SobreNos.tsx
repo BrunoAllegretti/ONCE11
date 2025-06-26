@@ -2,10 +2,13 @@ import './SobreNos.css';
 import ONCE from '../../assets/img/O11CE.png';
 import NP from '../../assets/img/nossosProdutos.png';
 import Tenis from '../../assets/img/tenis.webp';
-import ONCE20 from '../../assets/img/once20.png';
-import Bruno from '../../assets/img/incellbit.png';
-import Martins from '../../assets/img/titan.jpg';
-import João from '../../assets/img/joaohenrique.png';
+import ONCE20 from '../../assets/img/O11CE.png';
+import Bruno from '../../assets/img/cellbit.jpg';
+import Martins from '../../assets/img/leom.jpg';
+import João from '../../assets/img/joao.jpg';
+import leo from '../../assets/img/leod.jpg';
+import brayan from '../../assets/img/bra.jpg';
+
 
 export default function SobreNos() {
   return (
@@ -71,8 +74,7 @@ Trabalhamos com marcas reconhecidas no mercado, garantindo qualidade, conforto e
       
       {/* Membro 1 */}
       <div className="membro-box membro1">
-        <img src={Bruno} className="imagem-bloco" alt="Bruno" />
-        <div className="textsS">
+                <div className="textsS">
           <p className="nome-membro">Bruno de Pádua Allegretti Sousa</p>
           <p className="descricao">
             Apaixonado por tecnologia e esportes, Bruno atua como desenvolvedor full stack, com domínio em JavaScript, Node.js, React e Tree.js. Ele foi responsável por integrar todo o sistema do site, garantindo performance, segurança e responsividade.
@@ -82,8 +84,7 @@ Trabalhamos com marcas reconhecidas no mercado, garantindo qualidade, conforto e
 
       {/* Membro 2 */}
       <div className="membro-box membro2">
-        <img src={João} className="imagem-bloco" alt="João" />
-        <div className="textsS">
+               <div className="textsS">
         <p className="nome-membro">João Henrique Ramos Grangeiro</p>
         <p className="descricao">
           Especialista em design de interfaces, responsável pelo layout e visual do site, usando Figma e princípios de UX/UI.
@@ -93,8 +94,7 @@ Trabalhamos com marcas reconhecidas no mercado, garantindo qualidade, conforto e
 
       {/* Membro 3 */}
       <div className="membro-box membro1">
-        <img src={Martins} className="imagem-bloco" alt="Martins" />
-        <div className="textsS">
+               <div className="textsS">
         <p className="nome-membro">Leonardo Martins Borges</p>
         <p className="descricao">
           Responsável pelas animações e otimizações visuais com HTML, CSS e JavaScript. Foco em experiência fluida.
@@ -104,8 +104,7 @@ Trabalhamos com marcas reconhecidas no mercado, garantindo qualidade, conforto e
 
       {/* Membro 4 */}
       <div className="membro-box membro2">
-        <img src="" className="imagem-bloco"></img>
-        <div className="textsS">
+               <div className="textsS">
         <p className="nome-membro">Iago Carvalho Cabral Martins</p>
         <p className="descricao">
           Especialista em marketing digital e SEO, responsável por otimizar o alcance do site e melhorar a performance de buscas.
@@ -115,7 +114,6 @@ Trabalhamos com marcas reconhecidas no mercado, garantindo qualidade, conforto e
 
       {/* Membro 5 */}
       <div className="membro-box membro1">
-        <img src="" className="imagem-bloco"></img>
         <div className="textsS">
         <p className="nome-membro">Leonardo Di Ciommo</p>
         <p className="descricao">
@@ -126,7 +124,7 @@ Trabalhamos com marcas reconhecidas no mercado, garantindo qualidade, conforto e
 
       {/* Membro 6 */}
       <div className="membro-box membro2">
-        <img src="" className="imagem-bloco"></img>
+        
         <div className="textsS">
         <p className="nome-membro">Brayan Medeiros Pires</p>
         <p className="descricao">
@@ -137,7 +135,6 @@ Trabalhamos com marcas reconhecidas no mercado, garantindo qualidade, conforto e
 
       {/* Membro 7 */}
       <div className="membro-box membro1">
-        <img src="" className="imagem-bloco"></img>
         <div className="textsS">
         <p className="nome-membro">Vitor Henry de Souza Camilo Miranda</p>
         <p className="descricao">

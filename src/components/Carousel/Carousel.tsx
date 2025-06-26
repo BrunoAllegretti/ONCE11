@@ -22,7 +22,7 @@ export interface Product {
   description: string;
   priceOld: number;
   price: number;
-  filters: string[];
+  filters: string[]; // Esta é a propriedade que está causando o erro
   quantity?: number;
 }
 
@@ -36,15 +36,12 @@ export interface ProductList {
   outros: Product[];
 }
 
-// A constante BASE_URL não é mais necessária, pois as imagens são importadas diretamente.
-// const BASE_URL = "http://localhost:3001";
-
 export const produto: ProductList = {
   maisComprados: [
     {
       id: 1,
       name: "Olympikus Venum",
-      image: OlympikusVenumImage, // Usando a imagem importada
+      image: OlympikusVenumImage,
       description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
       priceOld: 799.99,
       price: 549.99,
@@ -53,7 +50,7 @@ export const produto: ProductList = {
     {
       id: 2,
       name: "Nike LeBron Witness 8",
-      image: NikeLeBronWitness8Image, // Usando a imagem importada
+      image: NikeLeBronWitness8Image,
       description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
       priceOld: 799.99,
       price: 549.99,
@@ -62,7 +59,7 @@ export const produto: ProductList = {
     {
       id: 3,
       name: "Asics Upcourt 4",
-      image: AsicsUpcourtImage, // Usando a imagem importada
+      image: AsicsUpcourtImage,
       description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
       priceOld: 799.99,
       price: 549.99,
@@ -71,7 +68,7 @@ export const produto: ProductList = {
     {
       id: 4,
       name: "Adidas Alphaedge+",
-      image: AdidasAlphaedgeImage, // Usando a imagem importada
+      image: AdidasAlphaedgeImage,
       description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
       priceOld: 799.99,
       price: 549.99,
@@ -80,25 +77,25 @@ export const produto: ProductList = {
     {
       id: 5,
       name: "New Balance 520",
-      image: NewBalanceImage, // Usando a imagem importada
+      image: NewBalanceImage,
       description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
       priceOld: 799.99,
       price: 79.99,
       filters: ["calçado", "futebol"],
     },
     {
-      id: 6,
-      name: "Vans Filmore",
-      image: VansFilmoreImage, // Usando a imagem importada
-      description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
-      priceOld: 799.99,
-      price: 549.99,
-      filters: ["calçado", "futebol"],
-    },
+        id: 6,
+        name: "Asics Upcourt 4",
+        image: AsicsUpcourtImage,
+        description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
+        priceOld: 799.99,
+        price: 549.99,
+        filters: ["calçado", "basquete"],
+      },
     {
       id: 7,
       name: "Asics Gel-Cumulus 24",
-      image: AsicsGelCumulusImage, // Usando a imagem importada
+      image: AsicsGelCumulusImage,
       description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
       priceOld: 799.99,
       price: 549.99,
@@ -107,7 +104,7 @@ export const produto: ProductList = {
     {
       id: 8,
       name: "Sneaker Branco",
-      image: SneakerBrancoImage, // Usando a imagem importada
+      image: SneakerBrancoImage,
       description: "Tênis da linhagem Nike Air Max de coloração branca e tons acinzentados",
       priceOld: 799.99,
       price: 549.99,
@@ -123,7 +120,7 @@ export const produto: ProductList = {
 };
 
 
-export default function Carousel( ) {
+export default function Carousel() {
 
     const containerRef = useRef<HTMLDivElement>(null);
     let isDown = false;
@@ -150,8 +147,6 @@ export default function Carousel( ) {
         container.scrollLeft = scrollLeft - walk;
     };
 
-    const produtosMaisComprados = produto.maisComprados;
-
     return (
         <div className="containerC" id="cards"
             ref={containerRef}
@@ -162,17 +157,88 @@ export default function Carousel( ) {
         >
             <img src={Logo} alt="" className="logoOnce" />
             <h2 className="title-carousel">TOP VENDAS<br /></h2>
-            {produtosMaisComprados.map((produto) => (
-                <Card
-                    key={produto.id}
-                    id={produto.id}
-                    name={produto.name}
-                    image={produto.image}
-                    description={produto.description}
-                    priceOld={produto.priceOld}
-                    price={produto.price}
-                />
-            ))}
+
+            {/* Renderizando os 8 cards diretamente, passando 'filters' */}
+            <Card
+                key={produto.maisComprados[0].id}
+                id={produto.maisComprados[0].id}
+                name={produto.maisComprados[0].name}
+                image={produto.maisComprados[0].image}
+                description={produto.maisComprados[0].description}
+                priceOld={produto.maisComprados[0].priceOld}
+                price={produto.maisComprados[0].price}
+                filters={produto.maisComprados[0].filters} // Adicionado
+            />
+            <Card
+                key={produto.maisComprados[1].id}
+                id={produto.maisComprados[1].id}
+                name={produto.maisComprados[1].name}
+                image={produto.maisComprados[1].image}
+                description={produto.maisComprados[1].description}
+                priceOld={produto.maisComprados[1].priceOld}
+                price={produto.maisComprados[1].price}
+                filters={produto.maisComprados[1].filters} // Adicionado
+            />
+            <Card
+                key={produto.maisComprados[2].id}
+                id={produto.maisComprados[2].id}
+                name={produto.maisComprados[2].name}
+                image={produto.maisComprados[2].image}
+                description={produto.maisComprados[2].description}
+                priceOld={produto.maisComprados[2].priceOld}
+                price={produto.maisComprados[2].price}
+                filters={produto.maisComprados[2].filters} // Adicionado
+            />
+            <Card
+                key={produto.maisComprados[3].id}
+                id={produto.maisComprados[3].id}
+                name={produto.maisComprados[3].name}
+                image={produto.maisComprados[3].image}
+                description={produto.maisComprados[3].description}
+                priceOld={produto.maisComprados[3].priceOld}
+                price={produto.maisComprados[3].price}
+                filters={produto.maisComprados[3].filters} // Adicionado
+            />
+            <Card
+                key={produto.maisComprados[4].id}
+                id={produto.maisComprados[4].id}
+                name={produto.maisComprados[4].name}
+                image={produto.maisComprados[4].image}
+                description={produto.maisComprados[4].description}
+                priceOld={produto.maisComprados[4].priceOld}
+                price={produto.maisComprados[4].price}
+                filters={produto.maisComprados[4].filters} // Adicionado
+            />
+            <Card
+                key={produto.maisComprados[5].id}
+                id={produto.maisComprados[5].id}
+                name={produto.maisComprados[5].name}
+                image={produto.maisComprados[5].image}
+                description={produto.maisComprados[5].description}
+                priceOld={produto.maisComprados[5].priceOld}
+                price={produto.maisComprados[5].price}
+                filters={produto.maisComprados[5].filters} // Adicionado
+            />
+            <Card
+                key={produto.maisComprados[6].id}
+                id={produto.maisComprados[6].id}
+                name={produto.maisComprados[6].name}
+                image={produto.maisComprados[6].image}
+                description={produto.maisComprados[6].description}
+                priceOld={produto.maisComprados[6].priceOld}
+                price={produto.maisComprados[6].price}
+                filters={produto.maisComprados[6].filters} // Adicionado
+            />
+            <Card
+                key={produto.maisComprados[7].id}
+                id={produto.maisComprados[7].id}
+                name={produto.maisComprados[7].name}
+                image={produto.maisComprados[7].image}
+                description={produto.maisComprados[7].description}
+                priceOld={produto.maisComprados[7].priceOld}
+                price={produto.maisComprados[7].price}
+                filters={produto.maisComprados[7].filters} // Adicionado
+            />
         </div>
     );
 }
