@@ -81,6 +81,11 @@ export function Login() {
                         />
                     </div>
 
+                    <div className="checkboxR">
+                        <input type="checkbox" className="remember" id="remember"/>
+                        <label htmlFor="remember" className="rememberL">Lembrar desta conta</label>
+                    </div>
+
                     <div className="form-actions">
                         <a href="#" className="no-account-link">Não tenho conta</a>
                         <button type="submit" className="login-button">ENTRAR</button>

@@ -54,7 +54,7 @@ transition: background-image 0.3s ease;
 }
 
 .imagem-troca:hover {
-background-image: url('../../assets/assets/img/LogoNVerde.png');
+background-image: url('../../assets/img/LogoNVerde.png');
 }
 
 
