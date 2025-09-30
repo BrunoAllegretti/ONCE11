@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'MSBold';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.section-products {
+    width: 90%;
+    margin-left: 5%;
+    display: grid;
+    gap: 50px;
+    grid-template-columns: repeat(4, 1fr); 
+    justify-items: center;
+}
+
+.containerB {
+    display: flex;
+    justify-content: center;
+}
+
+.section-button {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.ver-mais {
+    font-family: 'MSBold',Arial, Helvetica, sans-serif;
+    border: none;
+    cursor: pointer;
+    margin-top: 50px;
+    border: 1px solid black;
+    background-color: transparent;
+    padding: 15px 20px 15px 20px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.ver-mais:hover {
+    background-color: BLACK;
+    color: white;
+}
+
+.productImg {
+    display: flex;
+    margin-top: 150px;
+    margin-bottom: 75px;
+    margin-left: 12.5%;
+    width: 75%;
+    height: auto;
+}
+

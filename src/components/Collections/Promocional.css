@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'frijole';
+    src: url('../../assets/fonts/Frijole/Frijole-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'league-spartan';
+    src: url('../../assets/fonts/League_Spartan/LeagueSpartan-Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.collections {
+    position: relative;
+    background-color: #004aad;
+}
+
+.collections-title {
+    font-family:'league-spartan', Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    margin-left: 70%;
+    top: 175px;
+    color: white;
+    font-size: 100px;
+    position: relative;
+}
+.collections-title span{
+    color: #7efc00;
+}
+
+.scetion-collections {
+    margin-top: 250px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 100px;
+    align-items: center;
+}
+
+.collection {
+    height: 200px;
+    width: 80%;
+    background-color: #7efc00;
+}

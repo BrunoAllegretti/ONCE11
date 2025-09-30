@@ -1,0 +1,113 @@
+/* FONTES */
+@font-face {
+  font-family: 'commons';
+  src: url('../../assets/fonts/tt-commons-cufonfonts-1/TT Commons Bold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*------------------------- HEADER ----------------------------*/
+
+header {
+text-decoration: none;
+z-index: 1000;
+  width: 100%;
+  height: 100px;
+  font-weight: 500;
+  background-color: #004aad;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
+  color: #7efc00;
+  font-family: 'Arial', sans-serif;
+}
+
+header:hover{
+  background-color: #004aaa;
+}
+
+header a {
+text-decoration: none;
+color: inherit;
+}
+
+header a:visited {
+color: inherit;
+}
+
+/*------------------------- LOGO ----------------------------*/
+
+.home {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 100%;
+  position: absolute;
+  left: 100px;
+  top: 0;
+}
+
+
+.imagem-troca:hover {
+background-image: url('../../assets/img/LogoNVerde.png');
+}
+
+
+header h2 {
+  margin-left: 40px;
+  font-size: 24px;
+  color: #00ff66;
+}
+
+/* Menu */
+nav {
+  text-decoration: none;
+  margin-left: 55%;
+}
+
+nav ul {
+  text-decoration: none;
+  font-size: 24px;
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  font-weight: 00;
+  font-family: 'commons',Arial, Helvetica, sans-serif;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin: 0 8px;
+  list-style: none;
+  cursor: pointer;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transition: background-color 0.3s;
+}
+
+nav ul li:hover {
+  background-color: #59fa88;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  color: black;
+}
+
+nav ul li:hover a {
+  color: black;
+}
+
+/*------------------------- BUSCA ----------------------------*/
+
+
+
+.logoH {
+
+  height: 30%;
+}

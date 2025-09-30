@@ -1,0 +1,58 @@
+/* FONTES */
+@font-face {
+    font-family: 'vl';
+    src: url('../../assets/fonts/Vidaloka/Vidaloka-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'norms';
+  src: url('../../assets/fonts/tt-norms/TTNorms-Medium.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+ /* SCROLL REVEAL EFFECT */
+ .scroll-reveal {
+    visibility: hidden;
+ }
+
+.banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #004aad;
+}
+
+.escr {
+    margin-left: 12.5%;
+}
+
+.banner-title {
+    font-family: 'norms', Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 130px;
+}
+
+.banner-image {
+    height: 550px;
+    margin-left: 12.5%;
+}
+
+.banner-button {
+    background-color: white;
+    border: none;
+    color: black;
+    font-family: 'norms', Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    border-radius: 50px;
+    margin-top: 50px;
+    padding: 20px 80px;
+}
+
+
