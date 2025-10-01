@@ -1,6 +1,5 @@
 import { useState } from "react";
-import "./Card.css";
-
+import "./CardCart.css";
 
 type CardProps = {
     id: number;
@@ -15,19 +14,25 @@ export default function Card({ id, name, image, description, priceOld, price }: 
 
   return (
     <div className="card" key={id}>
-      <img  draggable={false} src={image} alt={name} className="card-img" />
-      <h2 className="card-title">{name}</h2>
-      <p className="card-description">
-        {description}
-      </p>
-      <div className="card-price">
-        <span className="old-price">{priceOld}</span>
-        <span className="new-price">{price.toFixed(2)}</span>
+      <div className="card-image-container">
+        <img draggable={false} src={image} alt={name} className="card-img" />
       </div>
-      <button className="card-button">
-        {}
-      </button>
+      
+      <div className="card-content">
+        <h3 className="card-title">{name}</h3>
+        <p className="card-description">{description}</p>
+        
+        <div className="card-price-section">
+          <div className="price-info">
+            <span className="old-price">R$ {priceOld.toFixed(2)}</span>
+            <span className="new-price">R$ {price.toFixed(2)}</span>
+          </div>
+        </div>
+        
+        <button className="add-to-cart-btn">
+          Adicionar ao Carrinho
+        </button>
+      </div>
     </div>
   );
 }
-

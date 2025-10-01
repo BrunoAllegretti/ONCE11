@@ -1,7 +1,7 @@
 import './Carousel.css'
 import { useRef } from 'react';
 import Card from '../SecProducts2/Card';
-import Logo from '../../assets/img/logo_sem_fundo.png';
+import logo from '../../assets/img/logo.png';
 
 // Importar as imagens dos produtos diretamente
 import OlympikusVenumImage from '../../assets/img/Products/OlympikusVenum.webp';
@@ -9,7 +9,6 @@ import NikeLeBronWitness8Image from '../../assets/img/Products/NikeLeBronWitness
 import AsicsUpcourtImage from '../../assets/img/Products/AsicsUpcourt.jpg';
 import AdidasAlphaedgeImage from '../../assets/img/Products/AdidasAlphaedge.avif';
 import NewBalanceImage from '../../assets/img/Products/NewBalance.jpg';
-import VansFilmoreImage from '../../assets/img/Products/VansFilmore.jpg';
 import AsicsGelCumulusImage from '../../assets/img/Products/AsicsGelCumulus.avif';
 import SneakerBrancoImage from '../../assets/img/Products/SneakerBranco.jpg';
 
@@ -155,7 +154,7 @@ export default function Carousel() {
             onMouseUp={handleMouseLeaveOrUp}
             onMouseMove={handleMouseMove}
         >
-            <img src={Logo} alt="" className="logoOnce" />
+            <img src={logo} alt="" className="logoOnce" />
             <h2 className="title-carousel">TOP VENDAS<br /></h2>
 
             {/* Renderizando os 8 cards diretamente, passando 'filters' */}

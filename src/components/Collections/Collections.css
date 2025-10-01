@@ -1,0 +1,91 @@
+/* FONTES */
+@font-face {
+    font-family: 'PS';
+    src: url('../assets/fonts/Prostest_Strike/ProtestStrike-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* FONTES */
+@font-face {
+    font-family: 'mont';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* FONTES */
+@font-face {
+    font-family: 'leagueS';
+    src: url('../../assets/fonts/League_Spartan/LeagueSpartan-Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* FONTES */
+@font-face {
+    font-family: 'mont';
+    src: url('../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.container-collections {
+    background: linear-gradient(180deg, #004aad 65%, #000000 90%);
+    width: 100%;
+    border: none;
+    height: auto;
+}
+
+.title-colletions {
+    font-family: 'leagueS', Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-size: 7.5rem;
+    padding-top: 175px;
+    text-align: right;
+    margin-right: 50px;
+    margin-bottom: 75px;
+}
+
+.title-colletions span{
+
+    color: #a8ff3a;
+
+}
+
+.visualizeButton {
+        margin-left: 40%;
+    background-color: white;
+    color: #000000;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    min-width: 140px;
+    width: 20%;
+    height: 50px;
+    text-transform: capitalize;
+    margin-top: 100px;
+}
+
+
+.Ser {
+    font-family: 'norms';
+    color: white;
+    font-size: 8rem;
+    text-align: center;
+}
+
+.ty {
+    padding-top: 300px;
+    padding-bottom: 175px;
+}
+
+.visualizeButton:hover {
+    transform: scale(1.05);   
+} 

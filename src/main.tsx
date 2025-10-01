@@ -8,8 +8,7 @@ import Search from './components/SearchBar/Search';
 import Provider from './context/Provider';
 import { Login } from './components/Login/Login'; 
 import Buy from './components/Buy/Buy'; 
-import SobreNos from './components/SobreNos/SobreNos';
-import Promocional from './components/Collections/Promocional';
+
 
 const router = createBrowserRouter(
   [
@@ -21,9 +20,7 @@ const router = createBrowserRouter(
         { path: 'cart', element: <Cart /> },
         { path: 'search', element: <Search /> },
         { path: 'login', element: <Login /> },
-        { path: 'buy', element: <Buy /> },
-        { path: 'sobrenos', element: <SobreNos /> },
-        { path: 'promocional', element: <Promocional /> },
+        { path: 'buy', element: <Buy /> }
       ],
     },
   ],

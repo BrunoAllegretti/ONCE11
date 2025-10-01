@@ -29,6 +29,7 @@ export default function Cart() {
     cvv: ''
   });
   const [pixCode, setPixCode] = useState('');
+  const [couponCode, setCouponCode] = useState('');
 
   // Gerar código PIX aleatório ao carregar o componente ou quando o total mudar
   useEffect(() => {
@@ -43,7 +44,15 @@ export default function Cart() {
     });
   };
 
+  const handleCouponChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCouponCode(e.target.value);
+  };
+
   const handleContinueToPayment = () => {
+    if (cartItems.length === 0) {
+      alert('Seu carrinho está vazio!');
+      return;
+    }
     setCheckoutStep('payment');
   };
 
@@ -62,6 +71,16 @@ export default function Cart() {
     setCheckoutStep('confirmation');
   };
 
+  const copyPixCode = async () => {
+    try {
+      await navigator.clipboard.writeText(pixCode);
+      alert('Código PIX copiado para a área de transferência!');
+    } catch (err) {
+      console.error('Erro ao copiar código PIX:', err);
+      alert('Erro ao copiar código PIX. Tente novamente.');
+    }
+  };
+
   return (
     <section className="cart-page-container">
       {checkoutStep === 'cart' && (
@@ -74,29 +93,38 @@ export default function Cart() {
                 <CartItem key={cartItem.id} data={cartItem} />
               ))
             ) : (
-              <p className="empty-cart">Seu carrinho está vazio.</p>
+              <p className="empty-cart">
+                🛒 Seu carrinho está vazio.<br />
+                Adicione alguns produtos para continuar!
+              </p>
             )}
           </div>
 
-          <div className="cart-resume">
-            <div className="resume">
-              <h2 className="cartH2">
-                Total :
-              </h2>
-              <h2 className="total">
-                {` R$   ${totalPrice.toFixed(2)}`}
-              </h2>
-            </div>
-            <input
-              className='cupom'
-              type="text"
-              placeholder="Cupom promocional"
-            />
-          </div>
+          {cartItems.length > 0 && (
+            <>
+              <div className="cart-resume">
+                <div className="resume">
+                  <h2 className="cartH2">Total do Pedido</h2>
+                  <h2 className="total">
+                    R$ {totalPrice.toFixed(2)}
+                  </h2>
+                </div>
+                <input
+                  className='cupom'
+                  type="text"
+                  placeholder="Digite seu cupom promocional"
+                  value={couponCode}
+                  onChange={handleCouponChange}
+                />
+              </div>
 
-          <div className="cartB">
-            <button className='continue' onClick={handleContinueToPayment}>Continuar</button>
-          </div>
+              <div className="cartB">
+                <button className='continue' onClick={handleContinueToPayment}>
+                  Continuar para Pagamento
+                </button>
+              </div>
+            </>
+          )}
         </section>
       )}
 
@@ -134,6 +162,7 @@ export default function Cart() {
                       name="number"
                       value={cardInfo.number}
                       onChange={handleCardInfoChange}
+                      maxLength={19}
                     />
                   </div>
                 </div>
@@ -160,6 +189,7 @@ export default function Cart() {
                       name="expiry"
                       value={cardInfo.expiry}
                       onChange={handleCardInfoChange}
+                      maxLength={5}
                     />
                   </div>
                   <div className="form-group">
@@ -170,6 +200,7 @@ export default function Cart() {
                       name="cvv"
                       value={cardInfo.cvv}
                       onChange={handleCardInfoChange}
+                      maxLength={4}
                     />
                   </div>
                 </div>
@@ -195,14 +226,16 @@ export default function Cart() {
                 <div className="pix-code-container">
                   <h3>Código PIX</h3>
                   <div className="pix-code">{pixCode}</div>
-                  <button className="copy-pix-button" onClick={() => navigator.clipboard.writeText(pixCode)}>Copiar Código</button>
+                  <button className="copy-pix-button" onClick={copyPixCode}>
+                    Copiar Código PIX
+                  </button>
                 </div>
                 <div className="pix-instructions">
-                  <p>1. Abra o aplicativo do seu banco</p>
-                  <p>2. Escolha a opção PIX</p>
-                  <p>3. Cole o código acima</p>
-                  <p>4. Confirme o pagamento de R$ {totalPrice.toFixed(2)}</p>
-                  <p>5. Volte aqui e clique em "Finalizar Compra"</p>
+                  <p>Abra o aplicativo do seu banco</p>
+                  <p>Escolha a opção PIX</p>
+                  <p>Cole o código acima</p>
+                  <p>Confirme o pagamento de R$ {totalPrice.toFixed(2)}</p>
+                  <p>Volte aqui e clique em "Finalizar Compra"</p>
                 </div>
               </div>
             )}
@@ -211,6 +244,14 @@ export default function Cart() {
           <div className="payment-summary">
             <h3>Resumo do Pedido</h3>
             <div className="cart-summary-row">
+              <span>Subtotal</span>
+              <span>R$ {totalPrice.toFixed(2)}</span>
+            </div>
+            <div className="cart-summary-row">
+              <span>Frete</span>
+              <span>Grátis</span>
+            </div>
+            <div className="cart-summary-row total">
               <span>Total</span>
               <span>R$ {totalPrice.toFixed(2)}</span>
             </div>
@@ -237,12 +278,13 @@ export default function Cart() {
           <div className="order-details">
             <h3>Detalhes do Pedido</h3>
             <p><strong>Número do Pedido:</strong> #ONCE{Math.floor(Math.random() * 10000)}</p>
-            <p><strong>Data:</strong> {new Date().toLocaleDateString()}</p>
+            <p><strong>Data:</strong> {new Date().toLocaleDateString('pt-BR')}</p>
             <p><strong>Método de Pagamento:</strong> {paymentMethod === 'card' ? 'Cartão de Crédito' : 'PIX'}</p>
             <p><strong>Total:</strong> R$ {totalPrice.toFixed(2)}</p>
+            <p><strong>Status:</strong> Processando</p>
           </div>
           <p className="confirmation-email">
-            Enviamos um e-mail com os detalhes da sua compra.
+            Enviamos um e-mail com os detalhes da sua compra para confirmação.
           </p>
           <button className="continue-shopping" onClick={() => window.location.href = '/'}>
             Continuar Comprando

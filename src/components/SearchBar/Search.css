@@ -14,13 +14,21 @@
     font-style: normal;
 }
 
+/* FONTES */
+@font-face {
+  font-family: 'commons';
+  src: url('../../assets/fonts/tt-norms/TTNorms-Medium.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .busque {
     margin-top: 150px;
     width: 100%;
     text-align: center;
     font-size: 60px;
-    color: #0C4412;
-    font-family: 'vl', Arial, Helvetica, sans-serif;
+    color: #0b3897;
+    font-family: 'commons', Arial, Helvetica, sans-serif;
 }
 
 /* Barra de busca */

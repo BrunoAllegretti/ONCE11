@@ -1,22 +1,19 @@
 import Banner from './Banner/Banner';
-import Carousel from './Carousel/Carousel';
-import Promo from './Collections/PromoBanner';
-import Products from './SecProducts1/Products2';
+import SobreNos from './SobreNos/SobreNos';
 import Slide from './Slide/Slide';
-import Products2 from './SecProducts2/Product';
-import EightL from './Collections/EightLine';
+import Collections from './Collections/Collections';
+
 
 
 export default function Home() {
   return (
     <>
-      <Banner /> 
-      <Carousel /> 
-      <Promo />
+            <div style={{ position: 'relative', zIndex: 1 }}>
+        <Banner />
+      </div>
+      <SobreNos />
       <Slide />
-      <Products />
-      <Products2 />
-      <EightL />
+      <Collections />
     </>
   );
 }

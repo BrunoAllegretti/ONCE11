@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { BsCartDashFill } from 'react-icons/bs';
 import './CartItem.css';
 import AppContext from '../../context/AppContext';
@@ -14,20 +14,26 @@ export default function CartItem({ data }: CartItemProps) {
 
   const { cartItems, setCartItems } = context;
   const { id, image, name, price, quantity } = data;
+  const [isRemoving, setIsRemoving] = useState(false);
 
   const handleRemoveItem = () => {
-    const updatedItems = cartItems.map((item) => {
-      if (item.id === id) {
-        return { ...item, quantity: item.quantity - 1 };
-      }
-      return item;
-    }).filter(item => item.quantity > 0);
+    setIsRemoving(true);
+    
+    // Aguarda a animação antes de remover o item
+    setTimeout(() => {
+      const updatedItems = cartItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+        return item;
+      }).filter(item => item.quantity > 0);
 
-    setCartItems(updatedItems);
+      setCartItems(updatedItems);
+    }, 300);
   };
 
   return (
-    <section className="cart-item">
+    <section className={`cart-item ${isRemoving ? 'removing' : ''}`}>
       <img
         src={`${image}`}
         alt={`Imagem de ${name}`}
@@ -35,18 +41,25 @@ export default function CartItem({ data }: CartItemProps) {
       />
 
       <div className="cart-item-content">
-        <h3 className="cart-item-title">{quantity}x {name}</h3>
-        <h3 className="cart-item-price">{`R$ ${(price * quantity).toFixed(2)}`}</h3>
+        <h3 className="cart-item-title">
+          {quantity}x {name}
+        </h3>
+
+        <div className="cart-item-right">
+          <h3 className="cart-item-price">
+            {`R$ ${(price * quantity).toFixed(2)}`}
+          </h3>
+          <button
+            type="button"
+            className="button__remove-item"
+            onClick={handleRemoveItem}
+            disabled={isRemoving}
+            title="Remover item do carrinho"
+          >
+            <BsCartDashFill />
+          </button>
+        </div>
       </div>
-
-      <button
-          type="button"
-          className="button__remove-item"
-          onClick={handleRemoveItem}
-        >
-          <BsCartDashFill />
-        </button>
-
     </section>
   );
 }

@@ -103,7 +103,7 @@ body {
 
 .right-column {
     width: 60%;
-    background: linear-gradient(45deg, #2d4a3e, #1a2f24, #4a9d5f, #2d4a3e, #1a2f24);
+    background: linear-gradient(45deg, #004aad, #24558d, #071a86, #1049a0, #a8ff3a);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
     display: flex;

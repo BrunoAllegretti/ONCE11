@@ -1,26 +1,25 @@
 import './Banner.css';
-import Once from '../../assets/img/Once11.png';
-import Fundo from '../../assets/img/nossosProdutos.png';
+import jogador from '../../assets/img/jogador.png';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react'; 
+import { initScrollReveal } from "../ScrollReveal/ScrollReveal";
 
 export default function Banner() {
+  useEffect(() => {
+    initScrollReveal(); 
+  }, []);
+
   return (
-    <div className="banner">
-      <div className="tenis-3d-container">
-        {/* Imagem de fundo */}
-        <div className="background-image">
-          <img src={Fundo} alt="Background" className="fundo" />
-        </div>
-
-        {/* Espaço vazio no lugar do Canvas 3D */}
-        <div className="canvas-container" style={{ width: '100%', height: '100%' }}>
-          {/* Aqui você pode colocar uma imagem estática ou deixar vazio */}
-        </div>
+    <div className="banner banner-section">
+      <div className="escr">
+        <h2 className="banner-title reveal">Welcome to<br />ONCE 11</h2>
+        
+        <Link to="/login">
+          <button className="banner-button reveal">Login</button>
+        </Link>
       </div>
-
-      <div className="lb">
-        <h2>Bem-vindo a</h2>
-        <img className="onceB" src={Once} alt="Once11" />
-      </div>
+    
+      <img src={jogador} alt="Jogador de Futebol" className="banner-image reveal" />
     </div>
   );
 }

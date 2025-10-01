@@ -1,46 +1,49 @@
 import './Header.css';
 import { Link } from 'react-router-dom';
-import CardButton from '../CartButton/CartButton'
-import LogoESCR from '../../assets/img/LogoESCR.png'
+// import CardButton from '../CartButton/CartButton'
+import logo from '../../assets/img/logo.png'
 
 export default function Header() {
 
   return (
     <>
       <header>
-        
-        <Link to="/" className="home">
-          <div className="imagem-troca"></div>
-        </Link>
 
-        <img src={LogoESCR} alt="" className='logoESCR'/>
+        <Link to="/" className="home">
+          <img src={logo} alt="" className='logoH'/>
+        </Link>  
+        
         
         <nav>
-            <ul>
+            <ul>  
+            <Link to="/" className="gohome">
+              <li>Home</li>
+            </Link>   
+
+            <a href="#colecoes" className="promocional" onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('colecoes');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}>
+                <li>Coleções</li>
+            </a>
+
+            
+            <Link to="/search" className="search">
+                <li>Busca</li>
+            </Link>
+
+            <Link to="/cart" className="caft">
+                <li>Carrinho</li>
+            </Link>
+
             <Link to="/login" className="login">
                 <li>Login</li>
             </Link>
-
-                <li>Produtos</li>
-                
-            <Link to="/promocional" className="promocional">
-                <li>Coleções</li>
-            </Link>
-
-            <Link to="/sobrenos" className="sobrenos">
-                <li>Sobre Nós</li>
-            </Link>
             </ul>
         </nav>
-
-        <Link to="/search" className="search">
-            <h2>Busca</h2>
-            <span className="material-symbols-outlined">search</span>
-        </Link>
-
-        <Link to="/cart" className="cart">
-          <CardButton />
-        </Link>
       
       </header>
     </>
