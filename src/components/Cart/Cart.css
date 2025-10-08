@@ -1,7 +1,7 @@
 /* FONTES */
 @font-face {
-    font-family: 'vl';
-    src: url('../../assets/fonts/Vidaloka/Vidaloka-Regular.ttf') format('truetype');
+    font-family: 'norms';
+    src: url('../../assets/fonts/tt-norms/TTNorms-Medium.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -40,7 +40,7 @@
 /* TÍTULO DO CARRINHO */
 .cart-title {
     color: var(--primary-blue);
-    font-family: 'vl', Arial, Helvetica, sans-serif;
+    font-family: 'norms', Arial, Helvetica, sans-serif;
     font-size: 2.5rem;
     margin-top: 40px;
     margin-left: 25px;

@@ -179,7 +179,7 @@
 /* Estilo especial para filtro selecionado */
 .filter-option input[type="checkbox"]:checked + span,
 .filter-option input[type="radio"]:checked + span {
-  background: #0C4412;
+  background: #004aad;
   color: white;
   box-shadow: 0 4px 8px rgba(12, 68, 18, 0.3);
 }
