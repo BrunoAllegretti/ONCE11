@@ -12,23 +12,16 @@ export default function Header() {
         <Link to="/" className="home">
           <img src={logo} alt="" className='logoH'/>
         </Link>  
-        
-        
+      
         <nav>
             <ul>  
             <Link to="/" className="gohome">
               <li>Home</li>
             </Link>   
 
-            <a href="#colecoes" className="promocional" onClick={(e) => {
-              e.preventDefault();
-              const element = document.getElementById('colecoes');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}>
+            <Link to="/collections" className="search">
                 <li>Coleções</li>
-            </a>
+            </Link>
 
             
             <Link to="/search" className="search">
@@ -44,7 +37,7 @@ export default function Header() {
             </Link>
             </ul>
         </nav>
-      
+    
       </header>
     </>
   )

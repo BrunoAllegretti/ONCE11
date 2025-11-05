@@ -1,91 +1,130 @@
 /* FONTES */
 @font-face {
-    font-family: 'Jost';
-    src: url('../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
+    font-family: 'vl';
+    src: url('../../assets/fonts/Vidaloka/Vidaloka-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'MSBold';
-    src: url('../assets/fonts/MontSerrat/Montserrat-Bold.ttf') format('truetype');
+    font-family: 'commons';
+    src: url('../../assets/fonts/tt-commons-cufonfonts-1/TT\ Commons\ Medium.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-
 .card {
-    background: linear-gradient(to bottom, #FFFFFF 0%, #999999 100%);
+    background: #FFFFFF;
     width: 300px;
-    height: 450px;
-    max-width: 300px;
-    min-width: 300px;
-    border-radius: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    transition: all 0.3s ease-in-out;
+    min-height: 380px; /* Altura reduzida */
+    position: relative; /* Para posicionar o ícone de carrinho */
 }
 
-
-.card:last-child {
-    margin-right: 100px;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .card-img {
-    border-radius: 32px;
-    width: 80%;
-    margin-left: 10%;
-    margin-top: 5%;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+    object-fit: cover;
+    height: 180px; /* Altura da imagem reduzida */
 }
 
-
 .card-title {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 10%;
-    font-size: 22px;
-    font-family: 'Jost', Arial, Helvetica, sans-serif;
-    text-align: justify;
+    color: #1d1d1d;
+    font-size: 1.2rem; /* Tamanho reduzido */
+    font-family: 'commons', Arial, Helvetica, sans-serif;
+    margin: 0 0 5px 0;
+    text-align: left;
+    font-weight: 700;
 }
 
 .card-description {
-    margin-left: 10%;
-    color: #373737;
-    font-size: 14px;
-    font-family: 'Jost';
+    color: #555555;
+    font-size: 0.8rem; /* Tamanho reduzido */
+    font-family: 'vl', serif;
+    flex-grow: 1;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
-.old-price {
-    text-decoration: line-through;
-    position: relative;
-    top: 10px;
-    margin-left: 100px;
-    font-size: 18px;
-    color: red;
-    font-family: 'Jost';
+.card-price {
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .new-price {
-    position: relative;
-    top: 10px;
-    margin-left: 18px;
-    color: #008F2B;
-    font-family: 'Jost';
+    color: #7FFF00;
+    font-family: 'commons', sans-serif;
+    font-size: 1.5rem; /* Tamanho reduzido */
+    font-weight: 800;
 }
 
-.card-button {
-    position: relative;
-    top: 20px;
-    margin-left: 90px;
-    width: 200px;
-    height: 50px;
-    border-radius: 10px;
-    background: linear-gradient(to right, #008F2B 0%, #00AC34 100%);
+.card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espaço entre o botão de compra e o ícone */
+    margin-top: auto;
+}
+
+.buy-button {
+    padding: 10px 20px; /* Padding reduzido */
+    border-radius: 40px;
     border: none;
-    color: white;
-    font-family: 'MSBold', Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    color: #1d1d1d;
+    font-family: 'commons', Arial, Helvetica, sans-serif;
+    font-size: 0.9rem; /* Tamanho reduzido */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
     font-weight: bold;
-    transition: transform 0.25s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    flex-grow: 1; /* Ocupa o espaço restante */
+    margin-right: 10px;
 }
 
-.card-button:hover {
-    transform: scale(1.05);
+.buy-button {
+    background-color: #7FFF00;
+}
+
+.buy-button:hover {
+    background-color: #66cc00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(127, 255, 0, 0.4);
+}
+
+.add-to-cart-icon {
+    background-color: #004aad; /* Azul Forte */
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0; /* Inicialmente invisível */
+    transform: scale(0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover .add-to-cart-icon {
+    opacity: 1; /* Visível no hover do card */
+    transform: scale(1);
+}
+
+.add-to-cart-icon:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
 }

@@ -1,141 +1,54 @@
-/* SecProducts.css */
-.carousel-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-  border-radius: 20px;
-  padding: 40px 20px;
-  position: relative;
-  overflow: hidden;
-  width: 80%;
-  margin-top: 250px;
-  margin-bottom: 250px;
-  margin-left: 10%;
-}
-
-.carousel-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.secProducts {
-  flex: 1;
-  width: 90%;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-
-.carousel-track {
-  display: flex;
-  gap: 10px; /* espaço entre os cards */
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+@font-face {
+    font-family: 'commons';
+    src: url('../assets/fonts/Prostest_Strike/ProtestStrike-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 
-.carousel-item {
-  flex: 0 0 calc(100% / 3);
-  padding: 0;
-  box-sizing: border-box;
+.sec-products-container {
+    width: 80%;
+    border-radius: 30px;
+    padding: 40px 20px;
+    background-color: #ecececef;
+    font-family: 'Jost', sans-serif;
+    margin: 100px 10%;
 }
 
-.carousel-btn {
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  color: #1976d2;
-  z-index: 2;
-  position: relative;
+.sec-products-container h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #1d1d1d;
+    margin-bottom: 30px;
+    font-family: 'commons', Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
 }
 
-.carousel-btn:hover:not(:disabled) {
-  background: #ffffff;
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+.products-grid {
+    display: grid;
+    /* Configuração de grid responsivo: 
+       - Repete automaticamente as colunas.
+       - minmax(280px, 1fr) garante que cada coluna tenha no mínimo 280px e ocupe o espaço restante (1fr).
+       - Isso cria o layout de "quadrilátero" (grid) que o usuário solicitou. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Espaçamento entre os cards */
+    max-width: 1200px; /* Largura máxima para centralizar o grid */
+    margin: 0 auto;
 }
 
-.carousel-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: scale(0.9);
+/* Estilos para o Card.css (apenas para garantir que o card se ajuste ao grid) */
+.card {
+    width: 100%; /* O card ocupa a largura total da coluna do grid */
+    /* Outros estilos do card (cores, sombras, etc.) já estão em Card.css */
 }
 
-.carousel-btn-prev {
-  margin-right: 20px;
-}
-
-.carousel-btn-next {
-  margin-left: 20px;
-}
-
-/* Responsividade */
-@media (max-width: 1024px) {
-  .carousel-track {
-    width: calc(100% * (6 / 2)); /* 2 itens por vez em tablets */
-  }
-  
-  .carousel-item {
-    flex: 0 0 calc(100% / 2);
-  }
-}
-
-@media (max-width: 768px) {
-  .carousel-container {
-    padding: 30px 15px;
-  }
-  
-  .carousel-track {
-    width: calc(100% * 6); /* 1 item por vez em mobile */
-  }
-  
-  .carousel-item {
-    flex: 0 0 100%;
-    padding: 0;
-  }
-  
-  .carousel-btn {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .carousel-btn-prev {
-    margin-right: 15px;
-  }
-  
-  .carousel-btn-next {
-    margin-left: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-container {
-    padding: 20px 10px;
-  }
-  
-  .carousel-btn {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .carousel-btn svg {
-    width: 18px;
-    height: 18px;
-  }
+/* Media query para telas menores, garantindo que o grid se ajuste bem */
+@media (max-width: 600px) {
+    .sec-products-container h2 {
+        font-size: 28px;
+    }
+    
+    .products-grid {
+        gap: 20px;
+    }
 }

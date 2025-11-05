@@ -1,12 +1,7 @@
 /* Search.css */
 
 /* FONTES */
-@font-face {
-    font-family: 'vl';
-    src: url('../../assets/fonts/Vidaloka/Vidaloka-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+
 @font-face {
     font-family: 'mont';
     src: url('../../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
@@ -27,7 +22,7 @@
     width: 100%;
     text-align: center;
     font-size: 60px;
-    color: #0b3897;
+    color: #ffffff;
     font-family: 'commons', Arial, Helvetica, sans-serif;
 }
 
@@ -36,7 +31,7 @@
     display: flex;
     margin-top: 20px;
     border-radius: 100px;
-    border: 1px solid black;
+    border: 1px solid rgb(0, 0, 0);
     width: 80%;
     margin-left: 10%;
     height: 2.75rem;
@@ -55,14 +50,14 @@
 }
 
 .search_input::placeholder {
-    color: #999;
+    color: #ffffff;
 }
   
 .search_button {
     margin-left: 20px;
     margin-right: 10px;
     border: none;
-    color: black;
+    color: rgb(255, 255, 255);
     cursor: pointer;
     background-color: transparent;
     transition: 0.2s;
@@ -90,15 +85,15 @@
 .filters-header h3 {
   font-size: 2rem;
   font-weight: bold;
-  color: #333;
+  color: #ffffff;
   margin: 0;
-  font-family: 'vl', Arial, Helvetica, sans-serif;
+  font-family: 'commons', Arial, Helvetica, sans-serif;
 }
 
 .clear-filters-btn {
   background: transparent;
   border: 1px solid #666;
-  color: #666;
+  color: #ffffff;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
@@ -108,7 +103,7 @@
 }
 
 .clear-filters-btn:hover {
-  background: #666;
+  background: #000a13;
   color: white;
 }
 
@@ -128,7 +123,7 @@
 
 .filter-group h4 {
   background: transparent;
-  color: #333;
+  color: #ffffff;
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: none;
@@ -136,7 +131,7 @@
   margin: 0 0 1rem 0;
   padding: 0;
   text-align: left;
-  font-family: 'vl', Arial, Helvetica, sans-serif;
+  font-family: 'commons', Arial, Helvetica, sans-serif;
 }
 
 /* Opções de filtro */
@@ -166,7 +161,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   font-size: 1rem;
-  color: #333;
+  color: #000000;
   text-align: center;
   font-weight: 500;
 }
@@ -179,7 +174,7 @@
 /* Estilo especial para filtro selecionado */
 .filter-option input[type="checkbox"]:checked + span,
 .filter-option input[type="radio"]:checked + span {
-  background: #004aad;
+  background: #081322;
   color: white;
   box-shadow: 0 4px 8px rgba(12, 68, 18, 0.3);
 }
@@ -200,7 +195,7 @@
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   width: 100%;
   max-width: 200px;
   margin: 0 auto;
@@ -210,6 +205,7 @@
 
 .search-button:hover {
   background: #094910;
+  transform: scale(1.05);
 }
 
 .search-button:active {

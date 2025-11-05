@@ -1,0 +1,83 @@
+/* FONTES */
+@font-face {
+    font-family: 'spa';
+    src: url('../../assets/fonts/League_Spartan/LeagueSpartan-Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.error {
+    margin: 0;
+    padding: 0;
+    color: white;
+    width: 100%;
+    height: 90vh;
+    /* Adicionado: Layout de duas colunas */
+    display: flex;
+    flex-direction: row;
+}
+
+.errorText {
+    font-family: 'spa',Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    /* Adicionado: Fundo azul e largura de 50% */
+    background-color: #0047AB; /* Azul escuro, similar ao da imagem */
+    width: 50%;
+    position: relative; /* Para posicionar a bola */
+}
+
+.h404 {
+    font-size: 14rem;
+    /* Adicionado: Ajuste de espaçamento para centralizar a bola */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.bola404 {
+    /* Estilo para a bola no centro do 404 */
+    width: 12rem; /* Ajuste conforme o tamanho do 404 */
+    height: 12rem;
+    border: none;
+    object-fit: cover;
+    margin: 0;
+}
+
+.desc404 {
+    font-size: 2rem; 
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.hr404 {
+    color: white;
+    height: 0.3rem;
+    background-color: white;
+    width: 50%; /* Linha de separação */
+    border: none;
+    margin-top: 0;
+}
+
+.errorImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%; /* Adicionado: Largura de 50% */
+    padding: 1rem; /* Espaçamento interno */
+}
+
+.errorImg img {
+    border: 5px solid #7efc00;
+    width: 100%; /* Imagem preenche a div */
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+}

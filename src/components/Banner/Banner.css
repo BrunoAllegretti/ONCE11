@@ -26,13 +26,13 @@
 }
 
 .escr {
-  margin-left: 12.5%;
+  margin-left: 5%;
 }
 
 .banner-title {
   font-family: 'norms', Arial, Helvetica, sans-serif;
   color: white;
-  font-size: 130px;
+  font-size: 8vw;
 }
 
 .banner-button {
@@ -40,10 +40,10 @@
   border: none;
   color: black;
   font-family: 'norms', Arial, Helvetica, sans-serif;
-  font-size: 28px;
+  font-size: clamp(16px, 1.5vw, 28px);
   border-radius: 50px;
   margin-top: 50px;
-  padding: 20px 80px;
+  padding: 1.5vw 4vw;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -55,32 +55,33 @@
 }
 
 .banner-image {
-  height: 550px;
+  max-width: 25%;
+  width: 25%;
   margin-left: 12.5%;
 }
 
 /* ==================== RESPONSIVIDADE ==================== */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .banner-title {
-    font-size: 80px;
+    font-size: 6vw;
   }
   
   .banner-image {
-    height: 400px;
-    margin-left: 5%;
+    max-width: 45%;
+    margin-left: 3%;
   }
   
   .escr {
-    margin-left: 5%;
+    margin-left: 3%;
   }
   
   .banner-button {
-    font-size: 20px;
-    padding: 15px 60px;
+    font-size: clamp(14px, 1.8vw, 20px);
+    padding: 1.5vw 4vw;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .banner-section {
     flex-direction: column;
     text-align: center;
@@ -88,13 +89,13 @@
   }
   
   .banner-title {
-    font-size: 60px;
+    font-size: 8vw;
     margin-bottom: 2rem;
   }
   
   .banner-image {
-    height: 300px;
-    margin: 0 auto;
+    max-width: 60%;
+    margin: 2rem auto 0 auto;
   }
   
   .escr {
@@ -102,8 +103,8 @@
   }
   
   .banner-button {
-    font-size: 18px;
-    padding: 12px 40px;
+    font-size: clamp(12px, 4vw, 18px);
+    padding: 3vw 8vw;
     margin-top: 2rem;
   }
 }

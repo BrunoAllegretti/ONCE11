@@ -8,6 +8,9 @@ import Search from './components/SearchBar/Search';
 import Provider from './context/Provider';
 import { Login } from './components/Login/Login'; 
 import Buy from './components/Buy/Buy'; 
+import Campanha from './components/Campanha/Campanha'; 
+import Error404 from './components/404/error404'; 
+import Colecoes from './components/Collections/Colecoes';
 
 
 const router = createBrowserRouter(
@@ -20,7 +23,10 @@ const router = createBrowserRouter(
         { path: 'cart', element: <Cart /> },
         { path: 'search', element: <Search /> },
         { path: 'login', element: <Login /> },
-        { path: 'buy', element: <Buy /> }
+        { path: 'buy', element: <Buy /> },
+        { path: 'collections', element: <Colecoes /> },
+        { path: 'campanha', element: <Campanha /> },
+        { path: '404', element: <Error404 /> }
       ],
     },
   ],

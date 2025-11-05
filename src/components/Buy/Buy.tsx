@@ -2,13 +2,29 @@ import React, { useState, useRef, useEffect } from 'react';
 import './buy.css';
 import tenisImage from '../../assets/img/tenis.webp';
 
+// Definição de dados mockados para simular a seleção de opções
+const sizes = [37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
+const colors = [
+    { name: 'Vermelho', hex: '#FF0000' },
+    { name: 'Azul', hex: '#0000FF' },
+    { name: 'Preto', hex: '#000000' },
+    { name: 'Roxo', hex: '#8A2BE2' },
+    { name: 'Verde Limão', hex: '#7FFF00' },
+    { name: 'Ciano', hex: '#00FFFF' },
+];
+const types = ['Society', 'Campo', 'Quadra'];
+
 const Buy = () => {
     const productImageWrapperRef = useRef<HTMLDivElement>(null);
     const magnifierLensRef = useRef<HTMLDivElement>(null);
     const productMainImageRef = useRef<HTMLImageElement>(null); 
 
     const zoomLevel = 2;
-    const lupaSize = 100;
+    const lupaSize = 120; // Ajustado para o novo tamanho da lupa no CSS
+
+    const [selectedSize, setSelectedSize] = useState(42);
+    const [selectedColor, setSelectedColor] = useState(colors[0].name);
+    const [selectedType, setSelectedType] = useState(types[1]);
 
     useEffect(() => {
         const img = productMainImageRef.current;
@@ -18,7 +34,8 @@ const Buy = () => {
             const setMagnifierBackgroundSize = () => {
                 lens.style.backgroundSize = `${img.offsetWidth * zoomLevel}px ${img.offsetHeight * zoomLevel}px`;
             };
-
+            
+            // Garante que o background-size seja definido após o carregamento da imagem
             if (img.complete) {
                 setMagnifierBackgroundSize();
             } else {
@@ -37,9 +54,11 @@ const Buy = () => {
         const y = e.clientY - rect.top;
         const halfLupaSize = lupaSize / 2;
 
+        // Posição da lupa (centralizada no cursor)
         lens.style.left = `${x}px`;
         lens.style.top = `${y}px`;
 
+        // Posição do background (imagem ampliada)
         const bgX = -((x * zoomLevel) - halfLupaSize);
         const bgY = -((y * zoomLevel) - halfLupaSize);
         lens.style.backgroundPosition = `${bgX}px ${bgY}px`;
@@ -83,15 +102,76 @@ const Buy = () => {
                 </div>
             </div>
             <div className="product-details">
-                <h1>Produto 1</h1>
-                <p>Tênis Nike verde com detalhes em branco e preto, design esportivo e moderno, ideal para uso casual ou prática esportiva.</p>
+                <h2 className="product-category">Chuteira</h2>
+                <h1 className="product-title">England Pack Umbro</h1>
+                <p className="product-description">Tênis Nike verde com detalhes em branco e preto, design esportivo e moderno, ideal para uso casual ou prática esportiva.</p>
 
-                <div className="price-info">
-                    <span className="original-price">de 599,99</span>
-                    <span className="discounted-price">por 399,99</span>
+                {/* Seção de Opções */}
+                <div className="options-section">
+                    {/* Opções de Tamanho */}
+                    <div className="option-group">
+                        <span className="option-label">Tamanho:</span>
+                        <div className="option-buttons">
+                            {sizes.map(size => (
+                                <button
+                                    key={size}
+                                    className={`option-button ${selectedSize === size ? 'selected' : ''}`}
+                                    onClick={() => setSelectedSize(size)}
+                                >
+                                    {size}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Opções de Tipo (Society, Campo, Quadra) */}
+                    <div className="option-group">
+                        <span className="option-label">Tipo:</span>
+                        <div className="option-buttons">
+                            {types.map(type => (
+                                <button
+                                    key={type}
+                                    className={`option-button ${selectedType === type ? 'selected' : ''}`}
+                                    onClick={() => setSelectedType(type)}
+                                >
+                                    {type}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Opções de Cor */}
+                    <div className="option-group">
+                        <span className="option-label">Cor:</span>
+                        <div className="option-colors">
+                            {colors.map(color => (
+                                <button
+                                    key={color.name}
+                                    className={`color-option ${selectedColor === color.name ? 'selected' : ''}`}
+                                    style={{ backgroundColor: color.hex }}
+                                    onClick={() => setSelectedColor(color.name)}
+                                    title={color.name}
+                                >
+                                    {/* Adiciona um indicador de seleção para cores claras */}
+                                    {selectedColor === color.name && <span className="color-check">✓</span>}
+                                </button>
+                            ))}
+                        </div>
+                        <span className="selected-color-name">{selectedColor}</span>
+                    </div>
                 </div>
 
-                <button className="add-to-cart-button">Adicionar ao Carrinho</button>
+                {/* Seção de Preço */}
+                <div className="price-section">
+                    <span className="price-label">Valor:</span>
+                    <h3 className='product-price'>R$ 179,98</h3>
+                </div>
+
+                {/* Grupo de Botões de Ação */}
+                <div className="button-group">
+                    <button className="action-button add-to-cart-button">Adicionar ao Carrinho</button>
+                    <button className="action-button buy-now-button">Comprar Agora</button>
+                </div>
             </div>
         </div>
     );

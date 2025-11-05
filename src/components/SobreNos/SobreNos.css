@@ -1,4 +1,3 @@
-/* Reset e configurações base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,34 +8,34 @@
   position: relative;
   height: 0vh;
   overflow: hidden;
-  background-color: #000000; /* Fundo preto conforme a imagem */
+  background-color: #000;
 }
 
 .sobre-nos-panel {
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
+  border-radius: 5%;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #000000; /* Fundo preto conforme a imagem */
+  background-color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
   transform: translateY(100vh);
-  transition: transform 0.1s ease-out;
+  transition: border-radius 0.3s ease;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
 }
 
 .sobre-nos-content {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribui o espaço entre imagem e texto */
-  max-width: 1400px; /* Largura máxima para telas grandes */
+  justify-content: space-between;
+  max-width: 90%;
   width: 100%;
-  padding: 0 60px;
-  gap: 140px; /* <-- aumentado para mais espaço entre imagem e texto */
+  padding: 0 20px;
+  gap: 5%;
 }
 
 .sobre-nos-image {
@@ -49,160 +48,132 @@
 .sobre-nos-image img {
   transform: scaleX(-1);
   max-width: 95%;
-  width: 92%;             /* <-- aumentei para imagem ficar maior */
+  width: 92%;
   height: auto;
-  max-height: 650px;      /* <-- aumentado (desktop) */
-  filter: brightness(0) invert(1); /* Deixa a imagem branca (silhueta) */
+  max-height: 80vh;
+  filter: brightness(0) invert(1);
   display: block;
 }
 
 .sobre-nos-text {
   flex: 1 1 48%;
-  color: #ffffff; /* Cor do texto branco */
-  max-width: 700px; /* aumentei para comportar texto maior */
+  color: #fff;
+  max-width: 700px;
 }
 
 .sobre-nos-text h2 {
-  font-size: 4.6rem; /* <-- aumentado */
+  font-size: clamp(2.5rem, 3.5vw, 4.6rem);
   font-weight: bold;
   margin-bottom: 1.8rem;
-  color: #ffffff; /* Cor do título branco */
+  color: #fff;
   line-height: 1.02;
   display: flex;
   align-items: center;
-  gap: 12px; /* Espaçamento entre o texto "Sobre a" e o logo */
+  gap: 12px;
   font-family: Arial, sans-serif;
 }
 
-.sobre-nos-logo-title {
-  height: 4.6rem; /* acompanha h2 */
-  width: auto;
-  vertical-align: middle;
-}
-
 .sobre-nos-text p {
-  font-size: 1.4rem; /* <-- aumentado */
+  font-size: clamp(1rem, 1.2vw, 1.4rem);
   line-height: 1.6;
-  color: #ffffff;
+  color: #fff;
   text-align: justify;
-  margin: 0;
   font-family: Arial, sans-serif;
   font-weight: 400;
 }
 
-/* Responsividade para telas Full HD (1920x1080) */
-@media (min-width: 1920px) {
+/* Responsividade */
+@media (min-width: 1600px) {
   .sobre-nos-content {
-    max-width: 1600px;
-    gap: 160px;
-    padding: 0 100px;
+    max-width: 85%;
+    gap: 8%;
+    padding: 0 20px;
   }
   .sobre-nos-text h2 {
-    font-size: 5.2rem;    /* maior em FullHD */
-  }
-  .sobre-nos-logo-title {
-    height: 5.2rem;
+    font-size: clamp(4.6rem, 4vw, 5.2rem);
   }
   .sobre-nos-text p {
-    font-size: 1.6rem;
+    font-size: clamp(1.4rem, 1.4vw, 1.6rem);
   }
   .sobre-nos-image img {
-    max-height: 780px;    /* maior para telas grandes */
+    max-height: 80vh;
     width: 95%;
   }
 }
 
-/* Responsividade para laptops */
-@media (max-width: 1439px) and (min-width: 1024px) {
+@media (max-width: 1200px) {
   .sobre-nos-content {
-    max-width: 1200px;
-    gap: 100px;
-    padding: 0 50px;
+    max-width: 90%;
+    gap: 4%;
+    padding: 0 20px;
   }
   .sobre-nos-text h2 {
-    font-size: 3.8rem; /* reduz um pouco em laptops, ainda maior que antes */
-  }
-  .sobre-nos-logo-title {
-    height: 3.8rem;
+    font-size: clamp(2.8rem, 3.2vw, 3.8rem);
   }
   .sobre-nos-text p {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 1.1vw, 1.25rem);
   }
   .sobre-nos-image img {
-    max-height: 520px;
+    max-height: 75vh;
     width: 90%;
   }
 }
 
-/* Responsividade para tablets */
-@media (max-width: 1023px) and (min-width: 769px) {
+@media (max-width: 992px) {
   .sobre-nos-content {
     flex-direction: column;
-    padding: 40px 30px;
-    gap: 48px; /* ligeiro aumento do gap para separar mais */
+    padding: 40px 20px;
+    gap: 30px;
     text-align: center;
   }
   .sobre-nos-text {
     max-width: 100%;
   }
   .sobre-nos-text h2 {
-    font-size: 3.2rem; /* maior no tablet */
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
     justify-content: center;
   }
-  .sobre-nos-logo-title {
-    height: 3.2rem;
-  }
   .sobre-nos-text p {
-    font-size: 1.15rem;
-    text-align: center;
+    font-size: clamp(0.9rem, 2.5vw, 1.15rem);
   }
   .sobre-nos-image img {
-    max-height: 420px;
+    max-height: 40vh;
     width: 92%;
   }
 }
 
-/* Responsividade para smartphones */
 @media (max-width: 768px) {
   .sobre-nos-content {
     flex-direction: column;
-    padding: 30px 20px;
-    gap: 36px;
+    padding: 30px 15px;
+    gap: 20px;
     text-align: center;
   }
   .sobre-nos-text h2 {
-    font-size: 2.6rem; /* aumentado para mobile */
-    justify-content: center;
-  }
-  .sobre-nos-logo-title {
-    height: 2.6rem;
+    font-size: clamp(2rem, 5vw, 2.6rem);
   }
   .sobre-nos-text p {
-    font-size: 1.0rem; /* maior leitura em celular */
-    text-align: left;
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
   }
   .sobre-nos-image img {
-    max-height: 320px;
+    max-height: 35vh;
     width: 96%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .sobre-nos-content {
-    padding: 20px 15px;
-    gap: 28px;
+    padding: 20px 10px;
+    gap: 15px;
   }
   .sobre-nos-text h2 {
-    font-size: 2.0rem;
-  }
-  .sobre-nos-logo-title {
-    height: 2.0rem;
+    font-size: clamp(1.8rem, 6vw, 2rem);
   }
   .sobre-nos-text p {
-    font-size: 0.95rem;
+    font-size: clamp(0.8rem, 4.5vw, 0.95rem);
   }
   .sobre-nos-image img {
-    max-height: 260px;
+    max-height: 30vh;
     width: 98%;
   }
 }

@@ -7,6 +7,14 @@
 }
 
 /*------------------------- HEADER ----------------------------*/
+/* Esconde a barra do Google Translate */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0px !important;
+}
 
 
 header {
@@ -16,12 +24,12 @@ z-index: 1000;
   height: 100px;
   font-weight: 500;
   background-color: #004aad;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0px;
   color: #7efc00;
   font-family: 'Arial', sans-serif;
@@ -46,10 +54,10 @@ color: inherit;
   display: flex;
   align-items: center;
   text-decoration: none;
-  height: 100%;
-  position: absolute;
-  left: 100px;
-  top: 0;
+  height: 80%;
+  position: relative;
+  right: 5%;
+  top: 2.5px;
 }
 
 
@@ -67,7 +75,7 @@ header h2 {
 /* Menu */
 nav {
   text-decoration: none;
-  margin-left: 55%;
+  margin-left: 0;
 }
 
 nav ul {
@@ -110,5 +118,85 @@ nav ul li:hover a {
 
 .logoH {
 
-  height: 30%;
+  height: 60%;
+}
+
+
+/*------------------------- RESPONSIVIDADE ----------------------------*/
+
+/* Para telas menores que 1024px (laptops menores e tablets) */
+@media (max-width: 1024px) {
+  header {
+    height: 80px;
+  }
+
+  .home {
+    margin-left: 20px;
+  }
+
+  nav ul {
+    font-size: 20px; /* Reduzindo um pouco o tamanho da fonte do menu */
+    gap: 5px;
+  }
+
+  nav ul li {
+    padding: 6px 12px;
+    margin: 0 4px;
+  }
+}
+
+/* Para telas menores que 768px (tablets e celulares) */
+@media (max-width: 768px) {
+  header {
+    height: 60px;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  .home {
+    margin-left: 10px;
+    height: 70%;
+  }
+
+  header h2 {
+    font-size: 18px;
+    margin-left: 10px;
+  }
+
+  .logoH {
+    height: 100%;
+  }
+
+  nav {
+    margin-right: 10px;
+  }
+
+  nav ul {
+    font-size: 14px;
+    gap: 2px;
+  }
+
+  nav ul li {
+    padding: 4px 8px;
+    margin: 0 2px;
+  }
+}
+
+/* Para telas menores que 480px (celulares) */
+@media (max-width: 480px) {
+  header {
+    height: 50px;
+  }
+
+  header h2 {
+    display: none; /* Esconde o texto do título em telas muito pequenas */
+  }
+
+  nav ul {
+    font-size: 12px;
+  }
+
+  nav ul li {
+    padding: 2px 4px;
+  }
 }

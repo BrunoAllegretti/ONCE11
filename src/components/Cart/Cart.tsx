@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Cart.css';
 import CartItem from './CartItem';
 import AppContext from '../../context/AppContext';
@@ -13,15 +14,20 @@ interface CardInfo {
 
 export default function Cart() {
   const context = useContext(AppContext);
+  const navigate = useNavigate();
+
   if (!context) return null;
 
-  const { cartItems } = context;
+  const { cartItems, setCartItems } = context;
 
-  const totalPrice = cartItems.reduce((acc: number, item: Product & { quantity: number }) => acc + item.price * item.quantity, 0);
+  const totalPrice = cartItems.reduce(
+    (acc: number, item: Product & { quantity: number }) =>
+      acc + item.price * item.quantity,
+    0
+  );
 
-  // Estados para a funcionalidade de pagamento
-  const [checkoutStep, setCheckoutStep] = useState('cart'); // 'cart' ou 'payment'
-  const [paymentMethod, setPaymentMethod] = useState('');
+  const [checkoutStep, setCheckoutStep] = useState<'cart' | 'payment' | 'confirmation'>('cart');
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix' | ''>('');
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     number: '',
     name: '',
@@ -31,17 +37,13 @@ export default function Cart() {
   const [pixCode, setPixCode] = useState('');
   const [couponCode, setCouponCode] = useState('');
 
-  // Gerar código PIX aleatório ao carregar o componente ou quando o total mudar
   useEffect(() => {
     setPixCode(`ONCE11${Math.random().toString(36).substring(2, 10).toUpperCase()}`);
-  }, [totalPrice]); // Depende de totalPrice para regenerar se o total mudar
+  }, [totalPrice]);
 
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setCardInfo({
-      ...cardInfo,
-      [name]: value
-    });
+    setCardInfo(prev => ({ ...prev, [name]: value }));
   };
 
   const handleCouponChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,13 +64,18 @@ export default function Cart() {
       return;
     }
 
-    if (paymentMethod === 'card' && (!cardInfo.number || !cardInfo.name || !cardInfo.expiry || !cardInfo.cvv)) {
+    if (
+      paymentMethod === 'card' &&
+      (!cardInfo.number || !cardInfo.name || !cardInfo.expiry || !cardInfo.cvv)
+    ) {
       alert('Por favor, preencha todos os dados do cartão');
       return;
     }
 
-    alert('Compra finalizada com sucesso!'); 
+    alert('Compra finalizada com sucesso!');
     setCheckoutStep('confirmation');
+
+    if (setCartItems) setCartItems([]);
   };
 
   const copyPixCode = async () => {
@@ -83,51 +90,70 @@ export default function Cart() {
 
   return (
     <section className="cart-page-container">
+      {/* --- ETAPA 1: Carrinho --- */}
       {checkoutStep === 'cart' && (
-        <section className="cart">
-          <h2 className="cart-title">Meu Carrinho</h2>
-
-          <div className="cart-items">
-            {cartItems.length > 0 ? (
-              cartItems.map((cartItem: Product & { quantity: number }) => (
-                <CartItem key={cartItem.id} data={cartItem} />
-              ))
-            ) : (
-              <p className="empty-cart">
-                🛒 Seu carrinho está vazio.<br />
-                Adicione alguns produtos para continuar!
-              </p>
-            )}
+        <>
+          <div className="cart">
+            <div className="cart-items">
+              {cartItems.length > 0 ? (
+                cartItems.map((cartItem: Product & { quantity: number }) => (
+                  <CartItem key={cartItem.id} data={cartItem} />
+                ))
+              ) : (
+                <p className="empty-cart">
+                  🛒 Seu carrinho está vazio.<br />
+                  Adicione alguns produtos para continuar!
+                </p>
+              )}
+            </div>
           </div>
 
-          {cartItems.length > 0 && (
-            <>
-              <div className="cart-resume">
-                <div className="resume">
-                  <h2 className="cartH2">Total do Pedido</h2>
-                  <h2 className="total">
-                    R$ {totalPrice.toFixed(2)}
-                  </h2>
-                </div>
+          <div className="cart-resume">
+            <div className="resume">
+              <div className="cart-summary-row">
+                <span>Subtotal</span>
+                <span>R$ {totalPrice.toFixed(2)}</span>
+              </div>
+
+              <div className="cart-summary-row">
+                <span>Frete</span>
+                <span>R$ 22,00</span>
+              </div>
+
+              <div className="cupom-container">
                 <input
-                  className='cupom'
+                  className="cupom"
                   type="text"
-                  placeholder="Digite seu cupom promocional"
+                  placeholder="Adicionar Cupom Promocional"
                   value={couponCode}
                   onChange={handleCouponChange}
                 />
+                <button className="cupom-button">Verificar</button>
               </div>
 
-              <div className="cartB">
-                <button className='continue' onClick={handleContinueToPayment}>
-                  Continuar para Pagamento
+              <div className="cart-summary-row total">
+                <span>Total</span>
+                <span>R$ {(totalPrice + 22).toFixed(2)}</span>
+              </div>
+
+              <div className="payment-actions">
+                <button className="checkout-button" onClick={handleContinueToPayment}>
+                  Finalizar
+                </button>
+                <button className="continue-shopping" onClick={() => navigate('/')}>
+                  Escolher Mais Produtos
                 </button>
               </div>
-            </>
-          )}
-        </section>
+
+              <p className="delivery-time">
+                Prazo de Entrega estimado - Entre 15 - 45 dias da data do pedido
+              </p>
+            </div>
+          </div>
+        </>
       )}
 
+      {/* --- ETAPA 2: Pagamento --- */}
       {checkoutStep === 'payment' && (
         <div className="payment-content">
           <h1>Método de Pagamento</h1>
@@ -210,14 +236,18 @@ export default function Cart() {
                     <label>Parcelamento</label>
                     <select>
                       <option value="1">À vista - R$ {totalPrice.toFixed(2)}</option>
-                      <option value="2">2x de R$ {(totalPrice / 2).toFixed(2)}</option>
-                      <option value="3">3x de R$ {(totalPrice / 3).toFixed(2)}</option>
-                      <option value="4">4x de R$ {(totalPrice / 4).toFixed(2)}</option>
-                      <option value="5">5x de R$ {(totalPrice / 5).toFixed(2)}</option>
-                      <option value="6">6x de R$ {(totalPrice / 6).toFixed(2)}</option>
+                      {[2, 3, 4, 5, 6].map(i => (
+                        <option key={i} value={i}>
+                          {i}x de R$ {(totalPrice / i).toFixed(2)}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
+
+                <button className="finalize-button" onClick={handleFinalizePurchase}>
+                  Finalizar Compra
+                </button>
               </div>
             )}
 
@@ -237,37 +267,16 @@ export default function Cart() {
                   <p>Confirme o pagamento de R$ {totalPrice.toFixed(2)}</p>
                   <p>Volte aqui e clique em "Finalizar Compra"</p>
                 </div>
+                <button className="finalize-button" onClick={handleFinalizePurchase}>
+                  Finalizar Compra
+                </button>
               </div>
             )}
-          </div>
-
-          <div className="payment-summary">
-            <h3>Resumo do Pedido</h3>
-            <div className="cart-summary-row">
-              <span>Subtotal</span>
-              <span>R$ {totalPrice.toFixed(2)}</span>
-            </div>
-            <div className="cart-summary-row">
-              <span>Frete</span>
-              <span>Grátis</span>
-            </div>
-            <div className="cart-summary-row total">
-              <span>Total</span>
-              <span>R$ {totalPrice.toFixed(2)}</span>
-            </div>
-          </div>
-
-          <div className="payment-actions">
-            <button className="back-button" onClick={() => setCheckoutStep('cart')}>
-              Voltar para o Carrinho
-            </button>
-            <button className="checkout-button" onClick={handleFinalizePurchase}>
-              Finalizar Compra
-            </button>
           </div>
         </div>
       )}
 
+      {/* --- ETAPA 3: Confirmação --- */}
       {checkoutStep === 'confirmation' && (
         <div className="confirmation-content">
           <div className="confirmation-icon">✓</div>
@@ -286,7 +295,7 @@ export default function Cart() {
           <p className="confirmation-email">
             Enviamos um e-mail com os detalhes da sua compra para confirmação.
           </p>
-          <button className="continue-shopping" onClick={() => window.location.href = '/'}>
+          <button className="continue-shopping" onClick={() => navigate('/')}>
             Continuar Comprando
           </button>
         </div>

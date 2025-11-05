@@ -1,6 +1,6 @@
 import './SecProducts.css'
-import Card from '../CardCart.tsx' 
-import React, { useState } from 'react';
+import Card from '../SecProducts2/Card' // Ajuste no nome do componente Card, se necessário, mas mantendo a importação original do Card.tsx
+import React from 'react';
 
 // Importar as imagens dos produtos diretamente
 import OlympikusVenumImage from '../../assets/img/Products/OlympikusVenum.webp';
@@ -96,63 +96,31 @@ export const produto: ProductList = {
 };
 
 export default function SecProducts() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3;
-  const totalItems = produto.maisComprados.length;
-  const maxIndex = Math.max(0, totalItems - itemsPerPage);
 
-  const nextSlide = () => {
-    setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
-  };
 
-  const prevSlide = () => {
-    setCurrentIndex(prev => Math.max(prev - 1, 0));
-  };
+
+
+
+
+
+
 
   return (
-    <div className="carousel-container">
-      <button 
-        className="carousel-btn carousel-btn-prev" 
-        onClick={prevSlide}
-        disabled={currentIndex === 0}
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <polyline points="15,18 9,12 15,6"></polyline>
-        </svg>
-      </button>
-      
-      <div className="secProducts">
-        <h2>Produtos</h2>
-        <div 
-          className="carousel-track"
-          style={{
-            transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`
-          }}
-        >
-          {produto.maisComprados.map((item: Product) => (
-            <div key={item.id} className="carousel-item">
-              <Card
-                id={item.id}
-                name={item.name}
-                image={item.image}
-                description={item.description}
-                price={item.price}
-                priceOld={item.priceOld}
-              />
-            </div>
-          ))}
-        </div>
+    <div className="sec-products-container">
+      <h2>Produtos</h2>
+      <div className="products-grid">
+        {produto.maisComprados.map((item: Product) => (
+          <Card
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            image={item.image}
+            description={item.description}
+            price={item.price}
+            priceOld={item.priceOld}
+          />
+        ))}
       </div>
-      
-      <button 
-        className="carousel-btn carousel-btn-next" 
-        onClick={nextSlide}
-        disabled={currentIndex === maxIndex}
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <polyline points="9,18 15,12 9,6"></polyline>
-        </svg>
-      </button>
     </div>
   );
 }

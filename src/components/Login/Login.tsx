@@ -1,97 +1,117 @@
-import { BsPersonFill } from "react-icons/bs";
 import { useState, useEffect } from 'react';
-import img1 from '../../assets/img/img1.png'
-import img2 from '../../assets/img/img2.png'
-import img3 from '../../assets/img/img3.png'
-import './Login.css'
+import { useNavigate } from 'react-router-dom';
+import { Register } from './Register';
+
+import './Login.css';
 
 export function Login() {
-    const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(true);
 
-    const slides = [
-        {
-            image: img1,
-            title: "ONCE",
-            description: "ONCE é energia que te move dentro e fora das quadras."
-        },
-        {
-            image: img2,
-            title: "ONCE",
-            description: "O esporte te impulsiona no jogo, na rua e na vida."
-        },
-        {
-            image: img3,
-            title: "ONCE",
-            description: "Não é só sobre vencer. É sobre se mover."
-        }
-    ];
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-    const changeSlide = (slideIndex) => {
-        setCurrentSlide(slideIndex);
-    };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000);
 
-        return () => clearInterval(interval);
-    }, [slides.length]);
+  const handleSwitch = () => {
+    setIsLogin(!isLogin);
+    setMessage('');
+  };
 
-    return (
-        <div className="login-container">
-            <div className="left-column">
-                <div className="product-showcase" key={currentSlide}>
-                    <div className="product-image">
-                        <img src={slides[currentSlide].image} alt="Nike Shoe" />
-                    </div>
-                    <div className="product-info">
-                        <h2>{slides[currentSlide].title}</h2>
-                        <p>{slides[currentSlide].description}</p>
-                    </div>
-                    <div className="pagination-dots">
-                        {slides.map((_, index) => (
-                            <label
-                                key={index}
-                                className={`dot ${currentSlide === index ? 'active' : ''}`}
-                                onClick={() => changeSlide(index)}
-                            />
-                        ))}
-                    </div>
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setMessage('');
+
+    try {
+      const res = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: login, password })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMessage(data.message || 'Erro ao tentar fazer login.');
+        return;
+      }
+
+      localStorage.setItem('token', data.token);
+      setMessage('Login realizado com sucesso! ✅');
+
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      setMessage('Erro ao conectar ao servidor.');
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <div className="right-column">
+        <div className="login-form">
+          {isLogin ? (
+            <>
+              <h1 className="login-title">Entre</h1>
+              <form onSubmit={handleLogin}>
+                <div className="form-group">
+                  <label htmlFor="login">Nome de usuário ou Email</label>
+                  <input
+                    type="text"
+                    id="login"
+                    name="login"
+                    className="login-input"
+                    placeholder="Digite o nome de usuário ou email"
+                    value={login}
+                    onChange={(e) => setLogin(e.target.value)}
+                    required
+                  />
                 </div>
-            </div>
 
-            <div className="right-column">
-                <div className="login-form">
-                    <h1 className="login-title">Sign in to ONCE 11</h1>
-
-                    <div className="user-icon">
-                        <div className="icon-circle">
-                            <BsPersonFill className='icon-login'/>
-                        </div>
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="login">login</label>
-                        <input
-                            type="text"
-                            id="login"
-                            name="login"
-                            className="login-input"
-                        />
-                    </div>
-
-                    <div className="checkboxR">
-                        <input type="checkbox" className="remember" id="remember"/>
-                        <label htmlFor="remember" className="rememberL">Lembrar desta conta</label>
-                    </div>
-
-                    <div className="form-actions">
-                        <a href="#" className="no-account-link">Não tenho conta</a>
-                        <button type="submit" className="login-button">ENTRAR</button>
-                    </div>
+                <div className="form-group">
+                  <label className="passwordLabel" htmlFor="password">Senha</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    className="login-input"
+                    placeholder="Digite sua senha"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
                 </div>
-            </div>
+
+                {message && (
+                  <p className={message.includes('sucesso') ? 'success-message' : 'error-message'}>
+                    {message}
+                  </p>
+                )}
+
+                <div className="form-actions">
+                  <a href="#" className="forgot-password-link">Esqueci minha senha</a>
+                  <button type="submit" className="login-button">Entrar</button>
+                  <a
+                    href="#"
+                    className="no-account-link"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleSwitch();
+                    }}
+                  >
+                    Não tenho conta
+                  </a>
+                </div>
+              </form>
+            </>
+          ) : (
+            <Register onSwitchToLogin={handleSwitch} />
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 }

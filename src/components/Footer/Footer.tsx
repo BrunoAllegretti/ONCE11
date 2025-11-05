@@ -37,10 +37,9 @@ export default function Footer() {
         <div className="footer-column">
           <h2 className="title-footer">Siga-nos</h2>
           <ul className="footer-list list4">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Coleções</a></li>
-            <li><a href="#">Busca</a></li>
-            <li><a href="#">Carrinho</a></li>
+            <li><a href="#">Youtube</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">X</a></li>
           </ul>
         </div>
       </div>
