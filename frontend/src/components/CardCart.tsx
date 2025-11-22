@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import "./CardCart.css";
-import AppContext from "./../context/AppContext";
+import AppContext from "../context/AppContext";
 
 type CardProps = {
   id: number;
