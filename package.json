@@ -14,13 +14,6 @@
   },
   "dependencies": {
     "@react-three/drei": "^9.0.0",
-    "bcrypt": "^6.0.0",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "gsap": "^3.13.0",
-    "i18next": "^25.6.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongodb": "^7.0.0",
     "react": "^18.3.1",
     "react-bootstrap-icons": "^1.11.6",
     "react-dom": "^18.3.1",
@@ -50,7 +43,6 @@
     "vite": "^6.3.1"
   },
   "description": "Loja online especializada na venda de produtos e equipamentos relacionados a diferentes modalidades esportivas, atendendo tanto iniciantes quanto atletas profissionais.",
-  "main": "eslint.config.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BrunoAllegretti/ONCE11.git"
