@@ -26,7 +26,7 @@ const router = createBrowserRouter(
         { path: 'buy', element: <Buy /> },
         { path: 'collections', element: <Colecoes /> },
         { path: 'campanha', element: <Campanha /> },
-        { path: '404', element: <Error404 /> }
+        { path: '*', element: <Error404 /> }
       ],
     },
   ],

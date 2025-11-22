@@ -19,7 +19,7 @@
     --light-blue: #1a5bb8;
     --lighter-blue: #3366cc;
     --dark-blue: #003577;
-    --accent-green: #4CAF50; /* Verde para o botão "Escolher Mais Produtos" */
+    --accent-green: #4CAF50;
     --dark-green: #388E3C;
     --blue-gradient: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 50%, var(--lighter-blue) 100%);
     --blue-shadow: rgba(0, 74, 173, 0.2);
@@ -31,9 +31,6 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    max-width: 100%;
-    width: 100%;
-    min-height: 100vh;
     background-color: var(--primary-blue);
     margin: 0;
     padding: 0;
@@ -41,7 +38,9 @@
 
 /* SEÇÃO DO CARRINHO (Coluna Esquerda) */
 .cart {
-    flex: 0 0 60%;
+    min-height: 88vh;
+    height: auto;
+    width: 60%;
     background-color: var(--primary-blue);
     padding: 30px;
     color: #fff;
@@ -49,7 +48,7 @@
 
 /* SEÇÃO DO RESUMO (Coluna Direita) */
 .cart-resume {
-    flex: 0 0 40%;
+    width: 40%;
     background-color: #ffffff;
     padding: 30px;
     display: flex;
@@ -58,7 +57,7 @@
     position: relative;
     right: 0;
     top: 0;
-    height: 100vh; /* ocupa toda a altura da tela */
+    height: 88vh;
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -82,7 +81,7 @@ body, html {
     display: flex;
     margin: 20px 0;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 16px;
     overflow: hidden;
 }
 
@@ -109,6 +108,7 @@ body, html {
 }
 
 .cupom-button {
+    height: 100%;
     background-color: var(--primary-blue);
     color: white;
     border: none;
@@ -142,7 +142,15 @@ body, html {
     display: none;
 }
 
+.row {
+    z-index: 20;
+    width: 100%;
+    height: 3px;
+    background-color: #004aad;
+}
+
 .cart-summary-row {
+    margin-right: 5%;
     margin-top: 5%;
     display: flex;
     justify-content: space-between;
@@ -155,8 +163,8 @@ body, html {
 
 .cart-summary-row span:first-child {
     font-weight: normal;
-    font-size: 3rem;
-    color: #333;
+    font-size: 1.5rem;
+    color: #000000;
 }
 
 .cart-summary-row span:last-child {
@@ -166,7 +174,7 @@ body, html {
 
 .cart-summary-row.total {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 1rem;
     border-bottom: none;
     padding-top: 15px;
     color: var(--primary-blue);
@@ -188,7 +196,7 @@ body, html {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 30%;
+    margin-top: 15%;
 }
 
 .checkout-button, .back-button, .continue-shopping {
@@ -222,8 +230,4 @@ body, html {
     border: 1px solid var(--accent-green); /* Borda verde */
 }
 
-/* Estilos para a etapa de pagamento (mantidos para o caso de o usuário avançar) */
-.payment-content {
-    /* ... manter estilos existentes ou ajustar conforme necessário ... */
-}
-/* ... e outros estilos de pagamento ... */
+

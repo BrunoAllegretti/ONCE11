@@ -8,7 +8,7 @@ export function Login() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
 
-  const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
@@ -24,10 +24,10 @@ export function Login() {
     setMessage('');
 
     try {
-      const res = await fetch('http://localhost:5000/login', {
+      const res = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: login, password })
+        body: JSON.stringify({ email, password })
       });
 
       const data = await res.json();
@@ -50,23 +50,29 @@ export function Login() {
   };
 
   return (
-    <div className="login-container">
-      <div className="right-column">
-        <div className="login-form">
+    <div className={`login-container ${!isLogin ? 'register-full-width' : ''}`}>
+      <div className="login-content">
+        {isLogin && (
+          <div className="left-column">
+            Modelos 3D
+          </div>
+        )}
+        <div className="right-column">
+          <div className="login-form">
           {isLogin ? (
             <>
               <h1 className="login-title">Entre</h1>
               <form onSubmit={handleLogin}>
                 <div className="form-group">
-                  <label htmlFor="login">Nome de usuário ou Email</label>
+                  <label htmlFor="email">Email</label>
                   <input
-                    type="text"
-                    id="login"
-                    name="login"
+                    type="email"
+                    id="email"
+                    name="email"
                     className="login-input"
-                    placeholder="Digite o nome de usuário ou email"
-                    value={login}
-                    onChange={(e) => setLogin(e.target.value)}
+                    placeholder="Digite seu email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
@@ -110,6 +116,7 @@ export function Login() {
           ) : (
             <Register onSwitchToLogin={handleSwitch} />
           )}
+          </div>
         </div>
       </div>
     </div>

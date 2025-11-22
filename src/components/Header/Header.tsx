@@ -1,6 +1,15 @@
 import './Header.css';
 import { Link } from 'react-router-dom';
-// import CardButton from '../CartButton/CartButton'
+
+// REACT ICONS
+import { FaSearch } from "react-icons/fa";
+import { TiHome } from "react-icons/ti";
+import { FaShoppingCart } from "react-icons/fa";
+import { IoPeople } from "react-icons/io5";
+import { HiViewGridAdd } from "react-icons/hi";
+
+
+// IMG 
 import logo from '../../assets/img/logo.png'
 
 export default function Header() {
@@ -16,24 +25,24 @@ export default function Header() {
         <nav>
             <ul>  
             <Link to="/" className="gohome">
-              <li>Home</li>
+              <li><TiHome /> Home</li>
             </Link>   
 
             <Link to="/collections" className="search">
-                <li>Coleções</li>
+                <li><HiViewGridAdd />Coleções</li>
             </Link>
 
             
             <Link to="/search" className="search">
-                <li>Busca</li>
+                <li><FaSearch />Busca</li>
             </Link>
 
             <Link to="/cart" className="caft">
-                <li>Carrinho</li>
+                <li><FaShoppingCart />Carrinho</li>
             </Link>
 
             <Link to="/login" className="login">
-                <li>Login</li>
+                <li><IoPeople />Login</li>
             </Link>
             </ul>
         </nav>

@@ -99,7 +99,16 @@ nav ul li {
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   transition: background-color 0.3s;
+  display: flex;
+  align-items: center;    
+  gap: 6px;    
 }
+
+nav ul li svg {
+  width: 20px;             
+  height: 20px;
+}
+
 
 nav ul li:hover {
   background-color: #59fa88;

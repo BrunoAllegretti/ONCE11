@@ -7,7 +7,7 @@ type ProviderProps = {
 };
 
 export default function Provider({ children }: ProviderProps) {
-  const [loading, setLoading] = useState<boolean>(true);  
+  const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [cartItems, setCartItems] = useState<(Product & { quantity: number })[]>([]);
 
@@ -37,9 +37,25 @@ export default function Provider({ children }: ProviderProps) {
     setIsCartVisible((prev) => !prev);
   };
 
+  // Novo: Efeito para buscar produtos da API
   useEffect(() => {
-    console.log("Produtos no contexto foram atualizados:", products);
-  }, [products]);
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/products');
+        if (!response.ok) {
+          throw new Error('Falha ao buscar produtos');
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const value = {
     products,

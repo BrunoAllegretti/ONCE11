@@ -108,17 +108,23 @@ export default function Cart() {
             </div>
           </div>
 
+
+
+
+        {/* ------------COLUNA DA DIREITA---------- */}
           <div className="cart-resume">
             <div className="resume">
               <div className="cart-summary-row">
                 <span>Subtotal</span>
                 <span>R$ {totalPrice.toFixed(2)}</span>
               </div>
+              <hr className='row'/>
 
               <div className="cart-summary-row">
                 <span>Frete</span>
                 <span>R$ 22,00</span>
               </div>
+              <hr className='row'/>
 
               <div className="cupom-container">
                 <input
@@ -130,6 +136,7 @@ export default function Cart() {
                 />
                 <button className="cupom-button">Verificar</button>
               </div>
+              <hr className='row'/>
 
               <div className="cart-summary-row total">
                 <span>Total</span>

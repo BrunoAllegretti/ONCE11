@@ -50,22 +50,25 @@ export default function CartItem({ data }: CartItemProps) {
   const hasOldPrice = oldPrice && oldPrice > price;
 
   return (
-    <section className={`cart-item ${isRemoving ? 'removing' : ''}`}>
-      <img src={image} alt={`Imagem de ${name}`} className="cart-item-image" />
+<section className={`cart-item ${isRemoving ? 'removing' : ''}`}>
+  
+  <div className="cart-item-top">
+    <img src={image} alt={`Imagem de ${name}`} className="cart-item-image" />
 
-      <div className="cart-item-content">
-        <h3 className="cart-item-title">{name}</h3>
+    <div className="cart-item-content">
+      <h3 className="cart-item-title">{name}</h3>
 
-        {/* Detalhes do produto para simular a imagem */}
-        <div className="cart-item-details">
-          <p>Proporções: {productDetails.proportions}</p>
-          <p>Tamanho: {productDetails.size}</p>
-          <p>Cor: {productDetails.color}</p>
-        </div>
+      <div className="cart-item-details">
+        <p>Proporções: {productDetails.proportions}</p>
+        <p>Tamanho: {productDetails.size}</p>
+        <p>Cor: {productDetails.color}</p>
+      </div>
+    </div>
+  </div>
 
-        <div className="cart-item-divider"></div>
+  <hr className="hrcart" />
 
-        <div className="cart-item-bottom">
+  <div className="cart-item-bottom">
           {/* Controle de Quantidade */}
           <div className="cart-item-quantity-control">
             <span>Quantidade</span>
@@ -102,7 +105,6 @@ export default function CartItem({ data }: CartItemProps) {
             </h3>
           </div>
         </div>
-      </div>
 
       {/* Botão de remover no canto superior direito (mantido do original, mas pode ser removido se o controle de quantidade for a única forma de remover) */}
       {/* <button

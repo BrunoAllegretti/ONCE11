@@ -1,24 +1,31 @@
 export interface Product {
-  id: number;
+  _id: string;
   name: string;
   image: string;
   description: string;
-  priceOld: number;
+  priceOld?: number;
   price: number;
-  filters: string[];
+  filters?: string[];
   quantity?: number;
+  size?: string;
+  type?: string;
+  color?: string;
+  isBestSeller?: boolean;
 }
 
 export interface ProductList {
-  maisComprados: Product[];
+  // Os dados agora virão da API, esta estrutura não é mais necessária.
+  // maisComprados: Product[];
   camisas: Product[];
-  futebol: Product[];
-  basquete: Product[];
-  voleibol: Product[];
-  futsal: Product[];
-  outros: Product[];
+  // futebol: Product[];
+  // basquete: Product[];
+  // voleibol: Product[];
+  // futsal: Product[];
+  // outros: Product[];
 }
 
+// O código abaixo foi comentado pois os dados virão da API
+/*
 const BASE_URL = "http://localhost:3001";
 
 export const produto: ProductList = {
@@ -101,5 +108,8 @@ export const produto: ProductList = {
   basquete: [],
   voleibol: [],
   futsal: [],
+  outros: []
+};
+*/
   outros: []
 };
