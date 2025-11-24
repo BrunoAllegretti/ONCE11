@@ -1,11 +1,10 @@
 import { BsSearch } from 'react-icons/bs';
 import { useState, useContext } from 'react';
 import './Search.css';
-import fetchProducts from '../../api/fetchProducts';
+import { fetchProducts } from "../../services/api";
 import AppContext from '../../context/AppContext';
 import ProductsSearch from '../Products/ProductsSearch';
 
-// Interface para os filtros
 interface FiltersState {
   selectedFilters: string[];
   priceRange: string;
@@ -20,14 +19,11 @@ export default function Search() {
 
   const { setProducts, setLoading } = context;
   const [searchValue, setSearchValue] = useState('');
-  
-  // Estado dos filtros integrado ao componente Search
   const [filters, setFilters] = useState<FiltersState>({
     selectedFilters: [],
     priceRange: ''
   });
 
-  // Opções de filtros - CORRIGIDOS para coincidir com os dados
   const categoryOptions = [
     { value: 'calçado', label: 'Calçado' },
     { value: 'bola', label: 'Bola' },
@@ -51,34 +47,19 @@ export default function Search() {
     { value: '500+', label: 'acima de 500 BRL' }
   ];
 
-  // Função SIMPLIFICADA para aplicar filtros nos produtos
   const applyFilters = (products: any[]) => {
-    console.log('Aplicando filtros em', products.length, 'produtos');
-    console.log('Filtros ativos:', filters);
-    
     let filteredProducts = [...products];
 
-    // Aplicar filtros de categoria e modalidade
     if (filters.selectedFilters.length > 0) {
       filteredProducts = filteredProducts.filter(product => {
-        console.log('Produto:', product.name, 'Filtros do produto:', product.filters);
-        
-        // Verifica se algum filtro selecionado está presente nos filtros do produto
-        const hasMatchingFilter = filters.selectedFilters.some(selectedFilter => {
-          return product.filters && product.filters.includes(selectedFilter);
-        });
-        
-        console.log('Produto passa no filtro?', hasMatchingFilter);
-        return hasMatchingFilter;
+        return product.filters &&
+               filters.selectedFilters.some(f => product.filters.includes(f));
       });
     }
 
-    // Aplicar filtro de preço
     if (filters.priceRange) {
       filteredProducts = filteredProducts.filter(product => {
-        const price = parseFloat(product.price);
-        console.log('Verificando preço:', price, 'contra range:', filters.priceRange);
-        
+        const price = Number(product.price);
         switch (filters.priceRange) {
           case '0-50':
             return price <= 50;
@@ -94,100 +75,69 @@ export default function Search() {
       });
     }
 
-    console.log('Produtos após filtros:', filteredProducts.length);
     return filteredProducts;
   };
 
-  // Função de busca que considera os filtros
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('handleSearch disparado com:', searchValue);
     setLoading(true);
-    
+
     try {
       const prod = await fetchProducts(searchValue);
-      console.log('Produtos recebidos no handleSearch:', prod);
-      
-      // DEBUG: Vamos ver a estrutura do primeiro produto
-      if (prod.length > 0) {
-        console.log('Estrutura do primeiro produto:', Object.keys(prod[0]));
-        console.log('Primeiro produto completo:', prod[0]);
-      }
-      
-      // Aplicar filtros aos produtos recebidos
-      const filteredProducts = applyFilters(prod);
-      console.log('Produtos após filtros:', filteredProducts);
-      
-      setProducts(filteredProducts);
-    } catch (error) {
-      console.error('Erro na busca:', error);
-      // Não deixar o loading infinito em caso de erro
+      const filtered = applyFilters(prod);
+      setProducts(filtered);
+    } catch {
       setProducts([]);
     }
+
     setLoading(false);
   };
 
-  // Função para executar busca com filtros
   const handleFilterSearch = async () => {
-    console.log('handleFilterSearch disparado');
     setLoading(true);
-    
+
     try {
-      // Se não há termo de busca, buscar todos os produtos
-      const searchTerm = searchValue || '';
-      const prod = await fetchProducts(searchTerm);
-      console.log('Produtos recebidos no handleFilterSearch:', prod);
-      console.log('Filtros sendo aplicados:', filters);
-      
-      const filteredProducts = applyFilters(prod);
-      console.log('Produtos após aplicar filtros:', filteredProducts);
-      
-      setProducts(filteredProducts);
-    } catch (error) {
-      console.error('Erro na busca:', error);
+      const prod = await fetchProducts(searchValue);
+      const filtered = applyFilters(prod);
+      setProducts(filtered);
+    } catch {
       setProducts([]);
     }
+
     setLoading(false);
   };
 
-  // Função para limpar filtros
   const handleClearFilters = () => {
     setFilters({
       selectedFilters: [],
       priceRange: ''
     });
-    
-    // Executar nova busca sem filtros
-    if (searchValue) {
-      handleFilterSearch();
-    }
+
+    handleFilterSearch();
   };
 
-  // Função para lidar com mudança de filtro individual
-  const handleFilterChange = (filterValue: string) => {
-    const newSelectedFilters = filters.selectedFilters.includes(filterValue)
-      ? filters.selectedFilters.filter(f => f !== filterValue)
-      : [...filters.selectedFilters, filterValue];
-    
+  const handleFilterChange = (value: string) => {
+    const updated = filters.selectedFilters.includes(value)
+      ? filters.selectedFilters.filter(f => f !== value)
+      : [...filters.selectedFilters, value];
+
     setFilters({
       ...filters,
-      selectedFilters: newSelectedFilters
+      selectedFilters: updated
     });
   };
 
-  // Função para lidar com mudança de preço
-  const handlePriceChange = (priceRange: string) => {
+  const handlePriceChange = (value: string) => {
     setFilters({
       ...filters,
-      priceRange
+      priceRange: value
     });
   };
 
   return (
     <>
       <h2 className="busque">Busque</h2>
-      
-      {/* Barra de Busca */}
+
       <form className="search-bar" onSubmit={handleSearch}>
         <button type="submit" className="search_button">
           <BsSearch />
@@ -201,7 +151,6 @@ export default function Search() {
         />
       </form>
 
-      {/* Filtros integrados */}
       <div className="filters-container">
         <div className="filters-header">
           <h3>Filtros</h3>
@@ -215,7 +164,6 @@ export default function Search() {
         </div>
 
         <div className="filters-content">
-          {/* Filtro por Categoria */}
           <div className="filter-group">
             <h4>Categoria</h4>
             <div className="filter-options">
@@ -232,7 +180,6 @@ export default function Search() {
             </div>
           </div>
 
-          {/* Filtro por Modalidade */}
           <div className="filter-group">
             <h4>Modalidade</h4>
             <div className="filter-options">
@@ -249,7 +196,6 @@ export default function Search() {
             </div>
           </div>
 
-          {/* Filtro por Preço */}
           <div className="filter-group">
             <h4>Preço</h4>
             <div className="filter-options">
@@ -269,7 +215,6 @@ export default function Search() {
           </div>
         </div>
 
-        {/* Botão de buscar */}
         <button 
           className="search-button"
           onClick={handleFilterSearch}
@@ -279,7 +224,6 @@ export default function Search() {
         </button>
       </div>
 
-      {/* Lista de produtos */}
       <ProductsSearch />
     </>
   );

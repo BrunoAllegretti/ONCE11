@@ -238,6 +238,7 @@ export default function Carousel() {
                 price={produto.maisComprados[7].price}
                 filters={produto.maisComprados[7].filters} // Adicionado
             />
+
         </div>
     );
 }

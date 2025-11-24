@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "homepage": "https://BrunoAllegretti.github.io/ONCE11",
-  "type": "module", 
+  "type": "module",
   "scripts": {
     "dev": "vite --port 5173",
     "build": "tsc && vite build",
@@ -13,7 +13,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.0",
     "@react-three/drei": "^9.0.0",
+    "gsap": "^3.13.0",
     "react": "^18.3.1",
     "react-bootstrap-icons": "^1.11.6",
     "react-dom": "^18.3.1",

@@ -1,11 +1,11 @@
 import { createContext } from "react";
-import { Product } from "../components/Products";
+import { Product } from "../services/api";
 
 interface AppContextType {
   cartItems: (Product & { quantity: number })[];
   setCartItems: React.Dispatch<React.SetStateAction<(Product & { quantity: number })[]>>;
-  addToCart: (item: Product & { quantity: number }) => void;
-  removeFromCart: (id: number) => void;
+  addToCart: (item: Product) => void; 
+  removeFromCart: (_id: string) => void; 
   products: Product[];
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
   loading: boolean;
