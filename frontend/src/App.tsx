@@ -14,7 +14,6 @@ export default function App() {
     <>
       <Header />  
       <ScrollToStop/>
-      <Card />
       <Outlet />
       <Footer />
     </>

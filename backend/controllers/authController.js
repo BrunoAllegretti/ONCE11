@@ -4,40 +4,50 @@ const jwt = require('jsonwebtoken');
 
 // Registrar um novo usuário
 exports.register = async (req, res) => {
-    const { name, email, password } = req.body;
+    const {
+        name,
+        email,
+        password,
+        cep,
+        street,
+        number,
+        neighborhood,
+        city,
+        state
+    } = req.body;
 
     try {
-        // Verificar se o usuário já existe
         let user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({ msg: 'Usuário já existe' });
         }
 
-        // Criar um novo usuário
         user = new User({
             name,
             email,
-            password
+            password,
+            profilePicture: req.file ? `/uploads/${req.file.filename}` : null,
+            address: {
+                cep,
+                street,
+                number,
+                neighborhood,
+                city,
+                state
+            }
         });
 
-        // Criptografar a senha
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
 
-        // Salvar o usuário no banco de dados
         await user.save();
 
-        // Criar e retornar o token JWT
-        const payload = {
-            user: {
-                id: user.id
-            }
-        };
+        const payload = { user: { id: user.id } };
 
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: 3600 }, // Expira em 1 hora
+            { expiresIn: 3600 },
             (err, token) => {
                 if (err) throw err;
                 res.json({ token });
@@ -50,29 +60,25 @@ exports.register = async (req, res) => {
     }
 };
 
-// Autenticar um usuário e obter o token (Login)
+// LOGIN DO USUÁRIO (FALTAVA)
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Verificar se o usuário existe
+        // Buscar usuário
         let user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ msg: 'Credenciais inválidas' });
         }
 
-        // Verificar a senha
+        // Comparar senha
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ msg: 'Credenciais inválidas' });
         }
 
-        // Criar e retornar o token JWT
-        const payload = {
-            user: {
-                id: user.id
-            }
-        };
+        // Criar token
+        const payload = { user: { id: user.id } };
 
         jwt.sign(
             payload,
@@ -80,7 +86,14 @@ exports.login = async (req, res) => {
             { expiresIn: 3600 },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token });
+                res.json({
+                    token,
+                    user: {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                    }
+                });
             }
         );
 

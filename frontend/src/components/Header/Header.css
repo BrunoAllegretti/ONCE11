@@ -209,3 +209,19 @@ nav ul li:hover a {
     padding: 2px 4px;
   }
 }
+
+
+.profileBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+}
+
+.profileImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}

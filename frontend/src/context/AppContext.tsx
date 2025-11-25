@@ -12,6 +12,12 @@ interface AppContextType {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isCartVisible: boolean;
   toggleCartVisibility: () => void;
+
+  // 🔥 ADICIONAR AQUI
+  user: { name: string; photo: string } | null;
+  setUser: React.Dispatch<
+    React.SetStateAction<{ name: string; photo: string } | null>
+  >;
 }
 
 const AppContext = createContext<AppContextType | null>(null);

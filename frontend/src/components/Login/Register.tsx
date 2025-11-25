@@ -26,45 +26,63 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
   };
 
   const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setMessage('');
+  e.preventDefault();
+  setMessage('');
 
-    if (!validateEmail(email)) {
-      setMessage('Por favor, insira um email válido.');
+  if (!validateEmail(email)) {
+    setMessage('Por favor, insira um email válido.');
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    setMessage('As senhas não coincidem.');
+    return;
+  }
+
+  try {
+    // Criar o FormData
+    const formData = new FormData();
+
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+
+    // Endereço
+    formData.append('cep', cep);
+    formData.append('street', street);
+    formData.append('number', number);
+    formData.append('neighborhood', neighborhood);
+    formData.append('city', city);
+    formData.append('state', state);
+
+    // Foto de perfil
+    if (profilePicture) {
+      formData.append('profilePicture', profilePicture);
+    }
+
+    // Enviar para o backend sem headers de JSON!
+    const res = await fetch('https://once11-backend.onrender.com', {
+      method: 'POST',
+      body: formData
+      // IMPORTANTE: não coloque headers
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setMessage(data.msg || 'Erro ao tentar registrar.');
       return;
     }
 
-    if (password !== confirmPassword) {
-      setMessage('As senhas não coincidem.');
-      return;
-    }
+    setMessage('✅ Conta criada com sucesso! Redirecionando para o login...');
+    setTimeout(onSwitchToLogin, 2000);
 
-    // Nota: A chamada de API abaixo não inclui os novos campos (profilePicture e endereço)
-    // pois o endpoint original só aceita username, password e email.
-    // Você precisará atualizar o backend para receber e processar esses novos dados.
-    // Por enquanto, os dados estão sendo coletados no estado do componente.
+  } catch (error) {
+    console.error(error);
+    setMessage('Erro ao conectar ao servidor.');
+  }
+};
 
-    try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, password, email })
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setMessage(data.message || 'Erro ao tentar registrar.');
-        return;
-      }
-
-      setMessage('✅ Conta criada com sucesso! Redirecionando para o login...');
-      setTimeout(onSwitchToLogin, 2000); // Alterna para o login após 2 segundos
-    } catch (error) {
-      console.error(error);
-      setMessage('Erro ao conectar ao servidor.');
-    }
-  };
 
   const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {

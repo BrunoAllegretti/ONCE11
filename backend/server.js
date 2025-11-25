@@ -5,19 +5,21 @@ require('dotenv').config();
 
 const app = express();
 
-// Conectar ao banco de dados
+// conectar ao banco
 connectDB();
 
-// Middlewares
+// middlewares
 app.use(cors());
-app.use(express.json({ extended: false })); // Permite que o app aceite dados JSON no corpo da requisição
+app.use(express.json());
 
-// Rota de teste
-app.get('/', (req, res) => res.send('API Rodando'));
+// rota teste
+app.get('/', (req, res) => {
+  res.send("API Rodando!");
+});
 
-// Definir Rotas
+// rotas
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/products', require('./routes/products')); // Será implementada a seguir
+app.use('/api/products', require('./routes/products'));
 
 const PORT = process.env.PORT || 5000;
 
