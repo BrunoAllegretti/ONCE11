@@ -40,7 +40,7 @@ export default function Provider({ children }: ProviderProps) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://once11-backend.onrender.com/api/products');
+        const response = await fetch('https://once11.onrender.com/api/products');
         const data = await response.json();
         setProducts(data.products);
       } catch (error) {

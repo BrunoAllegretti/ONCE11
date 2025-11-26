@@ -61,7 +61,7 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
     }
 
     // Enviar para o backend sem headers de JSON!
-    const res = await fetch('https://once11-backend.onrender.com', {
+    const res = await fetch('https://once11.onrender.com/api/auth/register', {
       method: 'POST',
       body: formData
       // IMPORTANTE: não coloque headers

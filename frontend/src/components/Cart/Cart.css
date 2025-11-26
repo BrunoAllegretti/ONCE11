@@ -31,9 +31,10 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    background-color: var(--primary-blue);
+    background-color: #f4f4f4; /* Fundo mais claro para a página */
     margin: 0;
     padding: 0;
+    min-height: 100vh; /* Garante que o container ocupe toda a altura */
 }
 
 /* SEÇÃO DO CARRINHO (Coluna Esquerda) */
@@ -41,10 +42,25 @@
     min-height: 88vh;
     height: auto;
     width: 60%;
-    background-color: var(--primary-blue);
+    background-color: #004aad; /* Fundo claro para a lista de itens */
     padding: 30px;
-    color: #fff;
+    color: #ffffff; /* Texto escuro */
 }
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 20px; /* Espaço para a sombra do resumo */
+}
+
+.empty-cart {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 50px;
+    color: #ffffff; /* Cor ajustada para o fundo claro */
+}
+
 
 /* SEÇÃO DO RESUMO (Coluna Direita) */
 .cart-resume {
@@ -59,6 +75,7 @@
     top: 0;
     height: 88vh;
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+    border-radius: 10px 0 0 10px; /* Borda arredondada no lado esquerdo */
 }
 
 /* Para garantir que não tenha margens extras */
@@ -71,7 +88,7 @@ body, html {
 .resume {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 15px; /* Espaçamento reduzido */
     width: 100%;
 }
 
@@ -81,17 +98,17 @@ body, html {
     display: flex;
     margin: 20px 0;
     border: 1px solid #ccc;
-    border-radius: 16px;
+    border-radius: 8px; /* Borda menos arredondada */
     overflow: hidden;
 }
 
 .cupom {
     flex: 1;
-    height: 40px;
+    height: 45px; /* Altura maior */
     border: none;
     outline: none;
-    padding: 0 10px;
-    font-size: 2rem;
+    padding: 0 15px;
+    font-size: 1rem; /* Tamanho de fonte ajustado */
     background: #f8f8f8;
     color: #333;
     font-family: 'norms', Arial, Helvetica, sans-serif;
@@ -108,19 +125,19 @@ body, html {
 }
 
 .cupom-button {
-    height: 100%;
-    background-color: var(--primary-blue);
+    height: 45px; /* Altura ajustada */
+    background-color: var(--accent-green); /* Cor de destaque para o botão */
     color: white;
     border: none;
-    padding: 0 15px;
+    padding: 0 20px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 1rem;
     transition: background-color 0.3s ease;
 }
 
 .cupom-button:hover {
-    background-color: var(--dark-blue);
+    background-color: var(--dark-green);
 }
 
 /* Ocultar botões antigos */
@@ -145,49 +162,51 @@ body, html {
 .row {
     z-index: 20;
     width: 100%;
-    height: 3px;
-    background-color: #004aad;
+    height: 1px; /* Linha mais fina */
+    background-color: #eee; /* Cor mais suave */
+    border: none;
 }
 
 .cart-summary-row {
-    margin-right: 5%;
-    margin-top: 5%;
+    margin-right: 0; /* Removendo margem direita */
+    margin-top: 0; /* Removendo margem superior */
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    font-size: 2.5rem;
+    border-bottom: none; /* Removendo a borda inferior duplicada */
+    font-size: 1.1rem; /* Tamanho de fonte ajustado */
     font-family: 'norms', Arial, Helvetica, sans-serif;
     color: #333;
 }
 
 .cart-summary-row span:first-child {
     font-weight: normal;
-    font-size: 1.5rem;
-    color: #000000;
+    font-size: 1rem; /* Tamanho de fonte ajustado */
+    color: #555;
 }
 
 .cart-summary-row span:last-child {
     font-weight: bold;
-    color: var(--primary-blue);
+    color: #333; /* Cor mais neutra */
 }
 
 .cart-summary-row.total {
     font-weight: bold;
-    font-size: 1rem;
-    border-bottom: none;
+    font-size: 1.5rem; /* Tamanho de fonte maior para o total */
+    border-top: 2px solid var(--primary-blue); /* Linha de destaque para o total */
     padding-top: 15px;
+    margin-top: 15px;
     color: var(--primary-blue);
     text-shadow: none;
 }
 
 .cart-summary-row.total span:first-child {
     font-weight: bold;
-    color: #000;
+    color: var(--primary-blue);
 }
 
 .cart-summary-row.total span:last-child {
-    font-size: 3rem;
+    font-size: 1.8rem; /* Tamanho de fonte ajustado */
     color: var(--primary-blue);
 }
 
@@ -195,8 +214,8 @@ body, html {
 .payment-actions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 15%;
+    gap: 15px; /* Espaçamento maior */
+    margin-top: 30px; /* Margem superior ajustada */
 }
 
 .checkout-button, .back-button, .continue-shopping {
@@ -215,9 +234,15 @@ body, html {
 }
 
 .checkout-button {
-    background-color: var(--primary-blue); /* Azul forte para Finalizar */
+    background-color: var(--accent-green); /* Verde para o botão principal */
     color: white;
     border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-button:hover {
+    background-color: var(--dark-green);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .back-button {
@@ -225,9 +250,280 @@ body, html {
 }
 
 .continue-shopping {
-    background-color: white; /* Fundo branco para Escolher Mais Produtos */
-    color: var(--accent-green); /* Verde para o texto */
-    border: 1px solid var(--accent-green); /* Borda verde */
+    background-color: white;
+    color: var(--primary-blue); /* Azul para o texto */
+    border: 1px solid var(--primary-blue); /* Borda azul */
+}
+
+.continue-shopping:hover {
+    background-color: #f4f4f4;
+    color: var(--dark-blue);
+    border-color: var(--dark-blue);
+}
+
+.delivery-time {
+    font-size: 0.9rem;
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+
+/* ESTILOS DA ETAPA DE PAGAMENTO */
+.payment-content {
+    width: 100%;
+    padding: 30px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.payment-content h1 {
+    font-family: 'most', Arial, Helvetica, sans-serif;
+    color: var(--primary-blue);
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.payment-method-selection {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    width: 50%;
+}
+
+.payment-method:hover {
+    border-color: var(--light-blue);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.payment-method.selected {
+    border-color: var(--primary-blue);
+    background-color: #e6f0ff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-method-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+.payment-method-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-blue);
+}
+
+/* Formulário de Cartão */
+.card-payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: #555;
+}
+
+
+.form-group input, .form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: 'norms', Arial, Helvetica, sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+}
+
+.finalize-button {
+    background-color: var(--accent-green);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.finalize-button:hover {
+    background-color: var(--dark-green);
+}
+
+/* Informações de PIX */
+.pix-payment-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    align-items: center;
+}
+
+.pix-code-container {
+    text-align: center;
+    width: 100%;
+}
+
+.pix-code-container h3 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+}
+
+.pix-code {
+    background-color: #f8f8f8;
+    border: 1px dashed #ccc;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    border-radius: 4px;
+    word-break: break-all;
+    margin-bottom: 15px;
+}
+
+.copy-pix-button {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.copy-pix-button:hover {
+    background-color: var(--dark-blue);
+}
+
+.pix-instructions {
+    width: 100%;
+    padding: 10px;
+    border-left: 4px solid var(--accent-green);
+    background-color: #e6ffe6;
+}
+
+.pix-instructions p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #388E3C;
+}
+
+/* ESTILOS DA ETAPA DE CONFIRMAÇÃO */
+.confirmation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    max-width: 600px;
+}
+
+.confirmation-icon {
+    font-size: 4rem;
+    color: var(--accent-green);
+    border: 4px solid var(--accent-green);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.confirmation-content h1 {
+    color: var(--accent-green);
+    font-family: 'most', Arial, Helvetica, sans-serif;
+    margin-bottom: 10px;
+}
+
+.confirmation-message {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.order-details {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.order-details h3 {
+    color: var(--primary-blue);
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.order-details p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.confirmation-email {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.confirmation-content .continue-shopping {
+    /* Reutiliza o estilo do botão, mas com margem superior */
+    margin-top: 10px;
+    width: auto;
+    padding: 10px 20px;
 }
 
 
