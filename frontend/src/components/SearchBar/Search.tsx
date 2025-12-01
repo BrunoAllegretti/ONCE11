@@ -3,6 +3,7 @@ import { useState, useContext } from 'react';
 import './Search.css';
 import { fetchProducts } from "../../services/api";
 import AppContext from '../../context/AppContext';
+import { useLanguage } from '../../context/LanguageContext';
 import Card from '../Card/Card';
 import { Product } from '../../services/api';
 
@@ -13,6 +14,7 @@ interface FiltersState {
 
 export default function Search() {
   const context = useContext(AppContext);
+  const { t } = useLanguage();
 
   if (!context) {
     throw new Error("AppContext must be used within a Provider");
@@ -26,26 +28,26 @@ export default function Search() {
   });
 
   const categoryOptions = [
-    { value: 'calçado', label: 'Calçado' },
-    { value: 'bola', label: 'Bola' },
-    { value: 'acessorio', label: 'Acessório' },
-    { value: 'outro', label: 'Outro' }
+    { value: 'calçado', label: t('option_footwear') },
+    { value: 'bola', label: t('option_ball') },
+    { value: 'acessorio', label: t('option_accessory') },
+    { value: 'outro', label: t('option_other') }
   ];
 
   const sportOptions = [
-    { value: 'futebol', label: 'Futebol' },
-    { value: 'basquete', label: 'Basquetebol' },
-    { value: 'volei', label: 'Voleibol' },
-    { value: 'futsal', label: 'Futsal' },
-    { value: 'outros', label: 'Outros' }
+    { value: 'futebol', label: t('option_football_sport') },
+    { value: 'basquete', label: t('option_basketball_sport') },
+    { value: 'volei', label: t('option_volleyball_sport') },
+    { value: 'futsal', label: t('option_futsal') },
+    { value: 'outros', label: t('option_other_sports') }
   ];
 
   const priceOptions = [
-    { value: '', label: 'Todos os preços' },
-    { value: '0-50', label: 'entre 0-50 BRL' },
-    { value: '50-250', label: 'entre 50-250 BRL' },
-    { value: '250-500', label: 'entre 250-500 BRL' },
-    { value: '500+', label: 'acima de 500 BRL' }
+    { value: '', label: t('option_all_prices') },
+    { value: '0-50', label: t('option_price_0_50') },
+    { value: '50-250', label: t('option_price_50_250') },
+    { value: '250-500', label: t('option_price_250_500') },
+    { value: '500+', label: t('option_price_above_500') }
   ];
 
   const applyFilters = (products: any[]) => {
@@ -83,7 +85,7 @@ export default function Search() {
     event.preventDefault();
     
     if (!searchValue.trim()) {
-      alert('Por favor, digite algo para buscar');
+      alert(t('placeholder_search_products'));
       return;
     }
     
@@ -145,7 +147,7 @@ export default function Search() {
 
   return (
     <>
-      <h2 className="busque">Busque</h2>
+      <h2 className="busque">{t('heading_search')}</h2>
 
       <form className="search-bar" onSubmit={handleSearch}>
         <button type="submit" className="search_button">
@@ -154,7 +156,7 @@ export default function Search() {
         <input
           type="search"
           value={searchValue}
-          placeholder="Buscar produtos"
+          placeholder={t('placeholder_search_products')}
           className="search_input"
           onChange={({ target }) => setSearchValue(target.value)}
         />
@@ -162,19 +164,19 @@ export default function Search() {
 
       <div className="filters-container">
         <div className="filters-header">
-          <h3>Filtros</h3>
+          <h3>{t('heading_filters')}</h3>
           <button 
             className="clear-filters-btn"
             onClick={handleClearFilters}
             type="button"
           >
-            Limpar Filtros
+            {t('button_clear_filters')}
           </button>
         </div>
 
         <div className="filters-content">
           <div className="filter-group">
-            <h4>Categoria</h4>
+            <h4>{t('heading_category')}</h4>
             <div className="filter-options">
               {categoryOptions.map(category => (
                 <label key={category.value} className="filter-option">
@@ -190,7 +192,7 @@ export default function Search() {
           </div>
 
           <div className="filter-group">
-            <h4>Modalidade</h4>
+            <h4>{t('heading_sport')}</h4>
             <div className="filter-options">
               {sportOptions.map(sport => (
                 <label key={sport.value} className="filter-option">
@@ -206,7 +208,7 @@ export default function Search() {
           </div>
 
           <div className="filter-group">
-            <h4>Preço</h4>
+            <h4>{t('heading_price_filter')}</h4>
             <div className="filter-options">
               {priceOptions.map(price => (
                 <label key={price.value} className="filter-option">
@@ -229,11 +231,11 @@ export default function Search() {
           onClick={handleFilterSearch}
           type="button"
         >
-          Buscar
+          {t('button_search_filter')}
         </button>
       </div>
 
-      {loading && <p className="loading-message">Carregando produtos...</p>}
+      {loading && <p className="loading-message">{t('message_loading_products_search')}</p>}
 
       {products && products.length > 0 && (
         <section className="products-grid">
@@ -244,7 +246,7 @@ export default function Search() {
       )}
 
       {products && products.length === 0 && !loading && (
-        <p className="no-results-message">Nenhum produto encontrado.</p>
+        <p className="no-results-message">{t('message_no_results')}</p>
       )}
     </>
   );
