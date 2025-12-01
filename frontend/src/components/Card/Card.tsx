@@ -1,5 +1,6 @@
 import { FaShoppingCart } from "react-icons/fa";
 import "./Card.css";
+import { useLanguage } from "../../context/LanguageContext";
 import { Product } from "../../services/api";
 
 interface CardProps {
@@ -7,12 +8,14 @@ interface CardProps {
 }
 
 export default function Card({ product }: CardProps) {
+  const { t } = useLanguage();
+
   console.log("🟦 [Card] Renderizando produto:", product);
 
   // Se o produto vier undefined ou quebrado
   if (!product || !product._id || !product.name) {
     console.log("❌ [Card] Produto inválido detectado:", product);
-    return <div className="cardProd">Produto inválido</div>;
+    return <div className="cardProd">{t('message_invalid_product')}</div>;
   }
 
   // Garantir campos mínimos
@@ -48,7 +51,7 @@ export default function Card({ product }: CardProps) {
 
         <div>
           <button className="cartButton">
-            <FaShoppingCart /> Adicionar no Carrinho
+            <FaShoppingCart /> {t('button_add_to_cart_card')}
           </button>
         </div>
       </section>

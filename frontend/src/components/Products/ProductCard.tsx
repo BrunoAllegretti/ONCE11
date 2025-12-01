@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import './Products.css';
 import { Product } from '../Products';
 import AppContext from '../../context/AppContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 type ProductCardProps = {
   data: Product;
@@ -9,6 +10,8 @@ type ProductCardProps = {
 
 export default function ProductCard({ data }: ProductCardProps) {
   const context = useContext(AppContext);
+  const { t } = useLanguage();
+
   if (!context) return null;
 
   const { cartItems, setCartItems } = context;
@@ -48,7 +51,7 @@ export default function ProductCard({ data }: ProductCardProps) {
           className="button__add-cart"
           onClick={handleAddCart}
         >
-          Adicionar ao Carrinho
+          {t('button_add_to_cart_product_card')}
         </button>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import "./CardCart.css";
 import AppContext from "../context/AppContext";
+import { useLanguage } from "../context/LanguageContext";
 
 type CardProps = {
   id: number;
@@ -13,6 +14,7 @@ type CardProps = {
 
 export default function Card({ id, name, image, description, priceOld, price }: CardProps) {
   const context = useContext(AppContext);
+  const { t } = useLanguage();
 
   if (!context) return null;
 
@@ -56,7 +58,7 @@ export default function Card({ id, name, image, description, priceOld, price }: 
         </div>
 
         <button className="add-to-cart-btn" onClick={handleAddToCart}>
-          Adicionar ao Carrinho
+          {t('button_add_to_cart_cardcart')}
         </button>
       </div>
     </div>
