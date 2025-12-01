@@ -4,6 +4,7 @@ import oluwakemi from '../../assets/img/Oluwakemi.png';
 import rafaela from '../../assets/img/Rafaela.png';
 import vinicius from '../../assets/img/Vinicius.png';
 import kid from '../../assets/img/Kid.mp4';
+import video from '../../assets/img/leomartins.mp4';
 
 export default function Campanha() {
     return(
@@ -25,7 +26,7 @@ export default function Campanha() {
 
             <div className='section-video'>
                 <h2>Como <b>VOCÊ</b> pode ajudar</h2>
-                <img className="camMP4" src="" alt="" />
+                <video className="camMP4" src={video} controls />
             </div>
 
             <div>

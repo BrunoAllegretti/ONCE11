@@ -7,7 +7,6 @@
 }
 
 /*------------------------- HEADER ----------------------------*/
-/* Esconde a barra do Google Translate */
 .goog-te-banner-frame.skiptranslate {
     display: none !important;
 }
@@ -16,40 +15,8 @@ body {
     top: 0px !important;
 }
 
-nav ul {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* itens espalhados */
-  gap: 10px;
-}
-
-.profileMenu {
-  margin-left: auto; /* empurra para a direita */
-  display: flex;
-  align-items: center;
-}
-
-.profileMenu .profile,
-.profileMenu .login {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: white;
-  text-decoration: none;
-}
-
-.profileImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-}
-
-
 header {
-text-decoration: none;
-z-index: 1000;
+  z-index: 1000;
   width: 100%;
   height: 100px;
   font-weight: 500;
@@ -59,53 +26,44 @@ z-index: 1000;
   left: 0;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0px;
   color: #7efc00;
   font-family: 'Arial', sans-serif;
 }
 
-header:hover{
+header:hover {
   background-color: #004aaa;
 }
 
 header a {
-text-decoration: none;
-color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 header a:visited {
-color: inherit;
+  color: inherit;
 }
 
 /*------------------------- LOGO ----------------------------*/
-
 .home {
   display: flex;
   align-items: center;
   text-decoration: none;
   height: 80%;
   position: relative;
-  right: 5%;
-  top: 2.5px;
+  left: 2%;
 }
 
-
-.imagem-troca:hover {
-background-image: url('../../assets/img/LogoNVerde.png');
+.logoH {
+  height: 60%;
 }
 
-
-header h2 {
-  margin-left: 40px;
-  font-size: 24px;
-  color: #00ff66;
-}
-
-/* Menu */
+/*------------------------- NAVBAR ----------------------------*/
 nav {
   text-decoration: none;
-  margin-left: 0;
+  margin-left: auto;
+  margin-right: 2%;
 }
 
 nav ul {
@@ -116,11 +74,12 @@ nav ul {
   gap: 10px;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 nav ul li {
-  font-weight: 00;
-  font-family: 'commons',Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-family: 'commons', Arial, Helvetica, sans-serif;
   padding: 8px 16px;
   border-radius: 4px;
   margin: 0 8px;
@@ -131,7 +90,8 @@ nav ul li {
   transition: background-color 0.3s;
   display: flex;
   align-items: center;    
-  gap: 6px;    
+  gap: 6px;
+  white-space: nowrap;
 }
 
 nav ul li svg {
@@ -139,11 +99,8 @@ nav ul li svg {
   height: 20px;
 }
 
-
 nav ul li:hover {
   background-color: #59fa88;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
   color: black;
 }
 
@@ -151,116 +108,29 @@ nav ul li:hover a {
   color: black;
 }
 
-/*------------------------- BUSCA ----------------------------*/
-
-
-
-.logoH {
-
-  height: 60%;
+/*------------------------- HAMBURGER MENU ----------------------------*/
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+  margin-right: 20px;
+  padding: 8px;
+  transition: color 0.3s;
 }
 
-
-/*------------------------- RESPONSIVIDADE ----------------------------*/
-
-/* Para telas menores que 1024px (laptops menores e tablets) */
-@media (max-width: 1024px) {
-  header {
-    height: 80px;
-  }
-
-  .home {
-    margin-left: 20px;
-  }
-
-  nav ul {
-    font-size: 20px; /* Reduzindo um pouco o tamanho da fonte do menu */
-    gap: 5px;
-  }
-
-  nav ul li {
-    padding: 6px 12px;
-    margin: 0 4px;
-  }
+.hamburger-btn:hover {
+  color: #59fa88;
 }
 
-/* Para telas menores que 768px (tablets e celulares) */
-@media (max-width: 768px) {
-  header {
-    height: 60px;
-    justify-content: space-between;
-    padding: 0 10px;
-  }
-
-  .home {
-    margin-left: 10px;
-    height: 70%;
-  }
-
-  header h2 {
-    font-size: 18px;
-    margin-left: 10px;
-  }
-
-  .logoH {
-    height: 100%;
-  }
-
-  nav {
-    margin-right: 10px;
-  }
-
-  nav ul {
-    font-size: 14px;
-    gap: 2px;
-  }
-
-  nav ul li {
-    padding: 4px 8px;
-    margin: 0 2px;
-  }
-}
-
-/* Para telas menores que 480px (celulares) */
-@media (max-width: 480px) {
-  header {
-    height: 50px;
-  }
-
-  header h2 {
-    display: none; /* Esconde o texto do título em telas muito pequenas */
-  }
-
-  nav ul {
-    font-size: 12px;
-  }
-
-  nav ul li {
-    padding: 2px 4px;
-  }
-}
-
-
-.profileBox {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-}
-
-.profileImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-}
-
+/*------------------------- USER PROFILE ----------------------------*/
 .icone {
   height: 100%;
   display: flex;
   flex-direction: row;
-  margin-left: 10%;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
@@ -270,4 +140,260 @@ nav ul li:hover a {
   width: 3rem;
   height: 3rem;
   z-index: 10;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name {
+  font-family: 'commons', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #00ff66;
+}
+
+/*------------------------- RESPONSIVIDADE ----------------------------*/
+
+/* DESKTOPS E LAPTOPS - 1024px acima */
+@media (min-width: 1024px) {
+  header {
+    height: 100px;
+    justify-content: space-around;
+  }
+
+  nav {
+    margin-left: 0;
+    margin-right: 2%;
+  }
+
+  nav ul {
+    font-size: 24px;
+    gap: 10px;
+  }
+
+  nav ul li {
+    padding: 8px 16px;
+    margin: 0 8px;
+  }
+
+  .hamburger-btn {
+    display: none !important;
+  }
+
+  .navbar {
+    display: block !important;
+    position: static !important;
+    transform: translateX(0) !important;
+    margin-left: auto;
+    margin-right: 2%;
+  }
+
+  .icone {
+    display: flex !important;
+  }
+}
+
+/* TABLETS - 600px a 1023px */
+@media (min-width: 600px) and (max-width: 1023px) {
+  header {
+    height: 80px;
+    padding: 0 10px;
+  }
+
+  .home {
+    left: 1%;
+  }
+
+  .hamburger-btn {
+    display: block !important;
+  }
+
+  /* Menu desliza da direita */
+  .navbar {
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    width: 70%;
+    max-width: 350px;
+    height: calc(100vh - 80px);
+    background-color: #004aad;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px 0;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+    margin: 0;
+  }
+
+  .navbar.active {
+    right: 0 !important;
+  }
+
+  nav {
+    margin: 0 !important;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    font-size: 18px;
+    gap: 0;
+  }
+
+  nav ul li {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0;
+    border-radius: 0;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  nav ul li:hover {
+    background-color: #59fa88;
+    color: black;
+  }
+
+  .icone {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex !important;
+  }
+
+  .icone img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+}
+
+/* DISPOSITIVOS MÓVEIS - até 599px */
+@media (max-width: 599px) {
+  header {
+    height: 60px;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  .home {
+    left: 0;
+  }
+
+  .logoH {
+    height: 100%;
+  }
+
+  .hamburger-btn {
+    display: block !important;
+  }
+
+  /* Menu desliza da direita */
+  .navbar {
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    width: 80%;
+    max-width: 280px;
+    height: calc(100vh - 60px);
+    background-color: #004aad;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px 0;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+    margin: 0;
+  }
+
+  .navbar.active {
+    right: 0 !important;
+  }
+
+  nav {
+    margin: 0 !important;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    font-size: 18px;
+    gap: 0;
+  }
+
+  nav ul li {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0;
+    border-radius: 0;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  nav ul li:hover {
+    background-color: #59fa88;
+    color: black;
+  }
+
+  .icone {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex !important;
+  }
+
+  .icone img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+}
+
+/* TELAS MUITO PEQUENAS - até 480px */
+@media (max-width: 480px) {
+  header {
+    height: 50px;
+  }
+
+  .logoH {
+    height: 80%;
+  }
+
+  .hamburger-btn {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  .navbar {
+    top: 50px;
+    width: 85%;
+    max-width: 250px;
+  }
+
+  nav ul li {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .icone {
+    padding: 10px 15px;
+  }
+
+  .icone img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .user-name {
+    font-size: 12px;
+  }
 }
