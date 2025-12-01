@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import { useTranslation } from '../../context/LanguageContext';
 
 interface RegisterProps {
   onSwitchToLogin: () => void;
@@ -18,6 +19,8 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const t = useTranslation();
 
   const validateEmail = (email: string) => {
     // Regex simples para validação de email
@@ -30,12 +33,12 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
   setMessage('');
 
   if (!validateEmail(email)) {
-    setMessage('Por favor, insira um email válido.');
+    setMessage(t('invalid_email'));
     return;
   }
 
   if (password !== confirmPassword) {
-    setMessage('As senhas não coincidem.');
+    setMessage(t('passwords_not_match'));
     return;
   }
 
@@ -70,16 +73,19 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
     const data = await res.json();
 
     if (!res.ok) {
-      setMessage(data.msg || 'Erro ao tentar registrar.');
+      setMessage(data.msg || t('register_error'));
+      setIsSuccess(false);
       return;
     }
 
-    setMessage('✅ Conta criada com sucesso! Redirecionando para o login...');
+    setMessage(t('register_success'));
+    setIsSuccess(true);
     setTimeout(onSwitchToLogin, 2000);
 
   } catch (error) {
     console.error(error);
-    setMessage('Erro ao conectar ao servidor.');
+    setMessage(t('error_connect'));
+    setIsSuccess(false);
   }
 };
 
@@ -92,7 +98,7 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
 
   return (
     <div className="login-form">
-      <h1 className="login-title">Cadastre-se</h1>
+      <h1 className="login-title">{t('register')}</h1>
       <form onSubmit={handleRegister}>
         {/* Bloco de Foto de Perfil */}
         <div className="profile-picture-upload">
@@ -101,11 +107,11 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
               {profilePicture ? (
                 <img
                   src={URL.createObjectURL(profilePicture)}
-                  alt="Foto de Perfil"
+                  alt={t('profile_picture')}
                   className="profile-picture-preview"
                 />
               ) : (
-                <span className="profile-picture-text">Clique para adicionar foto de perfil</span>
+                <span className="profile-picture-text">{t('click_add_profile')}</span>
               )}
             </div>
           </label>
@@ -116,18 +122,18 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
             onChange={handleProfilePictureChange}
             style={{ display: 'none' }}
           />
-          <p className="profile-picture-title">Foto de Perfil</p>
+          <p className="profile-picture-title">{t('profile_picture')}</p>
         </div>
         {/* Fim Bloco de Foto de Perfil */}
 
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t('email')}</label>
           <input
             type="email"
             id="email"
             name="email"
             className="login-input"
-            placeholder="Digite seu melhor email"
+            placeholder={t('email')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -135,13 +141,13 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
         </div>
 
         <div className="form-group">
-	          <label htmlFor="name">Nome Completo</label>
+            <label htmlFor="name">{t('name')}</label>
           <input
 	            type="text"
 	            id="name"
 	            name="name"
 	            className="login-input"
-	            placeholder="Digite seu nome completo"
+              placeholder={t('name')}
 	            value={name}
 	            onChange={(e) => setName(e.target.value)}
 	            required
@@ -149,13 +155,13 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
         </div>
 
         <div className="form-group">
-          <label className="passwordLabel" htmlFor="password">Senha</label>
+          <label className="passwordLabel" htmlFor="password">{t('password')}</label>
           <input
             type="password"
             id="password"
             name="password"
             className="login-input"
-            placeholder="Digite uma senha"
+            placeholder={t('password')}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -163,13 +169,13 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
         </div>
 
         <div className="form-group">
-          <label className="passwordLabel" htmlFor="confirmPassword">Repita a Senha</label>
+          <label className="passwordLabel" htmlFor="confirmPassword">{t('confirm_password')}</label>
           <input
             type="password"
             id="confirmPassword"
             name="confirmPassword"
             className="login-input"
-            placeholder="Confirme a senha"
+            placeholder={t('confirm_password')}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
@@ -177,15 +183,15 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
         </div>
 
         {/* Bloco de Endereço */}
-        <h2 className="address-title">Endereço</h2>
+        <h2 className="address-title">{t('address')}</h2>
         <div className="form-group">
-          <label htmlFor="cep">CEP</label>
+          <label htmlFor="cep">{t('cep')}</label>
           <input
             type="text"
             id="cep"
             name="cep"
             className="login-input"
-            placeholder="Digite o CEP"
+            placeholder={t('cep')}
             value={cep}
             onChange={(e) => setCep(e.target.value)}
             required
@@ -193,13 +199,13 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="street">Rua</label>
+          <label htmlFor="street">{t('street')}</label>
           <input
             type="text"
             id="street"
             name="street"
             className="login-input"
-            placeholder="Digite o nome da rua"
+            placeholder={t('street')}
             value={street}
             onChange={(e) => setStreet(e.target.value)}
             required
@@ -208,26 +214,26 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
 
         <div className="form-group-inline">
           <div className="form-group" style={{ flex: 1, marginRight: '10px' }}>
-            <label htmlFor="number">Número</label>
+            <label htmlFor="number">{t('number')}</label>
             <input
               type="text"
               id="number"
               name="number"
               className="login-input"
-              placeholder="Número"
+              placeholder={t('number')}
               value={number}
               onChange={(e) => setNumber(e.target.value)}
               required
             />
           </div>
           <div className="form-group" style={{ flex: 2 }}>
-            <label htmlFor="neighborhood">Bairro</label>
+            <label htmlFor="neighborhood">{t('neighborhood')}</label>
             <input
               type="text"
               id="neighborhood"
               name="neighborhood"
               className="login-input"
-              placeholder="Digite o bairro"
+              placeholder={t('neighborhood')}
               value={neighborhood}
               onChange={(e) => setNeighborhood(e.target.value)}
               required
@@ -237,26 +243,26 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
 
         <div className="form-group-inline">
           <div className="form-group" style={{ flex: 2, marginRight: '10px' }}>
-            <label htmlFor="city">Cidade</label>
+            <label htmlFor="city">{t('city')}</label>
             <input
               type="text"
               id="city"
               name="city"
               className="login-input"
-              placeholder="Digite a cidade"
+              placeholder={t('city')}
               value={city}
               onChange={(e) => setCity(e.target.value)}
               required
             />
           </div>
           <div className="form-group" style={{ flex: 1 }}>
-            <label htmlFor="state">Estado</label>
+            <label htmlFor="state">{t('state')}</label>
             <input
               type="text"
               id="state"
               name="state"
               className="login-input"
-              placeholder="Estado"
+              placeholder={t('state')}
               value={state}
               onChange={(e) => setState(e.target.value)}
               required
@@ -266,16 +272,14 @@ export function Register({ onSwitchToLogin }: RegisterProps) {
         {/* Fim Bloco de Endereço */}
 
         {message && (
-          <p
-            className={message.includes('sucesso') ? 'success-message' : 'error-message'}
-          >
+          <p className={isSuccess ? 'success-message' : 'error-message'}>
             {message}
           </p>
         )}
 
         <div className="form-actions">
-          <a href="#" className="no-account-link" onClick={(e) => { e.preventDefault(); onSwitchToLogin(); }}>Já tenho conta</a>
-          <button type="submit" className="login-button">Registrar</button>
+          <a href="#" className="no-account-link" onClick={(e) => { e.preventDefault(); onSwitchToLogin(); }}>{t('have_account')}</a>
+          <button type="submit" className="login-button">{t('register')}</button>
         </div>
       </form>
     </div>

@@ -1,6 +1,7 @@
 import './Header.css';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { TiHome } from "react-icons/ti";
@@ -16,6 +17,7 @@ import UserImg from '../../assets/img/user.webp';
 export default function Header() {
   const { user, isAuthenticated, logout } = useContext(UserContext) as any;
   const [menuOpen, setMenuOpen] = useState(false);
+  const { lang, toggleLang, t } = useLanguage();
 
   const getFirstName = (fullName: string) => {
     if (!fullName) return 'User';
@@ -49,6 +51,11 @@ export default function Header() {
         <img src={logo} alt="logo" className='logoH'/>
       </Link>
 
+      {/* Language toggle button */}
+      <button className="lang-toggle" onClick={toggleLang} aria-label="Toggle language">
+        {lang === 'pt' ? 'EN' : 'PT'}
+      </button>
+
       {/* Botão Hamburger - Visível em mobile e tablet */}
       <button className="hamburger-btn" onClick={toggleMenu} aria-label="Menu">
         {menuOpen ? <AiOutlineClose size={24} /> : <GiHamburgerMenu size={24} />}
@@ -57,22 +64,22 @@ export default function Header() {
       <nav className={`navbar ${menuOpen ? 'active' : ''}`}>
         <ul>
           <Link to="/" className="gohome" onClick={closeMenu}>
-            <li><TiHome /> Home</li>
+            <li><TiHome /> {t('home')}</li>
           </Link>
           <Link to="/collections" className="search" onClick={closeMenu}>
-            <li><HiViewGridAdd /> Coleções</li>
+            <li><HiViewGridAdd /> {t('collections')}</li>
           </Link>
           <Link to="/search" className="search" onClick={closeMenu}>
-            <li><FaSearch /> Busca</li>
+            <li><FaSearch /> {t('search')}</li>
           </Link>
           <Link to="/cart" className="caft" onClick={closeMenu}>
-            <li><FaShoppingCart /> Carrinho</li>
+            <li><FaShoppingCart /> {t('cart')}</li>
           </Link>
 
           <Link to={loginLink} className="login" onClick={closeMenu}>
             <li>
               {!isAuthenticated && <IoPeople />}
-              {isAuthenticated ? "Perfil" : "Login"}
+              {isAuthenticated ? t('profile') : t('login')}
             </li>
           </Link>
 

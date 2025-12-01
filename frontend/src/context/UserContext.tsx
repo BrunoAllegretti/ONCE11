@@ -22,6 +22,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserData | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const BASE_URL = 'https://once11.onrender.com';
+
+  const normalizeProfilePicture = (userData: any) => {
+    if (!userData) return userData;
+    const pd = { ...userData };
+    if (pd.profilePicture && typeof pd.profilePicture === 'string') {
+      const val = pd.profilePicture;
+      if (!/^https?:\/\//i.test(val)) {
+        pd.profilePicture = `${BASE_URL}/${val.replace(/^\/+/, '')}`;
+      }
+    }
+    return pd;
+  };
+
   // Função para buscar dados do usuário usando o token
   const fetchUserData = async (token: string) => {
     try {
@@ -35,7 +49,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
       if (res.ok) {
         const userData = await res.json();
-        setUser(userData);
+        setUser(normalizeProfilePicture(userData));
         setIsAuthenticated(true);
       } else {
         // Token inválido
@@ -50,7 +64,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   const login = (userData: UserData, token: string) => {
-    setUser(userData);
+    setUser(normalizeProfilePicture(userData));
     setIsAuthenticated(true);
     localStorage.setItem('token', token);
   };

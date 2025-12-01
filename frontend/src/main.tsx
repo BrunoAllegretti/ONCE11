@@ -12,6 +12,7 @@ import Campanha from './components/Campanha/Campanha';
 import Error404 from './components/404/error404'; 
 import Colecoes from './components/Collections/Colecoes';
 import { UserProvider } from './context/UserContext';
+import { LanguageProvider } from './context/LanguageContext';
 import SearchV from './components/SearchV/SearchV';
 import BeachTennis from './components/Coleções/BeachTennis';
 import Reds from './components/Coleções/Reds';
@@ -57,9 +58,11 @@ if (!rootElement) {
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <UserProvider>
-      <Provider>
-        <RouterProvider router={router} />
-      </Provider>
+      <LanguageProvider>
+        <Provider>
+          <RouterProvider router={router} />
+        </Provider>
+      </LanguageProvider>
     </UserProvider>
   </React.StrictMode>
 );
