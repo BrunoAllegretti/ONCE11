@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./SearchV.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 type Slide = {
   title: string;
@@ -7,38 +8,41 @@ type Slide = {
   image: string;
 };
 
-const slides: Slide[] = [
-  {
-    title: "Roupas",
-    centerText: "Creative Elements",
-    image: "https://assets.codepen.io/7558/flame-glow-blur-001.jpg",
-  },
-  {
-    title: "Calçados",
-    centerText: "Inner Stillness",
-    image: "https://assets.codepen.io/7558/flame-glow-blur-002.jpg",
-  },
-  {
-    title: "Bolas",
-    centerText: "Deep Knowing",
-    image: "https://assets.codepen.io/7558/flame-glow-blur-003.jpg",
-  },
-  {
-    title: "Acessórios",
-    centerText: "True Expression",
-    image: "https://assets.codepen.io/7558/flame-glow-blur-004.jpg",
-  },
-  {
-    title: "Equipamentos",
-    centerText: "Now Moment",
-    image: "https://assets.codepen.io/7558/flame-glow-blur-005.jpg",
-  },
-  {
-    title: "Colecionáveis",
-    centerText: "Deep Attention",
-    image: "https://assets.codepen.io/7558/flame-glow-blur-006.jpg",
-  },
-];
+export default function SearchV() {
+  const { t } = useLanguage();
+
+  const slides: Slide[] = [
+    {
+      title: t('category_clothes'),
+      centerText: t('section_creative_elements'),
+      image: "https://assets.codepen.io/7558/flame-glow-blur-001.jpg",
+    },
+    {
+      title: t('category_footwear'),
+      centerText: t('section_inner_stillness'),
+      image: "https://assets.codepen.io/7558/flame-glow-blur-002.jpg",
+    },
+    {
+      title: t('category_balls'),
+      centerText: t('section_deep_knowing'),
+      image: "https://assets.codepen.io/7558/flame-glow-blur-003.jpg",
+    },
+    {
+      title: t('category_accessories'),
+      centerText: t('section_true_expression'),
+      image: "https://assets.codepen.io/7558/flame-glow-blur-004.jpg",
+    },
+    {
+      title: t('category_equipment'),
+      centerText: t('section_now_moment'),
+      image: "https://assets.codepen.io/7558/flame-glow-blur-005.jpg",
+    },
+    {
+      title: t('category_collectibles'),
+      centerText: t('section_deep_attention'),
+      image: "https://assets.codepen.io/7558/flame-glow-blur-006.jpg",
+    },
+  ];
 
 export default function SearchV() {
   const [section, setSection] = useState(0);

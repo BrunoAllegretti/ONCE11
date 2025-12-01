@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import './CartItem.css';
 import AppContext from '../../context/AppContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { Product } from '../Products';
 
 type CartItemProps = {
@@ -10,6 +11,8 @@ type CartItemProps = {
 
 export default function CartItem({ data }: CartItemProps) {
   const context = useContext(AppContext);
+  const { t } = useLanguage();
+
   if (!context) return null;
 
   const { removeFromCart, updateQuantity } = context;
@@ -58,8 +61,8 @@ export default function CartItem({ data }: CartItemProps) {
 
           <div className="cart-item-details">
             <p>Proporções: {productDetails.proportions}</p>
-            <p>Tamanho: {productDetails.size}</p>
-            <p>Cor: {productDetails.color}</p>
+            <p>{t('label_size')} {productDetails.size}</p>
+            <p>{t('label_color')} {productDetails.color}</p>
           </div>
         </div>
       </div>
@@ -71,14 +74,14 @@ export default function CartItem({ data }: CartItemProps) {
 
         {/* Controle de quantidade */}
         <div className="cart-item-quantity-control">
-          <span>Quantidade</span>
+          <span>{t('label_quantity')}</span>
 
           <button
             type="button"
             className="quantity-button"
             onClick={handleDecreaseQuantity}
             disabled={isRemoving}
-            title="Diminuir quantidade"
+            title={t('button_decrease_quantity')}
           >
             <AiOutlineMinus />
           </button>
@@ -95,7 +98,7 @@ export default function CartItem({ data }: CartItemProps) {
             className="quantity-button"
             onClick={handleIncreaseQuantity}
             disabled={isRemoving}
-            title="Aumentar quantidade"
+            title={t('button_increase_quantity')}
           >
             <AiOutlinePlus />
           </button>

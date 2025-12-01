@@ -3,6 +3,7 @@ import './Basquete.css';
 import { Link } from 'react-router-dom';
 import Carrossel3D from '../Carousel/Carousel';
 import Card from '../Card/Card';
+import { useLanguage } from '../../context/LanguageContext';
 
 // Mock Product interface e dados para o grid
 interface Product {
@@ -131,6 +132,7 @@ const cars: Car[] = [
 ];
 
 export default function Basquete() {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
 
   const nextSlide = () => {
@@ -154,7 +156,7 @@ export default function Basquete() {
 
   return (
     <section className="colecao">
-      <h2 className="h2C">Produtos em Destaque</h2>
+      <h2 className="h2C">{t('heading_featured_products')}</h2>
 
       <div className="destaque">
         <div className="slider-container">
@@ -173,7 +175,7 @@ export default function Basquete() {
                     <div className="car-subtitle">{car.subtitle}</div>
                     <div className="car-price">{price}</div>
                     <Link to="/" className="gohome">
-                      <button className='car-button'>Comprar</button>
+                      <button className='car-button'>{t('button_buy')}</button>
                     </Link>
                   </div>
                 </div>
@@ -186,7 +188,7 @@ export default function Basquete() {
         </div>
       </div>
 
-      <h2 className="h2C">Mais produtos</h2>
+      <h2 className="h2C">{t('heading_more_products')}</h2>
 
       <div className="vendidos">
         <Carrossel3D />

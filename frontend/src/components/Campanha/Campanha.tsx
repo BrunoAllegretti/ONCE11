@@ -5,18 +5,19 @@ import rafaela from '../../assets/img/Rafaela.png';
 import vinicius from '../../assets/img/Vinicius.png';
 import kid from '../../assets/img/Kid.mp4';
 import video from '../../assets/img/leomartins.mp4';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Campanha() {
+    const { t } = useLanguage();
+
     return(
         <>
         <section className='campanha-section'>
             <div className='campanha-desc'>
-                <h3 className='campH3'>Campanha</h3>
-                <h2 className='campH2'>Seremos Todos<br></br>Vencedores</h2>
+                <h3 className='campH3'>{t('heading_campaign')}</h3>
+                <h2 className='campH2'>{t('heading_we_will_all_winners')}</h2>
                 <p className='campP'>
-                <b>1,4 bilhão</b> de crianças com idade entre 0-15 anos não têm nenhuma forma de proteção social 
-                básica. Por isso, a ONCE em parceria com a UNICEF, ILO e Save the Children, está realizando 
-                uma ação de caridade, onde você pode contribuir.
+                {t('paragraph_campaign_description')}
                 </p>
 
                 <div className="ongs">
@@ -25,32 +26,32 @@ export default function Campanha() {
             </div>
 
             <div className='section-video'>
-                <h2>Como <b>VOCÊ</b> pode ajudar</h2>
+                <h2>{t('heading_how')} <b>{t('heading_you_emphasis')}</b> {t('heading_can_help')}</h2>
                 <video className="camMP4" src={video} controls />
             </div>
 
             <div>
                 <div className='camTitle'>
                     <hr/>
-                    <h2>Histórias<br></br>Inpiradores</h2>
+                    <h2>{t('heading_stories')}<br></br>{t('heading_inspiring')}</h2>
                 </div>
 
                 <div>
                 <img className="img-athlete" src={oluwakemi}/>
-                <h3 className='h3-athlete'>Oluwakemi<br></br> Musa</h3>
-                <p className='text-athlete'>Oluwakemi Musa cresceu nas ruas de Lagos, envolvida com gangues e distante da escola. Foi levada pela polícia a um centro de reabilitação apoiado pelo UNICEF, onde recebeu acolhimento, educação e treinamento profissional. Longe das ruas, reencontrou o basquete e transformou sua vida. Competiu nos Special Olympics em Chicago e Abu Dhabi, tornando-se Embaixadora das Special Olympics Nigéria. Hoje inspira outros jovens, provando que até na miséria pode germinar grandeza — basta uma oportunidade para florescer.</p>
+                <h3 className='h3-athlete'>{t('heading_athlete_oluwakemi')}<br></br> {t('heading_athlete_musa')}</h3>
+                <p className='text-athlete'>{t('paragraph_athlete_oluwakemi_story')}</p>
                 </div>
 
                 <div>
                 <img className="img-athleteR" src={rafaela}/>
-                <h3 className='h3-athleteR'>Rafaela<br></br>  Silva</h3>
-                <p className='text-athlete'>Rafaela Silva nasceu na favela da Cidade de Deus, no Rio de Janeiro, cercada por violência e pobreza. Desde pequena, seus pais a colocaram no Instituto Reação, projeto de judô que oferecia disciplina, educação e oportunidades. Transformando sua força e raiva em foco, Rafaela conquistou títulos nacionais e internacionais, culminando com o ouro olímpico no Rio‑2016. Sua trajetória é exemplo de superação, mostrando que apoio, talento e determinação podem transformar adversidade em conquista.</p>
+                <h3 className='h3-athleteR'>{t('heading_athlete_rafaela')}<br></br>  {t('heading_athlete_silva')}</h3>
+                <p className='text-athlete'>{t('paragraph_athlete_rafaela_story')}</p>
                 </div>
 
                 <div>
                 <img className="img-athlete3" src={vinicius}/>
-                <h3 className='h3-athlete'>Vinícius R.<br></br>  Bento</h3>
-                <p className='text-athlete'>Vinícius Rodrigues Bento, natural de Primavera (SP) e criado em Maringá (PR), sofreu um acidente de moto aos 19 anos que resultou na amputação de sua perna direita. Enfrentando limitações financeiras, encontrou no esporte paralímpico uma nova chance de vida. Com apoio do Programa Bolsa Atleta, treinou e competiu em alto nível, conquistando a medalha de prata nos 100 metros T63 nos Jogos Paralímpicos de Tóquio‑2020 e estabelecendo recordes mundiais. Sua história é exemplo de superação e resiliência frente à adversidade.</p>
+                <h3 className='h3-athlete'>{t('heading_athlete_vinicius')}<br></br>  {t('heading_athlete_bento')}</h3>
+                <p className='text-athlete'>{t('paragraph_athlete_vinicius_story')}</p>
                 </div>
 
                 
@@ -58,18 +59,12 @@ export default function Campanha() {
 
                 <div className='donate'>
                 <div className="text-donate">
-                    <h3>Agora é sua vez</h3>
+                    <h3>{t('heading_your_turn')}</h3>
                         <p>
-                        A campanha não entrega apenas equipamentos, entrega oportunidades. 
-                        Cada bola, cada raquete, cada par de tênis representa a possibilidade de que uma criança 
-                        em situação de vulnerabilidade descubra seu talento, encontre disciplina, confiança e 
-                        até uma nova trajetória de vida, assim como Rafaela, Oluwakemi e Vinícius. Ao apoiar o 
-                        Seremos Todos Vencedores, cada doação se transforma em um passo para mudar histórias, 
-                        abrir portas e mostrar que, com acesso ao esporte, qualquer criança pode superar 
-                        obstáculos aparentemente intransponíveis.
+                        {t('paragraph_campaign_message')}
                         </p>
                         
-                        <button className='Doar'>Doar</button>
+                        <button className='Doar'>{t('button_donate')}</button>
                 </div>
 
                 <div className="donateMP4">

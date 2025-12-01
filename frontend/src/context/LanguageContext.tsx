@@ -515,6 +515,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [lang, setLang] = useState<Lang>('pt');
+  const [, setRender] = useState(0); // Força re-render global
 
   useEffect(() => {
     const stored = localStorage.getItem('lang') as Lang | null;
@@ -525,7 +526,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     localStorage.setItem('lang', lang);
   }, [lang]);
 
-  const toggleLang = () => setLang((l) => (l === 'pt' ? 'en' : 'pt'));
+  const toggleLang = () => {
+    setLang((l) => (l === 'pt' ? 'en' : 'pt'));
+    setRender(prev => prev + 1); // Força re-render de toda a árvore
+  };
 
   const t = (key: string) => {
     return translations[lang][key] ?? key;

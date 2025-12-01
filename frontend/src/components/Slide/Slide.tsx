@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import './Slide.css';
 import tenis from '../../assets/img/tenisdourado.png';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Slide() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t } = useLanguage();
   const totalSlides = 3; // Total de slides (repetidos)
 
   const nextSlide = () => {
@@ -23,13 +25,13 @@ export default function Slide() {
         {[...Array(totalSlides)].map((_, index) => (
           <div className="slide-item" key={index}>
             <div className="slide-text-section">
-              <h2>Em destaque</h2>
-              <h3>Nome do Produto</h3>
+              <h2>{t('featured')}</h2>
+              <h3>{t('product_name')}</h3>
               <p>
-                Wmns Nike Max Jewell QS<br></br>
+                {t('nike_max_jewell')}<br></br>
                 R$ 599,50
               </p>
-              <button className="slide-button">Comprar</button>
+              <button className="slide-button">{t('button_buy_slide')}</button>
               <br></br>
               <br></br>
               <br></br>
