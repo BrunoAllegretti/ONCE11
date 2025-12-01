@@ -52,16 +52,12 @@ body {
 .left-column {
     height: 88vh;
     width: 50%; /* 40% para o bloco 3D */
-    background-color: #ff69b4; /* Cor de exemplo para o bloco 3D (rosa) */
+    background-color: #004aad; /* Alterado para a cor de fundo principal */
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 2rem;
-    font-family: 'commons', Arial, Helvetica, sans-serif;
-    writing-mode: vertical-rl; 
-    text-orientation: mixed;
-    padding: 20px;
+    padding: 0; /* Removido o padding para o canvas preencher */
+    overflow: hidden; /* Garante que nada transborde */
 }
 
 .right-column {

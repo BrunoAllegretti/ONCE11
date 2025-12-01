@@ -13,8 +13,8 @@ export interface Product {
 
 export const fetchProducts = async (search?: string): Promise<Product[]> => {
   const url = search 
-    ? `https://once11-backend.onrender.com/api/products?search=${search}`
-    : "https://once11-backend.onrender.com/api/products";
+    ? `https://once11.onrender.com/api/products?search=${search}`
+    : "https://once11.onrender.com/api/products";
 
   const response = await fetch(url);
 

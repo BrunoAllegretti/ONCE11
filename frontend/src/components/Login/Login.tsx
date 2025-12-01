@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Register } from './Register';
+import { UserContext } from '../../context/UserContext';
 
 import './Login.css';
+import ModelDisplay from "./ModelDisplay";
 
-export function Login() {
+export  default function Login() {
+  const { login } = useContext(UserContext) as any;
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
 
@@ -33,11 +36,16 @@ export function Login() {
       const data = await res.json();
 
       if (!res.ok) {
-        setMessage(data.message || 'Erro ao tentar fazer login.');
+        setMessage(data.msg || 'Erro ao tentar fazer login.');
         return;
       }
 
-      localStorage.setItem('token', data.token);
+      // A resposta do backend agora inclui o token e o objeto user
+      const { token, user } = data;
+
+      // Chama a função login do contexto, que armazena o token e os dados do usuário
+      login(user, token); 
+
       setMessage('Login realizado com sucesso! ✅');
 
       setTimeout(() => {
@@ -54,7 +62,7 @@ export function Login() {
       <div className="login-content">
         {isLogin && (
           <div className="left-column">
-            Modelos 3D
+            <ModelDisplay />
           </div>
         )}
         <div className="right-column">

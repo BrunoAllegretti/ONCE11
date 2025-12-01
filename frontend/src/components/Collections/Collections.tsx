@@ -15,9 +15,7 @@ export default function Collections() {
 
             <Collection />
             <SecProducts/>
-            <Collection />
-            <SecProducts/>
-            <Collection />
+
 
           <div className="ty">
             <h2 className='Ser'>Seremos todos<br></br> vencedores.</h2>

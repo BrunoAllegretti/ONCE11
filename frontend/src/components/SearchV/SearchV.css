@@ -1,0 +1,90 @@
+.sv-scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.sv-background {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px);
+  z-index: -1;
+}
+
+.sv-fixed-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  scroll-snap-align: start;
+}
+
+.sv-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sv-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.sv-left,
+.sv-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 1.3rem;
+}
+
+.sv-artist,
+.sv-category {
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
+.sv-active {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+.sv-featured {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.sv-center-text {
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.sv-footer {
+  padding: 1rem;
+}
+
+.sv-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.sv-progress-fill {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 3px;
+  background: white;
+  transition: width 0.3s;
+}

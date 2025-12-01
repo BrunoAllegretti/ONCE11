@@ -7,7 +7,6 @@
 }
 
 .cardProd {
-    margin-left: 50%;
   --bg: #ffffff;
   --title-color: #fff;
   --title-color-hover: #000;
@@ -17,10 +16,8 @@
   background: var(--bg);
   border-radius: 2rem;
   padding: 0.5rem;
-  width: 20rem;
-  height: 31rem;
-  /*   aspect-ratio: 2 / 3;
-  height: auto; */
+  width: 18rem;
+  height: 28rem;
   overflow: clip;
   position: relative;
   font-family: 'spa', Helvetica, Arial, sans-serif;
@@ -70,7 +67,7 @@
     .titleCard {
       margin: 0;
       margin-block-end: 1rem;
-      font-size: 1.5rem;
+      font-size: 1rem;
       translate: 0 -100%;
       opacity:1;
       color: rgb(22, 22, 22);

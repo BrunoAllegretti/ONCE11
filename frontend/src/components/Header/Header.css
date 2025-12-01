@@ -16,6 +16,36 @@ body {
     top: 0px !important;
 }
 
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* itens espalhados */
+  gap: 10px;
+}
+
+.profileMenu {
+  margin-left: auto; /* empurra para a direita */
+  display: flex;
+  align-items: center;
+}
+
+.profileMenu .profile,
+.profileMenu .login {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  text-decoration: none;
+}
+
+.profileImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
 
 header {
 text-decoration: none;
@@ -224,4 +254,20 @@ nav ul li:hover a {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
+}
+
+.icone {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icone img {
+  width: 3rem;
+  height: 3rem;
+  z-index: 10;
 }

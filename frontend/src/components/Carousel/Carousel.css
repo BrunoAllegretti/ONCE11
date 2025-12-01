@@ -1,37 +1,62 @@
-/* FONTES */
-@font-face {
-    font-family: 'ms';
-    src: url('../assets/fonts/MontSerrat/Montserrat-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+/* Estilos baseados no exemplo do CodePen e adaptados para o seu Card */
 
-.containerC {
+/* Importante: Adicione os imports CSS do Swiper no seu arquivo principal ou no index.html/index.tsx */
+/* Ex: import 'swiper/css'; import 'swiper/css/effect-coverflow'; import 'swiper/css/pagination'; */
+
+.carousel-3d-wrapper {
+    /* Garante que o carrossel ocupe a largura total do container */
     width: 100%;
-    height: 650px;
-    background: linear-gradient(to top, #101010 0%, #292929 100%);
+    padding: 20px 0; /* Espaçamento vertical para o efeito 3D */
+}
+
+.swiper-3d-carousel {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* O Card.tsx tem largura e altura fixas (20rem x 31rem) */
+/* Vamos garantir que o slide Swiper se ajuste ao tamanho do Card */
+.swiper-slide-card {
+    /* Usamos 'auto' no slidesPerView, então definimos a largura do slide */
+    width: 20rem; 
+    height: 31rem;
+    /* Centraliza o conteúdo do slide (o Card) */
     display: flex;
-    justify-content: space-between;
-    gap: 75px;
+    justify-content: center;
     align-items: center;
-    margin: 0;
-    padding: 0;
-    overflow-x: scroll;
-    scrollbar-width: none;
 }
 
-.title-carousel {
-    position: absolute;
-    bottom: 260px;
-    margin-left: 100px;
-    font-size:30px;
-    color: white;
-    font-family: 'ms', Arial, Helvetica, sans-serif;
+/* Ajustes para o efeito 3D */
+/* O Swiper adiciona sombras automaticamente, mas podemos ajustar se necessário */
+.swiper-container-3d .swiper-slide-shadow-left,
+.swiper-container-3d .swiper-slide-shadow-right {
+    /* Remove as sombras padrão do Swiper se o Card já tiver seu próprio estilo */
+    background-image: none !important;
 }
 
-.logoOnce {
-    width: 75px;
-    position: relative;
-    bottom: 280px;
-    left: 10px;
+/* Estilos de paginação (bolinhas) */
+.swiper-pagination-bullet {
+    background: #696969;
+    transition: all 0.5s ease 0s;
+    border-radius: 8px;
+}
+
+.swiper-pagination-bullet-active {
+    background: #ffc107; /* Cor de destaque, pode ser ajustada */
+    width: 30px;
+}
+
+/* Se necessário, ajuste o estilo do Card dentro do carrossel */
+/* Exemplo: para remover a margem que o Card.css adiciona */
+.swiper-slide-card .cardProd {
+    margin-left: 0; /* Remove a margem de 50% do Card.css */
+}
+
+/* Media Queries para responsividade, se necessário, para ajustar o tamanho do Card */
+@media (max-width: 767px) {
+    .swiper-slide-card {
+        width: 15rem; /* Reduz o tamanho do card em telas menores */
+        height: 23.25rem; /* Mantém a proporção 20/31 */
+    }
 }

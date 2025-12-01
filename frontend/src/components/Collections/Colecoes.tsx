@@ -3,6 +3,14 @@ import './Colecoes.css';
 // Assumindo que as imagens estão em ../../assets/img/
 import Lebron from '../../assets/img/Lebron2.png';
 import PlayerBas from '../../assets/img/playerbas.png';
+import playerA1 from '../../assets/img/atletaA.jpeg';
+import playerA2 from '../../assets/img/AtletaA2.jpeg';
+import playerV1 from '../../assets/img/volei1.jpeg';
+import playerV2 from '../../assets/img/volei2.jpeg';
+import playerF1 from '../../assets/img/red1.jpeg';
+import playerF2 from '../../assets/img/red2.jpeg';
+import playerH1 from '../../assets/img/hoquei1.jpeg';
+import playerH2 from '../../assets/img/hoquei2.jpeg';
 
 // Estrutura de dados para a coleção
 const colecoesData = [
@@ -10,34 +18,56 @@ const colecoesData = [
         id: 1,
         titulo: 'Coleções',
         subtitulo: 'COLEÇÃO BASQUETE',
-        descricao: 'Mergulhe no mundo das enterradas usando produtos aprovados pelas maiores estrelas do esporte.',
+        descricao: 'Entre em quadra com produtos inspirados nas maiores estrelas do basquete mundial.',
         imagem1: Lebron,
         imagem2: PlayerBas,
         alt1: 'Lebron James',
         alt2: 'Jogador de Basquete',
-        className: 'slide-azul' // Cor azul
+        className: 'slide-azul' 
     },
     {
         id: 2,
         titulo: 'Coleções',
-        subtitulo: 'COLEÇÃO FUTEBOL',
-        descricao: 'Domine o campo com chuteiras e uniformes das maiores ligas do mundo.',
-        imagem1: Lebron,
-        imagem2: PlayerBas, // Reutilizando imagem para exemplo
-        alt1: 'Jogador de Futebol',
-        alt2: 'Jogador de Basquete',
-        className: 'slide-vermelho' // Cor vermelha
+        subtitulo: 'COLEÇÃO ATLETISMO',
+        descricao: 'Velocidade, resistência e precisão com equipamentos feitos para atletas de alta performance.',
+        imagem1: playerA1,
+        imagem2: playerA2, 
+        alt1: 'Atleta de Atletismo',
+        alt2: 'Atleta de Atletismo',
+        className: 'slide-preto' 
     },
     {
         id: 3,
         titulo: 'Coleções',
         subtitulo: 'COLEÇÃO VÔLEI',
-        descricao: 'Eleve seu jogo com equipamentos de alta performance para quadra e praia.',
-        imagem1: Lebron,
-        imagem2: PlayerBas, // Reutilizando imagem para exemplo
+        descricao: 'Domine quadras e areias com produtos leves, resistentes e pensados para o jogo dinâmico.',
+        imagem1: playerV1,
+        imagem2: playerV2, 
         alt1: 'Jogador de Vôlei',
-        alt2: 'Jogador de Basquete',
-        className: 'slide-verde' // Cor verde
+        alt2: 'Jogador de Vôlei',
+        className: 'slide-roxo' 
+    },
+    {
+        id: 4,
+        titulo: 'Coleções',
+        subtitulo: 'COLEÇÃO FUTEBOL',
+        descricao: 'Chuteiras, uniformes e acessórios ideais para elevar seu desempenho dentro das quatro linhas.',
+        imagem1: playerF1,
+        imagem2: playerF2, 
+        alt1: 'Jogador de Futebol',
+        alt2: 'Jogador de Futebol',
+        className: 'slide-vermelho' 
+    },
+    {
+        id: 5,
+        titulo: 'Coleções',
+        subtitulo: 'COLEÇÃO HÓQUEI',
+        descricao: 'Equipamentos resistentes e confortáveis para encarar a intensidade do hóquei no gelo.',
+        imagem1: playerH1,
+        imagem2: playerH2, 
+        alt1: 'Jogador de Hóquei',
+        alt2: 'Jogador de Hóquei',
+        className: 'slide-branco' 
     }
 ];
 

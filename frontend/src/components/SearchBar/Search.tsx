@@ -3,7 +3,8 @@ import { useState, useContext } from 'react';
 import './Search.css';
 import { fetchProducts } from "../../services/api";
 import AppContext from '../../context/AppContext';
-import ProductsSearch from '../Products/ProductsSearch';
+import Card from '../Card/Card';
+import { Product } from '../../services/api';
 
 interface FiltersState {
   selectedFilters: string[];
@@ -17,7 +18,7 @@ export default function Search() {
     throw new Error("AppContext must be used within a Provider");
   }
 
-  const { setProducts, setLoading } = context;
+  const { products, setProducts, setLoading, loading } = context;
   const [searchValue, setSearchValue] = useState('');
   const [filters, setFilters] = useState<FiltersState>({
     selectedFilters: [],
@@ -80,13 +81,20 @@ export default function Search() {
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    if (!searchValue.trim()) {
+      alert('Por favor, digite algo para buscar');
+      return;
+    }
+    
     setLoading(true);
 
     try {
       const prod = await fetchProducts(searchValue);
       const filtered = applyFilters(prod);
       setProducts(filtered);
-    } catch {
+    } catch (error) {
+      console.error('Erro na busca:', error);
       setProducts([]);
     }
 
@@ -97,23 +105,15 @@ export default function Search() {
     setLoading(true);
 
     try {
-      const prod = await fetchProducts(searchValue);
+      const prod = await fetchProducts(searchValue || '');
       const filtered = applyFilters(prod);
       setProducts(filtered);
-    } catch {
+    } catch (error) {
+      console.error('Erro ao aplicar filtros:', error);
       setProducts([]);
     }
 
     setLoading(false);
-  };
-
-  const handleClearFilters = () => {
-    setFilters({
-      selectedFilters: [],
-      priceRange: ''
-    });
-
-    handleFilterSearch();
   };
 
   const handleFilterChange = (value: string) => {
@@ -132,6 +132,15 @@ export default function Search() {
       ...filters,
       priceRange: value
     });
+  };
+
+  const handleClearFilters = () => {
+    setSearchValue('');
+    setFilters({
+      selectedFilters: [],
+      priceRange: ''
+    });
+    setProducts([]);
   };
 
   return (
@@ -224,7 +233,19 @@ export default function Search() {
         </button>
       </div>
 
-      <ProductsSearch />
+      {loading && <p className="loading-message">Carregando produtos...</p>}
+
+      {products && products.length > 0 && (
+        <section className="products-grid">
+          {products.map((product: Product) => (
+            <Card key={product._id} product={product} />
+          ))}
+        </section>
+      )}
+
+      {products && products.length === 0 && !loading && (
+        <p className="no-results-message">Nenhum produto encontrado.</p>
+      )}
     </>
   );
 }

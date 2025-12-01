@@ -10,15 +10,16 @@ export default function Provider({ children }: ProviderProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [cartItems, setCartItems] = useState<(Product & { quantity: number })[]>([]);
-
   const [isCartVisible, setIsCartVisible] = useState(false);
+
+  const [user, setUser] = useState<{ name: string; photo: string } | null>(null);
 
   const addToCart = (product: Product) => {
     setCartItems(prev => {
-      const existing = prev.find((item) => item._id === product._id);
+      const existing = prev.find(item => item._id === product._id);
 
       if (existing) {
-        return prev.map((item) =>
+        return prev.map(item =>
           item._id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
@@ -30,7 +31,16 @@ export default function Provider({ children }: ProviderProps) {
   };
 
   const removeFromCart = (_id: string) => {
-    setCartItems(prev => prev.filter((item) => item._id !== _id));
+    setCartItems(prev => prev.filter(item => item._id !== _id));
+  };
+
+  // 🔥 Função para atualizar quantidade
+  const updateQuantity = (_id: string, newQty: number) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item._id === _id ? { ...item, quantity: newQty } : item
+      )
+    );
   };
 
   const toggleCartVisibility = () => {
@@ -62,8 +72,11 @@ export default function Provider({ children }: ProviderProps) {
     setCartItems,
     addToCart,
     removeFromCart,
+    updateQuantity, 
     isCartVisible,
     toggleCartVisibility,
+    user,
+    setUser
   };
 
   return (
