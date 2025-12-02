@@ -1,5 +1,5 @@
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -38,67 +38,85 @@ export default function Header() {
 
   const loginLink = isAuthenticated ? "/profile" : "/login";
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
+  const handleImageError = () => setImageError(true);
 
-  const handleImageError = () => {
-    console.log('Erro ao carregar imagem:', user?.profilePicture);
-    setImageError(true);
-  };
+  // Detecta tela menor ou igual a 800px para decidir a ordem dos itens do menu
+  const isMobileMenu = window.innerWidth <= 800;
+
+  // Carrinho redireciona para login se não autenticado
+  // (Se preferir um evento JS, pode usar navigate do react-router, aqui é por <Link>)
+  const cartLink = isAuthenticated ? "/cart" : "/login";
 
   return (
     <header>
+      {/* Logo/Home principal */}
       <Link to="/" className="home" onClick={closeMenu}>
         <img src={logo} alt="logo" className='logoH'/>
       </Link>
 
-      {/* Language toggle button */}
-      <button className="lang-toggle" onClick={toggleLang} aria-label="Toggle language">
-        {lang === 'pt' ? 'EN' : 'PT'}
-      </button>
+      {/* Botão de linguagem visível sempre (fora do menu lateral) em desktop */}
+      {!isMobileMenu && (
+        <button className="lang-toggle" onClick={toggleLang} aria-label="Toggle language">
+          {lang === 'pt' ? 'EN' : 'PT'}
+        </button>
+      )}
 
-      {/* Botão Hamburger - Visível em mobile e tablet */}
-      <button className="hamburger-btn" onClick={toggleMenu} aria-label="Menu">
+      {/* Botão Hamburger para mobile/tablet */}
+      <button
+        className="hamburger-btn"
+        onClick={toggleMenu}
+        aria-label="Menu"
+      >
         {menuOpen ? <AiOutlineClose size={24} /> : <GiHamburgerMenu size={24} />}
       </button>
 
-      <nav className={`navbar ${menuOpen ? 'active' : ''}`}>
+      {/* NAVBAR - lateral em mobile/hamburger  */}
+      <nav className={`navbar${menuOpen ? ' active' : ''}`}>
+        {isMobileMenu && (
+          <>
+            <span className="close-btn" onClick={closeMenu}>
+              <AiOutlineClose size={26} />
+            </span>
+            <div className="icone" onClick={closeMenu}>
+              <img 
+                src={imageToDisplay} 
+                alt={nameToDisplay} 
+                className="user-image"
+                onError={handleImageError}
+              />
+              <span className="user-name">{nameToDisplay}</span>
+            </div>
+            <button className="lang-toggle" onClick={toggleLang} aria-label="Toggle language" style={{marginLeft: 0}}>
+              {lang === 'pt' ? 'EN' : 'PT'}
+            </button>
+          </>
+        )}
         <ul>
-          <Link to="/" className="gohome" onClick={closeMenu}>
-            <li><TiHome /> {t('home')}</li>
-          </Link>
-          <Link to="/collections" className="search" onClick={closeMenu}>
-            <li><HiViewGridAdd /> {t('collections')}</li>
-          </Link>
-          <Link to="/search" className="search" onClick={closeMenu}>
-            <li><FaSearch /> {t('search')}</li>
-          </Link>
-          <Link to="/cart" className="caft" onClick={closeMenu}>
-            <li><FaShoppingCart /> {t('cart')}</li>
-          </Link>
-
+          <Link to="/" className="gohome" onClick={closeMenu}><li><TiHome /> {t('home')}</li></Link>
+          <Link to="/collections" className="search" onClick={closeMenu}><li><HiViewGridAdd /> {t('collections')}</li></Link>
+          <Link to="/search" className="search" onClick={closeMenu}><li><FaSearch /> {t('search')}</li></Link>
+          <Link to={cartLink} className="caft" onClick={closeMenu}><li><FaShoppingCart /> {t('cart')}</li></Link>
           <Link to={loginLink} className="login" onClick={closeMenu}>
             <li>
               {!isAuthenticated && <IoPeople />}
               {isAuthenticated ? t('profile') : t('login')}
             </li>
           </Link>
-
-          {/* Ícone e primeiro nome do usuário */}
-          <div className="icone" onClick={closeMenu}>
-            <img 
-              src={imageToDisplay} 
-              alt={nameToDisplay} 
-              className="user-image"
-              onError={handleImageError}
-            />
-            <span className="user-name">{nameToDisplay}</span>
-          </div>
+          {/* Em desktop, o user fica sempre ali, fora do menu*/}
+          {!isMobileMenu && (
+            <div className="icone" onClick={closeMenu}>
+              <img 
+                src={imageToDisplay} 
+                alt={nameToDisplay}
+                className="user-image"
+                onError={handleImageError}
+              />
+              <span className="user-name">{nameToDisplay}</span>
+            </div>
+          )}
         </ul>
       </nav>
     </header>
