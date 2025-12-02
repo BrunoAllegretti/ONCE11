@@ -169,3 +169,15 @@
     }
   }
 }
+
+/* Responsive additions (<=600px, 600-768px, >=1024px) */
+@media (max-width: 600px) {
+  .cardProd { width: 100% !important; max-width: 100% !important; height: auto !important; padding: 0.75rem !important; }
+  .cardProd > img { height: auto; }
+}
+@media (min-width: 600px) and (max-width: 768px) {
+  .cardProd { width: calc(50% - var(--gap-sm)) !important; }
+}
+@media (min-width: 1024px) {
+  .cardProd { max-width: 18rem !important; }
+}

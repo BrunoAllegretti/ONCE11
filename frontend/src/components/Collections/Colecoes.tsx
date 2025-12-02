@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Colecoes.css';
+import { useLanguage } from '../../context/LanguageContext';
 // Assumindo que as imagens estão em ../../assets/img/
 import Lebron from '../../assets/img/Lebron2.png';
 import PlayerBas from '../../assets/img/playerbas.png';
@@ -12,81 +13,22 @@ import playerF2 from '../../assets/img/red2.jpeg';
 import playerH1 from '../../assets/img/hoquei1.jpeg';
 import playerH2 from '../../assets/img/hoquei2.jpeg';
 
-// Estrutura de dados para a coleção
-const colecoesData = [
-    {
-        id: 1,
-        titulo: 'Coleções',
-        subtitulo: 'COLEÇÃO BASQUETE',
-        descricao: 'Entre em quadra com produtos inspirados nas maiores estrelas do basquete mundial.',
-        imagem1: Lebron,
-        imagem2: PlayerBas,
-        alt1: 'Lebron James',
-        alt2: 'Jogador de Basquete',
-        className: 'slide-azul' 
-    },
-    {
-        id: 2,
-        titulo: 'Coleções',
-        subtitulo: 'COLEÇÃO ATLETISMO',
-        descricao: 'Velocidade, resistência e precisão com equipamentos feitos para atletas de alta performance.',
-        imagem1: playerA1,
-        imagem2: playerA2, 
-        alt1: 'Atleta de Atletismo',
-        alt2: 'Atleta de Atletismo',
-        className: 'slide-preto' 
-    },
-    {
-        id: 3,
-        titulo: 'Coleções',
-        subtitulo: 'COLEÇÃO VÔLEI',
-        descricao: 'Domine quadras e areias com produtos leves, resistentes e pensados para o jogo dinâmico.',
-        imagem1: playerV1,
-        imagem2: playerV2, 
-        alt1: 'Jogador de Vôlei',
-        alt2: 'Jogador de Vôlei',
-        className: 'slide-roxo' 
-    },
-    {
-        id: 4,
-        titulo: 'Coleções',
-        subtitulo: 'COLEÇÃO FUTEBOL',
-        descricao: 'Chuteiras, uniformes e acessórios ideais para elevar seu desempenho dentro das quatro linhas.',
-        imagem1: playerF1,
-        imagem2: playerF2, 
-        alt1: 'Jogador de Futebol',
-        alt2: 'Jogador de Futebol',
-        className: 'slide-vermelho' 
-    },
-    {
-        id: 5,
-        titulo: 'Coleções',
-        subtitulo: 'COLEÇÃO HÓQUEI',
-        descricao: 'Equipamentos resistentes e confortáveis para encarar a intensidade do hóquei no gelo.',
-        imagem1: playerH1,
-        imagem2: playerH2, 
-        alt1: 'Jogador de Hóquei',
-        alt2: 'Jogador de Hóquei',
-        className: 'slide-branco' 
-    }
-];
-
 // Componente de um único slide
-function SlideColecao({ data }) {
+function SlideColecao({ data, t }) {
     return (
         <div className="slide-colecao">
             <div className="colecao-info">
-                <h1 className="colecao-titulo">{data.titulo}</h1>
-                <h2 className="colecao-subtitulo">{data.subtitulo}</h2>
-                <p className="colecao-descricao">{data.descricao}</p>
-                <button className="colecao-botao">Vizualizar</button>
+                <h1 className="colecao-titulo">{t('section_collections')}</h1>
+                <h2 className="colecao-subtitulo">{t(data.titleKey)}</h2>
+                <p className="colecao-descricao">{t(data.descKey)}</p>
+                <button className="colecao-botao">{t('button_view')}</button>
             </div>
             <div className="colecao-imagens">
                 <div className="imagem-container img1">
-                    <img src={data.imagem1} alt={data.alt1} />
+                    <img src={data.imagem1} alt={t(data.alt1Key)} />
                 </div>
                 <div className="imagem-container img2">
-                    <img src={data.imagem2} alt={data.alt2} />
+                    <img src={data.imagem2} alt={t(data.alt2Key)} />
                 </div>
             </div>
         </div>
@@ -94,6 +36,61 @@ function SlideColecao({ data }) {
 }
 
 export default function Colecoes() {
+    const { t } = useLanguage();
+    
+    const colecoesData = [
+        {
+            id: 1,
+            titleKey: 'collection_basketball_title',
+            descKey: 'collection_basketball_description',
+            imagem1: Lebron,
+            imagem2: PlayerBas,
+            alt1Key: 'alt_text_lebron',
+            alt2Key: 'alt_text_basketball_player',
+            className: 'slide-azul' 
+        },
+        {
+            id: 2,
+            titleKey: 'collection_athletics_title',
+            descKey: 'collection_athletics_description',
+            imagem1: playerA1,
+            imagem2: playerA2, 
+            alt1Key: 'alt_text_athletics_player',
+            alt2Key: 'alt_text_athletics_player',
+            className: 'slide-preto' 
+        },
+        {
+            id: 3,
+            titleKey: 'collection_volleyball_title',
+            descKey: 'collection_volleyball_description',
+            imagem1: playerV1,
+            imagem2: playerV2, 
+            alt1Key: 'alt_text_volleyball_player',
+            alt2Key: 'alt_text_volleyball_player',
+            className: 'slide-roxo' 
+        },
+        {
+            id: 4,
+            titleKey: 'collection_football_title',
+            descKey: 'collection_football_description',
+            imagem1: playerF1,
+            imagem2: playerF2, 
+            alt1Key: 'alt_text_football_player',
+            alt2Key: 'alt_text_football_player',
+            className: 'slide-vermelho' 
+        },
+        {
+            id: 5,
+            titleKey: 'collection_hockey_title',
+            descKey: 'collection_hockey_description',
+            imagem1: playerH1,
+            imagem2: playerH2, 
+            alt1Key: 'alt_text_hockey_player',
+            alt2Key: 'alt_text_hockey_player',
+            className: 'slide-branco' 
+        }
+    ];
+
     const [currentSlide, setCurrentSlide] = useState(0);
     const totalSlides = colecoesData.length;
 
@@ -117,7 +114,7 @@ export default function Colecoes() {
         <section className={`colecoes-carrossel ${currentSlideClass}`}>
             <div className="carrossel-wrapper" style={wrapperStyle}>
                 {colecoesData.map(colecao => (
-                    <SlideColecao key={colecao.id} data={colecao} />
+                    <SlideColecao key={colecao.id} data={colecao} t={t} />
                 ))}
             </div>
             {/* Botões de navegação */}

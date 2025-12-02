@@ -1,45 +1,48 @@
 import './Footer.css'
 import logo from '../../assets/img/logoFooter.png'
+import { useLanguage } from '../../context/LanguageContext'
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer>
       <div className="containerFooter">
         <div className="footer-column">
-          <h2 className="title-footer">Suporte</h2>
+          <h2 className="title-footer">{t('heading_support')}</h2>
           <ul className="footer-list list1">
-            <li><a href="#">Atendimento ao cliente</a></li>
-            <li><a href="#">Formas de pagamento</a></li>
-            <li><a href="#">Dúvidas frequentes</a></li>
-            <li><a href="#">Cookies</a></li>
+            <li><a href="#">{t('link_customer_service')}</a></li>
+            <li><a href="#">{t('link_payment_methods')}</a></li>
+            <li><a href="#">{t('link_faq')}</a></li>
+            <li><a href="#">{t('link_cookies')}</a></li>
           </ul>
         </div>
 
         <div className="footer-column">
-          <h2 className="title-footer">Abas</h2>
+          <h2 className="title-footer">{t('heading_tabs')}</h2>
           <ul className="footer-list list2">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Coleções</a></li>
-            <li><a href="#">Busca</a></li>
-            <li><a href="#">Carrinho</a></li>
+            <li><a href="#">{t('link_footer_login')}</a></li>
+            <li><a href="#">{t('link_footer_collections')}</a></li>
+            <li><a href="#">{t('link_footer_search')}</a></li>
+            <li><a href="#">{t('link_footer_cart')}</a></li>
           </ul>
         </div>
 
         <div className="footer-column">
-          <h2 className="title-footer">Contate-nos</h2>
+          <h2 className="title-footer">{t('heading_contact_us')}</h2>
           <ul className="footer-list list3">
-            <li><a href="#">once11@gmail.com</a></li>
-            <li><a href="#">Av. Bahia, 1739 - Indaiá,<br></br> Caraguatatuba - SP,<br></br> Brazil, 11665-310</a></li>
-            <li><a href="#">+55 12 99170-9082</a></li>
+            <li><a href="#">{t('link_email')}</a></li>
+            <li><a href="#">{t('text_address')}</a></li>
+            <li><a href="#">{t('link_phone')}</a></li>
           </ul>
         </div>
 
         <div className="footer-column">
-          <h2 className="title-footer">Siga-nos</h2>
+          <h2 className="title-footer">{t('heading_follow_us')}</h2>
           <ul className="footer-list list4">
-            <li><a href="#">Youtube</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">X</a></li>
+            <li><a href="#">{t('link_youtube')}</a></li>
+            <li><a href="#">{t('link_instagram')}</a></li>
+            <li><a href="#">{t('link_twitter')}</a></li>
           </ul>
         </div>
       </div>

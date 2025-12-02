@@ -50,3 +50,15 @@
     height: auto;
 }
 
+/* Responsive additions (<=600px, 600-768px, >=1024px) */
+@media (max-width: 600px) {
+    .section-products { grid-template-columns: 1fr; gap: 24px; width: 94%; margin-left: 3%; }
+    .productImg { margin-top: 60px; width: 100%; margin-left: 0; }
+}
+@media (min-width: 600px) and (max-width: 768px) {
+    .section-products { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+}
+@media (min-width: 1024px) {
+    .section-products { grid-template-columns: repeat(4, 1fr); }
+}
+

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './buy.css';
 import tenisImage from '../../assets/img/tenis.webp';
+import { useLanguage } from '../../context/LanguageContext';
 
 // Definição de dados mockados para simular a seleção de opções
 const sizes = [37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
@@ -15,6 +16,7 @@ const colors = [
 const types = ['Society', 'Campo', 'Quadra'];
 
 const Buy = () => {
+    const { t } = useLanguage();
     const productImageWrapperRef = useRef<HTMLDivElement>(null);
     const magnifierLensRef = useRef<HTMLDivElement>(null);
     const productMainImageRef = useRef<HTMLImageElement>(null); 
@@ -102,15 +104,15 @@ const Buy = () => {
                 </div>
             </div>
             <div className="product-details">
-                <h2 className="product-category">Chuteira</h2>
-                <h1 className="product-title">England Pack Umbro</h1>
-                <p className="product-description">Tênis Nike verde com detalhes em branco e preto, design esportivo e moderno, ideal para uso casual ou prática esportiva.</p>
+                <h2 className="product-category">{t('label_product_category')}</h2>
+                <h1 className="product-title">{t('label_product_title')}</h1>
+                <p className="product-description">{t('alt_text_product_shoe')}</p>
 
                 {/* Seção de Opções */}
                 <div className="options-section">
                     {/* Opções de Tamanho */}
                     <div className="option-group">
-                        <span className="option-label">Tamanho:</span>
+                        <span className="option-label">{t('label_size')}</span>
                         <div className="option-buttons">
                             {sizes.map(size => (
                                 <button
@@ -126,7 +128,7 @@ const Buy = () => {
 
                     {/* Opções de Tipo (Society, Campo, Quadra) */}
                     <div className="option-group">
-                        <span className="option-label">Tipo:</span>
+                        <span className="option-label">{t('label_type')}</span>
                         <div className="option-buttons">
                             {types.map(type => (
                                 <button
@@ -142,7 +144,7 @@ const Buy = () => {
 
                     {/* Opções de Cor */}
                     <div className="option-group">
-                        <span className="option-label">Cor:</span>
+                        <span className="option-label">{t('label_color')}</span>
                         <div className="option-colors">
                             {colors.map(color => (
                                 <button
@@ -163,14 +165,14 @@ const Buy = () => {
 
                 {/* Seção de Preço */}
                 <div className="price-section">
-                    <span className="price-label">Valor:</span>
+                    <span className="price-label">{t('label_price')}</span>
                     <h3 className='product-price'>R$ 179,98</h3>
                 </div>
 
                 {/* Grupo de Botões de Ação */}
                 <div className="button-group">
-                    <button className="action-button add-to-cart-button">Adicionar ao Carrinho</button>
-                    <button className="action-button buy-now-button">Comprar Agora</button>
+                    <button className="action-button add-to-cart-button">{t('button_add_to_cart')}</button>
+                    <button className="action-button buy-now-button">{t('button_buy_now')}</button>
                 </div>
             </div>
         </div>

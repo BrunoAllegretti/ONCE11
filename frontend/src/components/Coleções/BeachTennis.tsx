@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './BeachTennis.css';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface Car {
   backgroundImage: string;
@@ -60,6 +61,7 @@ const cars: Car[] = [
 ];
 
 export default function BeachTennis() {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
 
   const nextSlide = () => {
@@ -83,7 +85,7 @@ export default function BeachTennis() {
 
   return (
     <section className="colecao">
-      <h2 className="h2C">Produtos em Destaque</h2>
+      <h2 className="h2C">{t('heading_featured_products')}</h2>
       <div className="destaque">
           <div className="slider-container">
           <div className="accordion-slider">
@@ -101,7 +103,7 @@ export default function BeachTennis() {
                     <div className="car-subtitle">{car.subtitle}</div>
                     <div className="car-price">{price}</div>
                     <Link to="/" className="gohome">
-                    <button className='car-button'>Comprar</button>
+                    <button className='car-button'>{t('button_buy')}</button>
                     </Link>
                   </div>
                 </div>
@@ -113,7 +115,7 @@ export default function BeachTennis() {
         </div>
       </div>
 
-      <h2 className="h2C">Mais produtos</h2>
+      <h2 className="h2C">{t('heading_more_products')}</h2>
       <div className="vendidos">
         
       </div>

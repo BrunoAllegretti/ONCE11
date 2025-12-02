@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Cart.css';
 import CartItem from './CartItem';
 import AppContext from '../../context/AppContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { Product } from '../Products';
 
 interface CardInfo {
@@ -15,6 +16,7 @@ interface CardInfo {
 export default function Cart() {
   const context = useContext(AppContext);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   if (!context) return null;
 
@@ -52,7 +54,7 @@ export default function Cart() {
 
   const handleContinueToPayment = () => {
     if (cartItems.length === 0) {
-      alert('Seu carrinho está vazio!');
+      alert(t('message_empty_cart'));
       return;
     }
     setCheckoutStep('payment');
@@ -60,7 +62,7 @@ export default function Cart() {
 
   const handleFinalizePurchase = () => {
     if (!paymentMethod) {
-      alert('Por favor, selecione um método de pagamento');
+      alert(t('heading_payment_method'));
       return;
     }
 
@@ -68,11 +70,11 @@ export default function Cart() {
       paymentMethod === 'card' &&
       (!cardInfo.number || !cardInfo.name || !cardInfo.expiry || !cardInfo.cvv)
     ) {
-      alert('Por favor, preencha todos os dados do cartão');
+      alert(t('label_card_number'));
       return;
     }
 
-    alert('Compra finalizada com sucesso!');
+    alert(t('message_order_success'));
     setCheckoutStep('confirmation');
 
     if (setCartItems) setCartItems([]);
@@ -81,10 +83,10 @@ export default function Cart() {
   const copyPixCode = async () => {
     try {
       await navigator.clipboard.writeText(pixCode);
-      alert('Código PIX copiado para a área de transferência!');
+      alert(t('button_copy_pix_code'));
     } catch (err) {
       console.error('Erro ao copiar código PIX:', err);
-      alert('Erro ao copiar código PIX. Tente novamente.');
+      alert(t('button_copy_pix_code'));
     }
   };
 
@@ -101,8 +103,8 @@ export default function Cart() {
                 ))
               ) : (
                 <p className="empty-cart">
-                  🛒 Seu carrinho está vazio.<br />
-                  Adicione alguns produtos para continuar!
+                  {t('message_empty_cart')}<br />
+                  {t('message_add_products_to_continue')}
                 </p>
               )}
             </div>
@@ -115,13 +117,13 @@ export default function Cart() {
           <div className="cart-resume">
             <div className="resume">
               <div className="cart-summary-row">
-                <span>Subtotal</span>
+                <span>{t('label_subtotal')}</span>
                 <span>R$ {totalPrice.toFixed(2)}</span>
               </div>
               <hr className='row'/>
 
               <div className="cart-summary-row">
-                <span>Frete</span>
+                <span>{t('label_shipping')}</span>
                 <span>R$ 22,00</span>
               </div>
               <hr className='row'/>
@@ -130,30 +132,30 @@ export default function Cart() {
                 <input
                   className="cupom"
                   type="text"
-                  placeholder="Adicionar Cupom Promocional"
+                  placeholder={t('placeholder_promo_code')}
                   value={couponCode}
                   onChange={handleCouponChange}
                 />
-                <button className="cupom-button">Verificar</button>
+                <button className="cupom-button">{t('button_verify_coupon')}</button>
               </div>
               <hr className='row'/>
 
               <div className="cart-summary-row total">
-                <span>Total</span>
+                <span>{t('label_total')}</span>
                 <span>R$ {(totalPrice + 22).toFixed(2)}</span>
               </div>
 
               <div className="payment-actions">
                 <button className="checkout-button" onClick={handleContinueToPayment}>
-                  Finalizar
+                  {t('button_checkout')}
                 </button>
                 <button className="continue-shopping" onClick={() => navigate('/')}>
-                  Escolher Mais Produtos
+                  {t('button_continue_shopping')}
                 </button>
               </div>
 
               <p className="delivery-time">
-                Prazo de Entrega estimado - Entre 15 - 45 dias da data do pedido
+                {t('message_estimated_delivery_time')}
               </p>
             </div>
           </div>
@@ -163,7 +165,7 @@ export default function Cart() {
       {/* --- ETAPA 2: Pagamento --- */}
       {checkoutStep === 'payment' && (
         <div className="payment-content">
-          <h1>Método de Pagamento</h1>
+          <h1>{t('heading_payment_method')}</h1>
 
           <div className="payment-methods">
             <div className="payment-method-selection">
@@ -172,7 +174,7 @@ export default function Cart() {
                 onClick={() => setPaymentMethod('card')}
               >
                 <div className="payment-method-icon">💳</div>
-                <div className="payment-method-name">Cartão de Crédito</div>
+                <div className="payment-method-name">{t('label_credit_card')}</div>
               </div>
 
               <div
@@ -180,7 +182,7 @@ export default function Cart() {
                 onClick={() => setPaymentMethod('pix')}
               >
                 <div className="payment-method-icon">📱</div>
-                <div className="payment-method-name">PIX</div>
+                <div className="payment-method-name">{t('label_pix')}</div>
               </div>
             </div>
 
@@ -188,10 +190,10 @@ export default function Cart() {
               <div className="card-payment-form">
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Número do Cartão</label>
+                    <label>{t('label_card_number')}</label>
                     <input
                       type="text"
-                      placeholder="0000 0000 0000 0000"
+                      placeholder={t('placeholder_card_number')}
                       name="number"
                       value={cardInfo.number}
                       onChange={handleCardInfoChange}
@@ -202,10 +204,10 @@ export default function Cart() {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Nome no Cartão</label>
+                    <label>{t('label_card_name')}</label>
                     <input
                       type="text"
-                      placeholder="Nome como está no cartão"
+                      placeholder={t('placeholder_card_name')}
                       name="name"
                       value={cardInfo.name}
                       onChange={handleCardInfoChange}
@@ -215,10 +217,10 @@ export default function Cart() {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Validade</label>
+                    <label>{t('label_expiry_date')}</label>
                     <input
                       type="text"
-                      placeholder="MM/AA"
+                      placeholder={t('placeholder_expiry_date')}
                       name="expiry"
                       value={cardInfo.expiry}
                       onChange={handleCardInfoChange}
@@ -226,10 +228,10 @@ export default function Cart() {
                     />
                   </div>
                   <div className="form-group">
-                    <label>CVV</label>
+                    <label>{t('label_cvv')}</label>
                     <input
                       type="text"
-                      placeholder="123"
+                      placeholder={t('placeholder_cvv')}
                       name="cvv"
                       value={cardInfo.cvv}
                       onChange={handleCardInfoChange}
@@ -240,9 +242,9 @@ export default function Cart() {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Parcelamento</label>
+                    <label>{t('label_installments')}</label>
                     <select>
-                      <option value="1">À vista - R$ {totalPrice.toFixed(2)}</option>
+                      <option value="1">{t('option_payment_cash')} - R$ {totalPrice.toFixed(2)}</option>
                       {[2, 3, 4, 5, 6].map(i => (
                         <option key={i} value={i}>
                           {i}x de R$ {(totalPrice / i).toFixed(2)}
@@ -253,7 +255,7 @@ export default function Cart() {
                 </div>
 
                 <button className="finalize-button" onClick={handleFinalizePurchase}>
-                  Finalizar Compra
+                  {t('button_finalize_purchase')}
                 </button>
               </div>
             )}
@@ -261,21 +263,21 @@ export default function Cart() {
             {paymentMethod === 'pix' && (
               <div className="pix-payment-info">
                 <div className="pix-code-container">
-                  <h3>Código PIX</h3>
+                  <h3>{t('heading_pix_code')}</h3>
                   <div className="pix-code">{pixCode}</div>
                   <button className="copy-pix-button" onClick={copyPixCode}>
-                    Copiar Código PIX
+                    {t('button_copy_pix_code')}
                   </button>
                 </div>
                 <div className="pix-instructions">
-                  <p>Abra o aplicativo do seu banco</p>
-                  <p>Escolha a opção PIX</p>
-                  <p>Cole o código acima</p>
-                  <p>Confirme o pagamento de R$ {totalPrice.toFixed(2)}</p>
-                  <p>Volte aqui e clique em "Finalizar Compra"</p>
+                  <p>{t('instruction_open_bank_app')}</p>
+                  <p>{t('instruction_choose_pix_option')}</p>
+                  <p>{t('instruction_paste_code')}</p>
+                  <p>{t('instruction_confirm_payment')} R$ {totalPrice.toFixed(2)}</p>
+                  <p>{t('instruction_return_and_finalize')}</p>
                 </div>
                 <button className="finalize-button" onClick={handleFinalizePurchase}>
-                  Finalizar Compra
+                  {t('button_finalize_purchase')}
                 </button>
               </div>
             )}
@@ -287,23 +289,23 @@ export default function Cart() {
       {checkoutStep === 'confirmation' && (
         <div className="confirmation-content">
           <div className="confirmation-icon">✓</div>
-          <h1>Pedido Confirmado!</h1>
+          <h1>{t('heading_order_confirmed')}</h1>
           <p className="confirmation-message">
-            Seu pedido foi realizado com sucesso e está sendo processado.
+            {t('message_order_success')}
           </p>
           <div className="order-details">
-            <h3>Detalhes do Pedido</h3>
-            <p><strong>Número do Pedido:</strong> #ONCE{Math.floor(Math.random() * 10000)}</p>
-            <p><strong>Data:</strong> {new Date().toLocaleDateString('pt-BR')}</p>
-            <p><strong>Método de Pagamento:</strong> {paymentMethod === 'card' ? 'Cartão de Crédito' : 'PIX'}</p>
-            <p><strong>Total:</strong> R$ {totalPrice.toFixed(2)}</p>
-            <p><strong>Status:</strong> Processando</p>
+            <h3>{t('heading_order_details')}</h3>
+            <p><strong>{t('label_order_number')}</strong> #ONCE{Math.floor(Math.random() * 10000)}</p>
+            <p><strong>{t('label_date')}:</strong> {new Date().toLocaleDateString('pt-BR')}</p>
+            <p><strong>{t('label_payment_method_details')}:</strong> {paymentMethod === 'card' ? t('label_credit_card_payment_confirmation') : 'PIX'}</p>
+            <p><strong>{t('label_total_confirmation')}:</strong> R$ {totalPrice.toFixed(2)}</p>
+            <p><strong>{t('label_status')}:</strong> {t('label_processing_status')}</p>
           </div>
           <p className="confirmation-email">
-            Enviamos um e-mail com os detalhes da sua compra para confirmação.
+            {t('message_email_sent_confirmation')}
           </p>
           <button className="continue-shopping" onClick={() => navigate('/')}>
-            Continuar Comprando
+            {t('button_continue_shopping_confirmation')}
           </button>
         </div>
       )}

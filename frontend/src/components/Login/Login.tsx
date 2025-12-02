@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Register } from './Register';
 import { UserContext } from '../../context/UserContext';
+import { useTranslation } from '../../context/LanguageContext';
 
 import './Login.css';
 import ModelDisplay from "./ModelDisplay";
@@ -14,6 +15,8 @@ export  default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const t = useTranslation();
 
 
 
@@ -25,6 +28,7 @@ export  default function Login() {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMessage('');
+    setIsSuccess(false);
 
     try {
       const res = await fetch('https://once11.onrender.com/api/auth/login', {
@@ -37,6 +41,7 @@ export  default function Login() {
 
       if (!res.ok) {
         setMessage(data.msg || 'Erro ao tentar fazer login.');
+        setIsSuccess(false);
         return;
       }
 
@@ -46,7 +51,8 @@ export  default function Login() {
       // Chama a função login do contexto, que armazena o token e os dados do usuário
       login(user, token); 
 
-      setMessage('Login realizado com sucesso! ✅');
+      setMessage(t('login_success'));
+      setIsSuccess(true);
 
       setTimeout(() => {
         navigate('/');
@@ -54,6 +60,7 @@ export  default function Login() {
     } catch (error) {
       console.error(error);
       setMessage('Erro ao conectar ao servidor.');
+      setIsSuccess(false);
     }
   };
 
@@ -69,16 +76,16 @@ export  default function Login() {
           <div className="login-form">
           {isLogin ? (
             <>
-              <h1 className="login-title">Entre</h1>
+              <h1 className="login-title">{t('enter')}</h1>
               <form onSubmit={handleLogin}>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">{t('email')}</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     className="login-input"
-                    placeholder="Digite seu email"
+                    placeholder={t('email')}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -86,13 +93,13 @@ export  default function Login() {
                 </div>
 
                 <div className="form-group">
-                  <label className="passwordLabel" htmlFor="password">Senha</label>
+                  <label className="passwordLabel" htmlFor="password">{t('password')}</label>
                   <input
                     type="password"
                     id="password"
                     name="password"
                     className="login-input"
-                    placeholder="Digite sua senha"
+                    placeholder={t('password')}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -100,14 +107,14 @@ export  default function Login() {
                 </div>
 
                 {message && (
-                  <p className={message.includes('sucesso') ? 'success-message' : 'error-message'}>
+                  <p className={isSuccess ? 'success-message' : 'error-message'}>
                     {message}
                   </p>
                 )}
 
                 <div className="form-actions">
-                  <a href="#" className="forgot-password-link">Esqueci minha senha</a>
-                  <button type="submit" className="login-button">Entrar</button>
+                  <a href="#" className="forgot-password-link">{t('forgot_password')}</a>
+                  <button type="submit" className="login-button">{t('enter')}</button>
                   <a
                     href="#"
                     className="no-account-link"
@@ -116,7 +123,7 @@ export  default function Login() {
                       handleSwitch();
                     }}
                   >
-                    Não tenho conta
+                    {t('no_account')}
                   </a>
                 </div>
               </form>

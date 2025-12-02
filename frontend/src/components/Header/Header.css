@@ -150,6 +150,10 @@ nav ul li:hover a {
   color: #00ff66;
 }
 
+.lang-toggle {
+  margin-left: 100px;
+}
+
 /*------------------------- RESPONSIVIDADE ----------------------------*/
 
 /* DESKTOPS E LAPTOPS - 1024px acima */

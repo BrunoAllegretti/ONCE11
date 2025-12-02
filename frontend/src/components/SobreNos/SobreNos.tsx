@@ -3,10 +3,12 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './SobreNos.css';
 import jogadorSobre from '../../assets/img/jogador.png';
+import { useLanguage } from '../../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SobreNos() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const sobreNosRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -82,18 +84,15 @@ export default function SobreNos() {
             <div className="sobre-nos-image">
               <img
                 src={jogadorSobre}
-                alt="Jogador representando a ONCE 11 - Marketplace de produtos esportivos"
+                alt={t('alt_text_about_player')}
                 loading="lazy"
                 decoding="async"
               />
             </div>
             <div className="sobre-nos-text">
-              <h2>Sobre a ONCE</h2>
+              <h2>{t('heading_about_once')}</h2>
               <p>
-                Somos um <strong>marketplace de produtos esportivos</strong> que reúne variedade,
-                qualidade e praticidade em um só lugar. Nosso propósito é conectar apaixonados por
-                esporte a opções que unem <strong>desempenho, estilo e conforto</strong>, garantindo
-                sempre segurança e confiança em cada compra.
+                {t('paragraph_about_once_description')}
               </p>
             </div>
           </div>
