@@ -157,3 +157,16 @@
     font-size: 13px;
   }
 }
+
+/* Responsive additions (<=600px, 600-768px, >=1024px) */
+@media (max-width: 600px) {
+  .card { width: calc(100% - 2rem); max-width: 100%; height: auto; }
+  .card-image-container { height: 140px; }
+  .card-title { font-size: 1rem; }
+}
+@media (min-width: 600px) and (max-width: 768px) {
+  .card { max-width: 320px; }
+}
+@media (min-width: 1024px) {
+  .card { max-width: 380px; }
+}

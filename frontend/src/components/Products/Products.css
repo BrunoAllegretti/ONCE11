@@ -71,3 +71,17 @@
     width: 25%;
     height: 75px;
 }
+
+/* Responsive additions (<=600px, 600-768px, >=1024px) */
+@media (max-width: 600px) {
+    .card__name { font-size: 2.5rem; }
+    .card__desc { font-size: 1rem; }
+    .button__add-cart { width: 100%; height: 56px; font-size: 1.1rem; }
+    .card__image { width: 100%; margin-left: 0; }
+}
+@media (min-width: 600px) and (max-width: 768px) {
+    .button__add-cart { width: 45%; }
+}
+@media (min-width: 1024px) {
+    .button__add-cart { width: 25%; height: 75px; }
+}

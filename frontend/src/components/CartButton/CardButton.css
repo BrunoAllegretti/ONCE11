@@ -27,3 +27,15 @@
     align-items: center;
     justify-content: center;
 }
+
+/* Responsive additions (<=600px, 600-768px, >=1024px) */
+@media (max-width: 600px) {
+    .cart_button { margin-right: 12px; font-size: 1.2rem; }
+    .cart-status { width: 12px; height: 12px; font-size: 10px; }
+}
+@media (min-width: 600px) and (max-width: 768px) {
+    .cart_button { margin-right: 30px; }
+}
+@media (min-width: 1024px) {
+    .cart_button { margin-right: 50px; }
+}
