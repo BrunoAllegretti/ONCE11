@@ -38,7 +38,7 @@ export default function Card({ product }: CardProps) {
 
   return (
     <div className="cardProd">
-      <img src={image} alt={name} />
+      <img src={`Products/${image}`} alt={name} />
 
       <section>
         <div className="headerCard">

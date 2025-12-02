@@ -1,183 +1,203 @@
 /* FONTES */
 @font-face {
-    font-family: 'spa';
-    src: url('../assets/fonts/League_Spartan/LeagueSpartan-Bold.otf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'spa';
+  src: url('../assets/fonts/League_Spartan/LeagueSpartan-Bold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .cardProd {
-  --bg: #ffffff;
-  --title-color: #fff;
-  --title-color-hover: #000;
+  --bg: #f5f5f5;
+  --title-color: #222;
+  --price-color: #18a100;
   --text-color: #666;
-  --button-color: #eee;
-  --button-color-hover: #ddd;
+  --button-color: #019801;
+  --button-color-hover: #017c01;
   background: var(--bg);
   border-radius: 2rem;
-  padding: 0.5rem;
-  width: 18rem;
-  height: 28rem;
-  overflow: clip;
-  position: relative;
+  padding: 1.2rem 1rem 1rem 1rem;
+  width: 100%;
+  max-width: 340px;
+  min-width: 220px;
+  box-shadow: 0 2px 16px #00000013;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-family: 'spa', Helvetica, Arial, sans-serif;
-
-  &.dark {
-    --bg: #222;
-    --title-color: #fff;
-    --title-color-hover: #fff;
-    --text-color: #ccc;
-    --button-color: #555;
-    --button-color-hover: #444;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    width: calc(100% - 1rem);
-    height: 30%;
-    bottom: 0.5rem;
-    left: 0.5rem;
-    mask: linear-gradient(#0000, #000f 80%);
-    backdrop-filter: blur(1rem);
-    border-radius: 0 0 1.5rem 1.5rem;
-    translate: 0 0;
-    transition: translate 0.25s;
-  }
-
-  > img {
-    max-width: 100%;
-    aspect-ratio: 2.4 / 3;
-    object-fit: cover;
-    object-position: 50% 5%;
-    border-radius: 1.5rem;
-    display: block;
-    transition: aspect-ratio 0.25s, object-position 0.5s;
-    /* firefox patch */
-    width: 100%;
-    height: auto;
-  }
-
-  > section {
-    margin: 1rem;
-    height: calc(33.3333% - 1rem);
-    display: flex;
-    flex-direction: column;
-
-    .titleCard {
-      margin: 0;
-      margin-block-end: 1rem;
-      font-size: 1rem;
-      translate: 0 -100%;
-      opacity:1;
-      color: rgb(22, 22, 22);
-      transition: color 0.5s, margin-block-end 0.25s, opacity 1s, translate 0.25s;
-    }
-
-    .priceCard {
-      margin: 0;
-      margin-block-end: 1rem;
-      font-size: 1.5rem;
-      translate: 0 -100%;
-      text-align: right;
-      opacity:1;
-      color: rgb(0, 172, 0);
-      transition: color 0.5s, margin-block-end 0.25s, opacity 1s, translate 0.25s;
-    }
-
-    .headerCard {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-.cartButton {
-    width: 100%;
-    padding: 0.8rem;
-    background-color: rgb(1, 182, 1);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-
-    /* animação igual ao <p> */
-    opacity: 0;
-    translate: 0 100%;
-    transition: 
-        background 0.25s,
-        opacity 1s 0.2s,
-        translate 0.25s 0.2s;
+  transition: box-shadow .2s, transform .2s;
+  margin: 0 auto 2rem auto;
+  position: relative;
 }
 
-.cartButton:hover {
-    background-color: rgb(1, 150, 1);
+.cardProd:hover, .cardProd:focus-within {
+  box-shadow: 0 4px 28px #00000024;
+  transform: scale(1.03);
 }
 
-
-
-    p {
-      font-size: 0.95rem;
-      line-height: 1.3;
-      color: var(--text-color);
-      opacity: 0;
-      margin: 0;
-      translate: 0 100%;
-      transition: margin-block-end 0.25s, opacity 1s 0.2s, translate 0.25s 0.2s;
-    }
-
-    > div {
-    flex: 1;
-    align-items: flex-end;
-    display: flex;
-    justify-content: space-between;
-    translate: 0 100%; /* corrigido */
-    transition: translate 0.25s 0.2s, opacity 1s 0.2s;
-    }
-  }
-
-  &:hover, &:focus-within {
-    &::before {
-      translate: 0 100%;
-    }
-
-
-    > img {
-      aspect-ratio: 1 / 1;
-      object-position: 50% top;
-      
-      transition: aspect-ratio 0.25s, object-position 0.25s;
-    }
-
-    > section {
-      h2, p, button {
-        translate: 0 0;
-        margin-block-end: 0.5rem;
-        opacity: 1;
-      }
-
-      .titleCard {
-        color: var(--title-color-hover);
-      }
-
-      > div {
-        translate: 0 0;
-        opacity: 1;
-        transition: translate 0.25s 0.25s, opacity 0.5s 0.25s;
-      }
-    }
-  }
+/* Imagem sempre visível */
+.cardProd > img {
+  max-width: 95%;
+  height: auto;
+  aspect-ratio: 1.2 / 1;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 1.4rem;
+  display: block;
+  margin-bottom: 1rem;
+  background: #fff;
+  box-shadow: 0 1px 6px #0000000b;
 }
 
-/* Responsive additions (<=600px, 600-768px, >=1024px) */
+/* Seção: todos os elementos ocultos por padrão (desc, botão) */
+.cardProd > section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.3rem;
+}
+
+/* Header: Título e Preço */
+.cardProd .headerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: .6rem;
+  gap: .2rem;
+}
+
+.cardProd .titleCard, .cardProd .priceCard, 
+.cardProd .descriptionCard, .cardProd .cartButton {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: 
+    opacity .6s cubic-bezier(.77,0,.18,1), 
+    transform .5s cubic-bezier(.77,0,.18,1);
+}
+
+/* Apenas título e preço aparecem antes do hover */
+.cardProd .titleCard, .cardProd .priceCard {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.cardProd .titleCard {
+  width: 100%;
+  font-size: 1.1rem;
+  color: var(--title-color);
+  font-weight: bold;
+  text-align: left;
+  word-break: break-word;
+}
+
+.cardProd .priceCard {
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--price-color);
+  text-align: left;
+  margin-top: .2rem;
+  letter-spacing: 1px;
+}
+
+/* Descrição e Botão ocultos até hover! */
+.cardProd .descriptionCard,
+.cardProd .cartButton {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(24px);
+  transition-delay: 0s;
+}
+
+/* Botão ADICIONAR AO CARRINHO estilizado */
+.cardProd .cartButton {
+  width: 100%;
+  padding: .8rem;
+  background-color: var(--button-color);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: .8rem;
+  box-shadow: 0px 1px 6px #0001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  transition: background .25s, transform .17s, opacity .6s, transform .5s;
+}
+.cardProd .cartButton:hover {
+  background-color: var(--button-color-hover);
+  transform: scale(1.01);
+}
+
+/* HOVER - animação bonita entra em cascata */
+.cardProd:hover .descriptionCard,
+.cardProd:focus-within .descriptionCard {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: .12s;
+}
+.cardProd:hover .cartButton,
+.cardProd:focus-within .cartButton {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: .24s;
+}
+.cardProd:hover .titleCard,
+.cardProd:focus-within .titleCard {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+.cardProd:hover .priceCard,
+.cardProd:focus-within .priceCard {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .08s;
+}
+
+/* Responsividade */
 @media (max-width: 600px) {
-  .cardProd { width: 100% !important; max-width: 100% !important; height: auto !important; padding: 0.75rem !important; }
-  .cardProd > img { height: auto; }
+  .cardProd {
+    max-width: 98vw;
+    min-width: 0;
+    padding: .8rem .3rem;
+    border-radius: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .cardProd > img {
+    border-radius: 1rem;
+    margin-bottom: .8rem;
+  }
+  .cardProd > section {
+    gap: .2rem;
+    margin: 0;
+  }
+  .cardProd .titleCard { font-size: 1rem; }
+  .cardProd .priceCard { font-size: 1.1rem; }
 }
-@media (min-width: 600px) and (max-width: 768px) {
-  .cardProd { width: calc(50% - var(--gap-sm)) !important; }
+
+@media (min-width: 601px) and (max-width: 1023px) {
+  .cardProd {
+    max-width: 46vw;
+    margin-bottom: 2rem;
+  }
+  .cardProd .titleCard { font-size: 1.06rem; }
+  .cardProd .priceCard { font-size: 1.23rem; }
 }
+
 @media (min-width: 1024px) {
-  .cardProd { max-width: 18rem !important; }
+  .cardProd {
+    max-width: 340px;
+    box-shadow: 0 2px 16px #00000013;
+    margin-bottom: 2.3rem;
+  }
+  .cardProd .titleCard { font-size: 1.13rem; }
+  .cardProd .priceCard { font-size: 1.4rem; }
 }
