@@ -224,7 +224,7 @@ const translations: Record<Lang, Record<string, string>> = {
     section_now_moment: 'Now Moment',
     category_collectibles: 'Colecionáveis',
     section_deep_attention: 'Deep Attention',
-    heading_welcome_to: 'Welcome to',
+    heading_welcome_to: 'Bem-vindo a',
     heading_once_11: 'ONCE 11',
     button_login: 'Login',
     alt_text_lebron: 'Lebron James',

@@ -6,6 +6,7 @@ interface UserData {
   name: string;
   email: string;
   profilePicture?: string;
+  photo?: string;
 }
 
 interface UserContextType {
@@ -27,12 +28,27 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const normalizeProfilePicture = (userData: any) => {
     if (!userData) return userData;
     const pd = { ...userData };
+    
+    // Mapear 'photo' para 'profilePicture' se existir
+    if (pd.photo && !pd.profilePicture) {
+      pd.profilePicture = pd.photo;
+    }
+    
     if (pd.profilePicture && typeof pd.profilePicture === 'string') {
-      const val = pd.profilePicture;
+      let val = pd.profilePicture;
+      
+      // Limpar duplicações de /uploads - remover todos os /uploads extras
+      while (val.includes('/uploads/uploads/')) {
+        val = val.replace('/uploads/uploads/', '/uploads/');
+      }
+      
       if (!/^https?:\/\//i.test(val)) {
-        pd.profilePicture = `${BASE_URL}/${val.replace(/^\/+/, '')}`;
+        pd.profilePicture = `${BASE_URL}${val}`;
+      } else {
+        pd.profilePicture = val;
       }
     }
+    console.log('URL final da imagem:', pd.profilePicture);
     return pd;
   };
 
@@ -49,9 +65,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
       if (res.ok) {
         const userData = await res.json();
+        console.log('Dados recebidos do backend:', userData);
         setUser(normalizeProfilePicture(userData));
         setIsAuthenticated(true);
       } else {
+        console.log('Erro ao buscar user data. Status:', res.status);
         // Token inválido
         localStorage.removeItem('token');
         setIsAuthenticated(false);
@@ -64,22 +82,36 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   const login = (userData: UserData, token: string) => {
-    setUser(normalizeProfilePicture(userData));
+    console.log('Login chamado com:', userData, 'Token:', token);
+    const normalizedUser = normalizeProfilePicture(userData);
+    setUser(normalizedUser);
     setIsAuthenticated(true);
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(normalizedUser));
   };
 
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   };
 
   // Verificação inicial de autenticação
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      fetchUserData(token);
+    const userStr = localStorage.getItem('user');
+    
+    if (token && userStr) {
+      try {
+        const userData = JSON.parse(userStr);
+        setUser(userData);
+        setIsAuthenticated(true);
+      } catch (e) {
+        console.error('Erro ao restaurar dados do usuário:', e);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
     }
   }, []);
 

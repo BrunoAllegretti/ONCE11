@@ -17,6 +17,7 @@ import UserImg from '../../assets/img/user.webp';
 export default function Header() {
   const { user, isAuthenticated, logout } = useContext(UserContext) as any;
   const [menuOpen, setMenuOpen] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const { lang, toggleLang, t } = useLanguage();
 
   const getFirstName = (fullName: string) => {
@@ -31,7 +32,7 @@ export default function Header() {
     ? getFirstName(user.name) 
     : defaultUserName;
 
-  const imageToDisplay = isAuthenticated && user?.profilePicture
+  const imageToDisplay = isAuthenticated && user?.profilePicture && !imageError
     ? user.profilePicture
     : defaultUserImage;
 
@@ -43,6 +44,11 @@ export default function Header() {
 
   const closeMenu = () => {
     setMenuOpen(false);
+  };
+
+  const handleImageError = () => {
+    console.log('Erro ao carregar imagem:', user?.profilePicture);
+    setImageError(true);
   };
 
   return (
@@ -85,7 +91,12 @@ export default function Header() {
 
           {/* Ícone e primeiro nome do usuário */}
           <div className="icone" onClick={closeMenu}>
-            <img src={imageToDisplay} alt={nameToDisplay} className="user-image" />
+            <img 
+              src={imageToDisplay} 
+              alt={nameToDisplay} 
+              className="user-image"
+              onError={handleImageError}
+            />
             <span className="user-name">{nameToDisplay}</span>
           </div>
         </ul>
