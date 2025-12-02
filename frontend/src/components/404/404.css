@@ -25,8 +25,6 @@
     align-items: center;
     flex-direction: column;
     height: 100%;
-    /* Adicionado: Fundo azul e largura de 50% */
-    background-color: #0047AB; /* Azul escuro, similar ao da imagem */
     width: 50%;
     position: relative; /* Para posicionar a bola */
 }
@@ -80,4 +78,36 @@
     width: 100%; /* Imagem preenche a div */
     height: 100%;
     object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+}
+
+/* Estilos existentes */
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 880px) {
+  .errorText {
+    
+    width: 100%;
+    font-size: 1rem;
+    padding: 32px;
+  }
+
+  .errorImg {
+    background-color: none;
+    display: none;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .errorText {
+    font-size: 1.4rem;
+    padding: 64px;
+  }
+}
+
+@media (min-width: 880px) and (max-width: 1024px) {
+  .errorText {
+    font-size: 1rem;
+    padding: 64px;
+    }
 }

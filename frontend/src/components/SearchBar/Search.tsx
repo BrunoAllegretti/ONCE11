@@ -31,6 +31,7 @@ export default function Search() {
     { value: 'calçado', label: t('option_footwear') },
     { value: 'bola', label: t('option_ball') },
     { value: 'acessorio', label: t('option_accessory') },
+    { value: 'roupa', label: t('option_clothes') },
     { value: 'outro', label: t('option_other') }
   ];
 
