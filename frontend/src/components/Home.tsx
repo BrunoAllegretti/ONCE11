@@ -8,9 +8,7 @@ import Collections from './Collections/Collections';
 export default function Home() {
   return (
     <>
-      <div style={{ position: 'relative', zIndex: 1 }}>
         <Banner />
-      </div>
       <SobreNos />
       <Slide />
       <Collections />

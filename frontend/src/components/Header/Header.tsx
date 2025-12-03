@@ -18,6 +18,7 @@ export default function Header() {
   const { user, isAuthenticated, logout } = useContext(UserContext) as any;
   const [menuOpen, setMenuOpen] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { lang, toggleLang, t } = useLanguage();
 
   const getFirstName = (fullName: string) => {
@@ -36,12 +37,19 @@ export default function Header() {
     ? user.profilePicture
     : defaultUserImage;
 
-  const loginLink = isAuthenticated ? "/profile" : "/login";
-
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
+  
+  const toggleUserMenu = () => setUserMenuOpen(!userMenuOpen);
+  const closeUserMenu = () => setUserMenuOpen(false);
 
   const handleImageError = () => setImageError(true);
+  
+  const handleLogout = () => {
+    logout();
+    closeUserMenu();
+    closeMenu();
+  };
 
   // Detecta tela menor ou igual a 800px para decidir a ordem dos itens do menu
   const isMobileMenu = window.innerWidth <= 800;
@@ -80,7 +88,7 @@ export default function Header() {
             <span className="close-btn" onClick={closeMenu}>
               <AiOutlineClose size={26} />
             </span>
-            <div className="icone" onClick={closeMenu}>
+            <div className="icone" onClick={toggleUserMenu}>
               <img 
                 src={imageToDisplay} 
                 alt={nameToDisplay} 
@@ -88,6 +96,13 @@ export default function Header() {
                 onError={handleImageError}
               />
               <span className="user-name">{nameToDisplay}</span>
+              {isAuthenticated && userMenuOpen && (
+                <div className="user-dropdown">
+                  <button onClick={handleLogout} className="logout-btn">
+                    {t('logout')}
+                  </button>
+                </div>
+              )}
             </div>
             <button className="lang-toggle" onClick={toggleLang} aria-label="Toggle language" style={{marginLeft: 0}}>
               {lang === 'pt' ? 'EN' : 'PT'}
@@ -99,15 +114,14 @@ export default function Header() {
           <Link to="/collections" className="search" onClick={closeMenu}><li><HiViewGridAdd /> {t('collections')}</li></Link>
           <Link to="/search" className="search" onClick={closeMenu}><li><FaSearch /> {t('search')}</li></Link>
           <Link to={cartLink} className="caft" onClick={closeMenu}><li><FaShoppingCart /> {t('cart')}</li></Link>
-          <Link to={loginLink} className="login" onClick={closeMenu}>
+          <Link to="/login" className="login" onClick={closeMenu}>
             <li>
-              {!isAuthenticated && <IoPeople />}
-              {isAuthenticated ? t('profile') : t('login')}
+              <IoPeople /> {t('login')}
             </li>
           </Link>
           {/* Em desktop, o user fica sempre ali, fora do menu*/}
           {!isMobileMenu && (
-            <div className="icone" onClick={closeMenu}>
+            <div className="icone user-menu-wrapper" onClick={toggleUserMenu}>
               <img 
                 src={imageToDisplay} 
                 alt={nameToDisplay}
@@ -115,6 +129,13 @@ export default function Header() {
                 onError={handleImageError}
               />
               <span className="user-name">{nameToDisplay}</span>
+              {isAuthenticated && userMenuOpen && (
+                <div className="user-dropdown">
+                  <button onClick={handleLogout} className="logout-btn">
+                    {t('logout')}
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </ul>

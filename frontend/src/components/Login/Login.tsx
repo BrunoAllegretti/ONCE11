@@ -8,7 +8,7 @@ import './Login.css';
 import ModelDisplay from "./ModelDisplay";
 
 export  default function Login() {
-  const { login } = useContext(UserContext) as any;
+  const { login, isAuthenticated } = useContext(UserContext) as any;
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
 
@@ -17,6 +17,13 @@ export  default function Login() {
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const t = useTranslation();
+
+  // Redirecionar se já estiver logado
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
 
 

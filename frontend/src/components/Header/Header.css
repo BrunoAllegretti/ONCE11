@@ -60,7 +60,7 @@ header a:visited {
   border: 2px solid #7efc00;
   border-radius: 16px;
   padding: 6px 20px;
-  margin-left: 12px;
+  margin-left: 10%;
   margin-right: 10px;
   cursor: pointer;
   transition: background 0.25s, color 0.25s, border-color 0.25s, box-shadow .25s;
@@ -166,6 +166,8 @@ nav ul li:focus a {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  position: relative;
+  cursor: pointer;
 }
 
 .icone img {
@@ -174,6 +176,11 @@ nav ul li:focus a {
   z-index: 10;
   border-radius: 50%;
   object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.icone:hover img {
+  transform: scale(1.05);
 }
 
 .user-name {
@@ -181,6 +188,59 @@ nav ul li:focus a {
   font-size: 16px;
   color: #00ff66;
   font-weight: bold;
+}
+
+.user-menu-wrapper {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: #003d8f;
+  border: 2px solid #7efc00;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 8px;
+  min-width: 140px;
+  z-index: 1100;
+  animation: dropdownFadeIn 0.2s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 10px 16px;
+  background: #7efc00;
+  color: #004aad;
+  border: none;
+  border-radius: 8px;
+  font-family: 'commons', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #68f86b;
+  transform: translateY(-1px);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 800px) {
@@ -279,7 +339,7 @@ nav ul li:focus a {
     padding: 14px 20px;
     margin: 13px auto 0 auto;
     border-radius: 13px;
-    font-size: 18px;
+    font-size: 20px;
     border-bottom: none;
     background: none;
   }
@@ -290,7 +350,9 @@ nav ul li:focus a {
     box-shadow: 0 3px 8px #68f86b33;
   }
   .navbar ul li svg {
-    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
   }
 }
 

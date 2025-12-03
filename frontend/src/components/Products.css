@@ -1,3 +1,15 @@
+/* Centraliza o grid dos cards */
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    justify-items: center;
+    align-items: start;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 40px auto;
+    padding: 40px 0;
+}
 @font-face {
     font-family: 'MSBold';
     src: url('../assets/fonts/MontSerrat/Montserrat-Bold.ttf') format('truetype');
@@ -6,12 +18,15 @@
 }
 
 .section-products {
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
     display: grid;
-    gap: 50px;
+    gap: 40px;
     grid-template-columns: repeat(4, 1fr); 
     justify-items: center;
+    justify-content: center;
+    padding: 40px 20px;
 }
 
 .containerB {

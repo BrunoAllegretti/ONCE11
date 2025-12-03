@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./Collection.css";
 import lebron from "../../assets/img/lebron.png";
 import run from "../../assets/img/RUN.jpeg";
@@ -113,16 +114,19 @@ export default function Collection() {
           <div className="clc-slider-wrapper-inner">
             <div className="clc-slider" ref={sliderRef}>
 
-              {slides.map((img, index) => (
-                <div className="clc-slide-wrapper" key={index}>
-                  <div className="clc-slider-item">
-                    <img src={img} alt={`slide-${index}`} />
-                    <div className="clc-bubble">
-                      <span>Visualizar</span>
-                    </div>
+              {slides.map((img, index) => {
+                const routes = ['/collections/colecao-basquete', '/collections/colecao-atletismo', '/collections/colecao-beachtennis', '/collections/colecao-hoquei', '/collections/colecao-reds'];
+                return (
+                  <div className="clc-slide-wrapper" key={index}>
+                    <Link to={routes[index]} className="clc-slider-item">
+                      <img src={img} alt={`slide-${index}`} />
+                      <div className="clc-bubble">
+                        <span>Visualizar</span>
+                      </div>
+                    </Link>
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
             </div>
           </div>

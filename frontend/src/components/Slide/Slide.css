@@ -19,198 +19,700 @@ body {
 }
 
 .slide-container {
-  margin-top: 30vh;
   display: flex;
   width: 100%;
-  height: 105vh; /* Ocupa a altura total da viewport */
-  background-color: #f8f8f8; /* Cor de fundo clara como na imagem */
+  height: 90vh;
+  margin: 800px 0 0 0; /* push slide further down below SobreNos */
   overflow: hidden;
   position: relative;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 0;
+}
+
+#root {
+  background: #004aad;
+}
+
+/* Match site blue on smaller screens */
+@media (max-width: 800px) {
+  .slide-container {
+    background: #004aad;
+  }
+}
+
+/* Loading State */
+.slide-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  gap: 2rem;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.slide-loading p {
+  font-family: 'commons', sans-serif;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 .slide-content {
   display: flex;
   width: 100%;
-  transition: transform 0.5s ease-in-out;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .slide-item {
   flex: 0 0 100%;
+  min-width: 100%;
+  width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   box-sizing: border-box;
+  padding: 4rem 8%;
+  gap: 4rem;
+  background: linear-gradient(-45deg, var(--bg-color, #667eea) 0%, var(--accent-color, #764ba2) 100%);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-item::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotateGlow 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Seção de Texto (lado esquerdo) */
-
 .slide-text-section {
-  width: 50%;
-  padding: 0 80px 0 0px; /* Ajuste de padding para corresponder à imagem */
+  flex: 1;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: left;
+  z-index: 2;
+  animation: slideInLeft 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.slide-text-section:hover button{
-  transform: scale(1.05);
-  background-color: #067018;
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
-.slide-text-section h2 {
-  margin-left: 5%;
-  font-family: 'norms', sans-serif; /* Usar a fonte commons */
+
+.featured-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-family: 'commons', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   font-weight: bold;
-  font-size: 5em; /* Tamanho maior para "Em destaque" */
-  margin-top: 150px;
-  margin-bottom: 100px;
-  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  width: fit-content;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.slide-text-section h3 {
-  margin-left: 5%;
-  font-family: 'norms', sans-serif; /* Usar a fonte commons */
-  font-weight: normal;
-  font-size: 3em; /* Tamanho para "Nome do Produto" */
-  margin-bottom: 20px;
-  text-align: justify;
-  color: #000;
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-.slide-text-section p {
-  text-align: justify;
-  width: 80%;
-  margin-left: 5%;
-  font-family: 'norms', sans-serif; /* Usar a fonte commons */
-  font-size: 2.5em;
-  line-height: 1;
-  color: #555;
-  margin-bottom: 100px;
-  font-weight: 0;
+.product-title {
+  font-family: 'norms', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.slide-text-section hr {
-  color: rgb(0, 0, 0);
-  width: 100%;
-  margin-left: 20%;
-  height: 5px;
+.product-description {
+  font-family: 'commons', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 2rem;
+  max-width: 550px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.price-label {
+  font-family: 'commons', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.product-price {
+  font-family: 'norms', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .slide-button {
-  margin-left: 5%;
-  background-color: #00b31e; /* Cor do botão azul */
-  color: white;
-  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--bg-color, #000);
+  padding: 1.2rem 3rem;
   border: none;
-  margin-top: 100px;
-  border-radius: 30px;
-  font-size: 2em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 50px;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   font-family: 'commons', sans-serif;
   font-weight: bold;
-  width: 25%;
-  height: 75px;
-    transition: all 0.5s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.slide-button:hover::before {
+  width: 400px;
+  height: 400px;
 }
 
 .slide-button:hover {
-  background-color: #004085;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* substitua por isto se quiser que a imagem ocupe toda a altura e mantenha proporção */
+.slide-button:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.button-arrow {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.slide-button:hover .button-arrow {
+  transform: translateX(8px);
+}
+
+/* Seção de Imagem */
 .slide-image-section {
-    background-color: #0056b3;
-  width: 45%;               /* mantém a divisão 50/50 */
-  height: 100%;              /* ocupa toda a altura do slide-container (105vh) */
+  flex: 1;
+  max-width: 650px;
+  height: 80vh;
   display: flex;
   align-items: center;
-  justify-content: flex-end;  
-  overflow: hidden;  
-  position: relative;        /* esconde qualquer excesso se houver transform */
+  justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
-.slide-image-section img {
-  display: flex;
-  justify-content: flex-end;
+.image-decoration {
   position: absolute;
-  right: 0;
-  height: 100%;              /* ocupa 100% da altura do contêiner */
-  width: auto;               /* largura automática para preservar proporção */
-  max-width: none;           /* permite que a largura passe do contêiner se necessário */
-  object-fit: contain;       /* funciona como fallback; aqui estamos usando height/width */
-  transform: translateZ(0);  /* melhora performance em alguns browsers */
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
+.circle-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+}
+
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.shape-1 {
+  width: 100px;
+  height: 100px;
+  top: 10%;
+  right: 15%;
+}
+
+.shape-2 {
+  width: 150px;
+  height: 150px;
+  bottom: 20%;
+  left: 10%;
+}
+
+.shape-3 {
+  width: 80px;
+  height: 80px;
+  top: 60%;
+  right: 5%;
+}
+
+.product-image {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+  animation: slideInRight 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+  border-radius: 32px;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.product-image:hover {
+  transform: scale(1.05);
+}
+
+
+/* Indicadores de Slides */
+.slide-indicators {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.indicator:hover {
+  transform: scale(1.3);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.indicator.active {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.4);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
 
 /* Botões de Navegação */
 .slide-nav-buttons {
   position: absolute;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.164);
   top: 50%;
-  right: 50px; /* Ajustado para mais à direita */
+  right: 3rem;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
   z-index: 10;
 }
 
 .slide-nav-button {
-  background: none;
-  border: none;
-  font-size: 2.5em;
-  color: #333;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  color: #fff;
   cursor: pointer;
-  padding: 5px;
-  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 .slide-nav-button:hover {
+  background: rgba(255, 255, 255, 0.9);
   color: #000;
+  transform: scale(1.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
-.slide-nav-button.disabled {
-  color: #ccc;
-  cursor: not-allowed;
+.slide-nav-button:active {
+  transform: scale(1.05);
 }
 
-/* Media Queries para responsividade */
-@media (max-width: 768px) {
+/* ============================================
+   RESPONSIVIDADE - MOBILE (≤ 600px)
+   ============================================ */
+@media screen and (max-width: 600px) {
+  .slide-container {
+    margin-top: 0;
+    min-height: 100vh;
+  }
+
   .slide-item {
     flex-direction: column;
+    padding: 2rem 5%;
+    gap: 2rem;
+    justify-content: center;
   }
 
   .slide-text-section {
-    padding: 20px;
-    align-items: center;
+    max-width: 100%;
     text-align: center;
+    align-items: center;
   }
 
-  .slide-text-section h2 {
-    font-size: 2.5em;
+  .featured-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+    margin-bottom: 1rem;
   }
 
-  .slide-text-section h3 {
-    font-size: 1.5em;
+  .product-title {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 1rem;
   }
 
-  .slide-text-section p {
-    font-size: 1em;
+  .product-description {
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-section {
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-label {
+    font-size: 0.85rem;
+  }
+
+  .product-price {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .slide-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
   }
 
   .slide-image-section {
-    height: 300px;
     width: 100%;
+    max-width: 100%;
+    height: 350px;
+    margin-top: 1rem;
+  }
+
+  .circle-bg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .shape-1, .shape-2, .shape-3 {
+    display: none;
+  }
+
+  .product-image {
+    max-height: 320px;
+  }
+
+  .slide-indicators {
+    bottom: 1.5rem;
+    gap: 0.6rem;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
   }
 
   .slide-nav-buttons {
-    flex-direction: row;
     top: auto;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    right: auto;
+    bottom: 5rem;
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .slide-nav-button {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVIDADE - TABLET (601px - 768px)
+   ============================================ */
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  .slide-container {
+    margin-top: 0;
+  }
+
+  .slide-item {
+    flex-direction: column;
+    padding: 3rem 6%;
+    gap: 3rem;
+  }
+
+  .slide-text-section {
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .featured-badge {
+    font-size: 0.95rem;
+  }
+
+  .product-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    text-align: center;
+  }
+
+  .product-description {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .price-section {
+    align-items: center;
+  }
+
+  .product-price {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .slide-button {
+    padding: 1.1rem 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .slide-image-section {
+    width: 100%;
+    max-width: 500px;
+    height: 450px;
+  }
+
+  .shape {
+    display: block;
+  }
+
+  .shape-1 {
+    width: 80px;
+    height: 80px;
+  }
+
+  .shape-2 {
+    width: 120px;
+    height: 120px;
+  }
+
+  .shape-3 {
+    width: 60px;
+    height: 60px;
+  }
+
+  .slide-indicators {
+    bottom: 2rem;
+  }
+
+  .slide-nav-buttons {
+    right: 2rem;
+  }
+
+  .slide-nav-button {
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVIDADE - TABLET LANDSCAPE (769px - 1023px)
+   ============================================ */
+@media screen and (min-width: 769px) and (max-width: 1023px) {
+  .slide-container {
+    margin-bottom: 0;
+  }
+
+  .slide-item {
+    padding: 3rem 7%;
+    gap: 3rem;
+  }
+
+  .slide-text-section {
+    max-width: 500px;
+  }
+
+  .product-title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .product-description {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+  }
+
+  .slide-image-section {
+    max-width: 550px;
+    height: 70vh;
+  }
+}
+
+/* ============================================
+   RESPONSIVIDADE - DESKTOP (≥ 1024px)
+   ============================================ */
+@media screen and (min-width: 1024px) {
+  .slide-item {
+    padding: 4rem 8%;
+  }
+
+  .slide-text-section {
+    max-width: 600px;
+  }
+
+  .product-title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .slide-image-section {
+    max-width: 650px;
+    height: 80vh;
+  }
+}
+
+/* ============================================
+   RESPONSIVIDADE - LARGE DESKTOP (≥ 1440px)
+   ============================================ */
+@media screen and (min-width: 1440px) {
+  .slide-item {
+    padding: 5rem 10%;
+    gap: 5rem;
+  }
+
+  .slide-text-section {
+    max-width: 700px;
+  }
+
+  .product-title {
+    font-size: clamp(3rem, 4vw, 4.5rem);
+  }
+
+  .product-description {
+    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+  }
+
+  .slide-image-section {
+    max-width: 750px;
+    height: 85vh;
+  }
+
+  .slide-nav-buttons {
+    right: 4rem;
+  }
+
+  .slide-nav-button {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
   }
 }
 

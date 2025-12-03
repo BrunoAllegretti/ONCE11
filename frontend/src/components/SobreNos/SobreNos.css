@@ -11,6 +11,13 @@
   background-color: #000;
 }
 
+/* Hide SobreNos on smaller screens */
+@media (max-width: 768px) {
+  .sobre-nos-wrapper {
+    display: none;
+  }
+}
+
 .sobre-nos-panel {
   border-radius: 5%;
   position: fixed;
@@ -18,14 +25,14 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #000;
+  background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
   transform: translateY(100vh);
   transition: border-radius 0.3s ease;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.6);
 }
 
 .sobre-nos-content {
@@ -34,8 +41,8 @@
   justify-content: space-between;
   max-width: 90%;
   width: 100%;
-  padding: 0 20px;
-  gap: 5%;
+  padding: 0 40px;
+  gap: 6%;
 }
 
 .sobre-nos-image {
@@ -47,133 +54,196 @@
 
 .sobre-nos-image img {
   transform: scaleX(-1);
-  max-width: 95%;
-  width: 92%;
+  max-width: 90%;
+  width: 88%;
   height: auto;
-  max-height: 80vh;
-  filter: brightness(0) invert(1);
+  max-height: 70vh;
+  filter: brightness(1.2) invert(1) drop-shadow(0 8px 24px rgba(255, 255, 255, 0.15));
   display: block;
+  border-radius: 0;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.sobre-nos-image img:hover {
+  transform: scaleX(-1) translateY(-4px);
+  filter: brightness(1.3) invert(1) drop-shadow(0 12px 32px rgba(255, 255, 255, 0.2));
 }
 
 .sobre-nos-text {
   flex: 1 1 48%;
   color: #fff;
-  max-width: 700px;
+  max-width: 720px;
 }
 
 .sobre-nos-text h2 {
-  font-size: clamp(2.5rem, 3.5vw, 4.6rem);
-  font-weight: bold;
+  font-size: clamp(2.8rem, 4vw, 5.2rem);
+  font-weight: 900;
   margin-bottom: 1.8rem;
   color: #fff;
-  line-height: 1.02;
+  line-height: 1.1;
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: Arial, sans-serif;
+  font-family: 'commons', 'Arial Black', Arial, sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .sobre-nos-text p {
-  font-size: clamp(1rem, 1.2vw, 1.4rem);
-  line-height: 1.6;
-  color: #fff;
+  font-size: clamp(1.05rem, 1.4vw, 1.6rem);
+  line-height: 1.8;
+  color: #e8e8e8;
   text-align: justify;
-  font-family: Arial, sans-serif;
-  font-weight: 400;
+  font-family: 'montN', 'Segoe UI', Arial, sans-serif;
+  font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsividade */
+/* Responsividade Desktop Grande */
 @media (min-width: 1600px) {
   .sobre-nos-content {
     max-width: 85%;
     gap: 8%;
-    padding: 0 20px;
+    padding: 0 60px;
   }
+  
   .sobre-nos-text h2 {
-    font-size: clamp(4.6rem, 4vw, 5.2rem);
+    font-size: clamp(4.8rem, 5vw, 6rem);
+    margin-bottom: 2rem;
   }
+  
   .sobre-nos-text p {
-    font-size: clamp(1.4rem, 1.4vw, 1.6rem);
+    font-size: clamp(1.5rem, 1.6vw, 1.8rem);
   }
-  .sobre-nos-image img {
-    max-height: 80vh;
-    width: 95%;
-  }
-}
-
-@media (max-width: 1200px) {
-  .sobre-nos-content {
-    max-width: 90%;
-    gap: 4%;
-    padding: 0 20px;
-  }
-  .sobre-nos-text h2 {
-    font-size: clamp(2.8rem, 3.2vw, 3.8rem);
-  }
-  .sobre-nos-text p {
-    font-size: clamp(1rem, 1.1vw, 1.25rem);
-  }
+  
   .sobre-nos-image img {
     max-height: 75vh;
-    width: 90%;
-  }
-}
-
-@media (max-width: 992px) {
-  .sobre-nos-content {
-    flex-direction: column;
-    padding: 40px 20px;
-    gap: 30px;
-    text-align: center;
-  }
-  .sobre-nos-text {
-    max-width: 100%;
-  }
-  .sobre-nos-text h2 {
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-    justify-content: center;
-  }
-  .sobre-nos-text p {
-    font-size: clamp(0.9rem, 2.5vw, 1.15rem);
-  }
-  .sobre-nos-image img {
-    max-height: 40vh;
     width: 92%;
   }
 }
 
-@media (max-width: 768px) {
+/* Laptop / Desktop Médio */
+@media (max-width: 1200px) {
   .sobre-nos-content {
-    flex-direction: column;
-    padding: 30px 15px;
-    gap: 20px;
-    text-align: center;
+    max-width: 90%;
+    gap: 5%;
+    padding: 0 32px;
   }
+  
   .sobre-nos-text h2 {
-    font-size: clamp(2rem, 5vw, 2.6rem);
+    font-size: clamp(2.6rem, 3.5vw, 4rem);
+    margin-bottom: 1.6rem;
   }
+  
   .sobre-nos-text p {
-    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
   }
+  
   .sobre-nos-image img {
-    max-height: 35vh;
-    width: 96%;
+    max-height: 68vh;
+    width: 90%;
   }
 }
 
+/* Tablet */
+@media (max-width: 992px) {
+  .sobre-nos-content {
+    flex-direction: column-reverse;
+    padding: 48px 28px;
+    gap: 36px;
+    text-align: center;
+  }
+  
+  .sobre-nos-text {
+    max-width: 100%;
+  }
+  
+  .sobre-nos-text h2 {
+    font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+    justify-content: center;
+    margin-bottom: 1.4rem;
+  }
+  
+  .sobre-nos-text p {
+    font-size: clamp(0.95rem, 2.8vw, 1.2rem);
+    text-align: center;
+  }
+  
+  .sobre-nos-image img {
+    max-height: 45vh;
+    width: 80%;
+    max-width: 400px;
+  }
+}
+
+/* Tablet Pequeno */
+@media (max-width: 768px) {
+  .sobre-nos-content {
+    flex-direction: column-reverse;
+    padding: 36px 20px;
+    gap: 28px;
+  }
+  
+  .sobre-nos-text h2 {
+    font-size: clamp(2rem, 5.5vw, 2.8rem);
+    margin-bottom: 1.2rem;
+  }
+  
+  .sobre-nos-text p {
+    font-size: clamp(0.9rem, 3.8vw, 1.1rem);
+    line-height: 1.7;
+  }
+  
+  .sobre-nos-image img {
+    max-height: 38vh;
+    width: 85%;
+    max-width: 350px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 576px) {
   .sobre-nos-content {
-    padding: 20px 10px;
-    gap: 15px;
+    padding: 28px 16px;
+    gap: 24px;
   }
+  
   .sobre-nos-text h2 {
-    font-size: clamp(1.8rem, 6vw, 2rem);
+    font-size: clamp(1.8rem, 7vw, 2.2rem);
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
   }
+  
   .sobre-nos-text p {
-    font-size: clamp(0.8rem, 4.5vw, 0.95rem);
+    font-size: clamp(0.85rem, 4.5vw, 1rem);
+    line-height: 1.65;
   }
+  
   .sobre-nos-image img {
-    max-height: 30vh;
-    width: 98%;
+    max-height: 32vh;
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+/* Mobile Pequeno */
+@media (max-width: 400px) {
+  .sobre-nos-content {
+    padding: 24px 12px;
+    gap: 20px;
+  }
+  
+  .sobre-nos-text h2 {
+    font-size: clamp(1.6rem, 8vw, 2rem);
+  }
+  
+  .sobre-nos-text p {
+    font-size: clamp(0.8rem, 5vw, 0.95rem);
+  }
+  
+  .sobre-nos-image img {
+    max-height: 28vh;
+    width: 92%;
   }
 }
