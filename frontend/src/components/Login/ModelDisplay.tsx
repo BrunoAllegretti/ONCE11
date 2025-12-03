@@ -1,146 +1,104 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Loader, useGLTF } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Loader, useGLTF, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 
-interface PhysicsBallProps {
+interface InteractiveBallProps {
   path: string;
   scale?: number;
-  radius?: number;
-  restitution?: number; // bounce factor (0..1)
-  linearDamping?: number; // 0..1 per-frame damping
 }
 
-const PhysicsBall: React.FC<PhysicsBallProps> = ({
-  path,
-  scale = 1,
-  radius = 0.9,
-  restitution = 0.95, // high restitution -> bouncy (zero-gravity feel)
-  linearDamping = 0.998, // slight damping so it eventually stops
-}) => {
+const InteractiveBall: React.FC<InteractiveBallProps> = ({ path, scale = 1.3 }) => {
   const gltf = useGLTF(path) as any;
   const groupRef = useRef<THREE.Group | null>(null);
+  const { viewport } = useThree();
+  
+  const [isDragging, setIsDragging] = useState(false);
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const targetRotation = useRef({ x: 0, y: 0 });
+  const velocity = useRef({ x: 0, y: 0 });
+  const lastPointer = useRef({ x: 0, y: 0 });
 
-  // position and velocity (only X and Y used; Z kept fixed)
-  const pos = useRef(new THREE.Vector3(0, 0, 0));
-  const vel = useRef(new THREE.Vector3(0, 0, 0));
-
-  // dragging state & last pointer sample to compute release velocity
-  const dragging = useRef(false);
-  const lastPointer = useRef<THREE.Vector3 | null>(null);
-  const lastTime = useRef<number | null>(null);
-  const planeZ = 0; // keep object in Z=0 plane
-
-  // world bounds (centered at origin)
-  const bounds = { x: 2.2, y: 2.2 }; // tweak to fit your scene
-
-  // update loop
   useFrame((state, delta) => {
-    if (!dragging.current) {
-      // integrate velocity (no gravity)
-      pos.current.addScaledVector(vel.current, delta);
+    if (!groupRef.current) return;
 
-      // collisions with bounds -> invert corresponding velocity component
-      // left / right (X)
-      if (pos.current.x - radius < -bounds.x) {
-        pos.current.x = -bounds.x + radius;
-        vel.current.x = -vel.current.x * restitution;
-      } else if (pos.current.x + radius > bounds.x) {
-        pos.current.x = bounds.x - radius;
-        vel.current.x = -vel.current.x * restitution;
-      }
-
-      // bottom / top (Y)
-      if (pos.current.y - radius < -bounds.y) {
-        pos.current.y = -bounds.y + radius;
-        vel.current.y = -vel.current.y * restitution;
-      } else if (pos.current.y + radius > bounds.y) {
-        pos.current.y = bounds.y - radius;
-        vel.current.y = -vel.current.y * restitution;
-      }
-
-      // damping
-      vel.current.multiplyScalar(linearDamping);
-    } else {
-      // while dragging keep velocity small so it doesn't jump
-      vel.current.multiplyScalar(0.9);
+    if (!isDragging) {
+      // Apply momentum
+      velocity.current.x *= 0.95;
+      velocity.current.y *= 0.95;
+      
+      targetRotation.current.y += velocity.current.x * delta * 2;
+      targetRotation.current.x += velocity.current.y * delta * 2;
+      // Base continuous rotation to keep model spinning
+      targetRotation.current.y += 0.3 * delta;
+      
+      // Clamp X rotation
+      targetRotation.current.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, targetRotation.current.x));
     }
 
-    // apply to object (keep Z constant)
-    if (groupRef.current) {
-      groupRef.current.position.set(pos.current.x, pos.current.y, planeZ);
-      // optionally add a little rotation to look nicer
-      groupRef.current.rotation.y += 0.6 * delta;
+    // Smooth interpolation
+    setRotation(prev => ({
+      x: THREE.MathUtils.lerp(prev.x, targetRotation.current.x, 0.1),
+      y: THREE.MathUtils.lerp(prev.y, targetRotation.current.y, 0.1)
+    }));
+
+    groupRef.current.rotation.x = rotation.x;
+    groupRef.current.rotation.y = rotation.y;
+
+    // Subtle floating animation
+    if (!isDragging) {
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
     }
   });
 
-  // pointer handlers attached to interactive wrapper
   const handlePointerDown = (e: any) => {
     e.stopPropagation();
-    dragging.current = true;
-    lastPointer.current = e.point.clone();
-    lastPointer.current.z = planeZ;
-    lastTime.current = e.timeStamp || performance.now();
-    // zero velocity while user holds
-    vel.current.set(0, 0, 0);
+    setIsDragging(true);
+    lastPointer.current = { x: e.clientX, y: e.clientY };
+    velocity.current = { x: 0, y: 0 };
   };
 
   const handlePointerMove = (e: any) => {
-    if (!dragging.current) return;
+    if (!isDragging) return;
     e.stopPropagation();
-    const now = e.timeStamp || performance.now();
-    const p = e.point.clone();
-    // constrain to planeZ
-    p.z = planeZ;
 
-    if (lastPointer.current && lastTime.current != null) {
-      const dt = Math.max((now - lastTime.current) / 1000, 1e-4);
-      // move only X and Y (user can drag horizontally & vertically)
-      const dx = p.x - lastPointer.current.x;
-      const dy = p.y - lastPointer.current.y;
-      // immediate position set
-      pos.current.x = p.x;
-      pos.current.y = p.y;
-      // velocity sample based on pointer motion (scale for nicer throw)
-      vel.current.set(dx / dt * 0.9, dy / dt * 0.9, 0);
-    } else {
-      pos.current.x = p.x;
-      pos.current.y = p.y;
-    }
+    const deltaX = e.clientX - lastPointer.current.x;
+    const deltaY = e.clientY - lastPointer.current.y;
 
-    lastPointer.current = p;
-    lastTime.current = now;
+    velocity.current.x = deltaX * 0.01;
+    velocity.current.y = -deltaY * 0.01;
+
+    targetRotation.current.y += deltaX * 0.01;
+    targetRotation.current.x += -deltaY * 0.01;
+    
+    targetRotation.current.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, targetRotation.current.x));
+
+    lastPointer.current = { x: e.clientX, y: e.clientY };
   };
 
-  const handlePointerUp = (e: any) => {
-    e.stopPropagation();
-    dragging.current = false;
-    lastPointer.current = null;
-    lastTime.current = null;
-    // on release vel.current already set from last pointerMove -> object will continue and bounce
+  const handlePointerUp = () => {
+    setIsDragging(false);
   };
 
   return (
-    <group ref={groupRef} scale={scale} dispose={null}>
-      <group
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={handlePointerUp}
-      >
-        <primitive object={gltf.scene} />
-      </group>
+    <group
+      ref={groupRef}
+      scale={scale}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+    >
+      <primitive object={gltf.scene} />
     </group>
   );
 };
 
-/* ---------- main display component ---------- */
-
 const modelConfigs = [
-  { name: "Basquete", path: "/ONCE11/mdl3D/mdls/basquete.glb", scale: 1.2 },
-  { name: "Futebol", path: "/ONCE11/mdl3D/mdls/futebol.glb", scale: 1.2 },
-  { name: "Volei", path: "/ONCE11/mdl3D/mdls/volei.glb", scale: 1.2 },
-  { name: "Tennis", path: "/ONCE11/mdl3D/mdls/tennis.glb", scale: 1.2 },
+  { name: "Basquete", path: "/ONCE11/mdl3D/mdls/basquete.glb", scale: 1.4 },
+  { name: "Futebol", path: "/ONCE11/mdl3D/mdls/futebol.glb", scale: 1.4 },
+  { name: "Volei", path: "/ONCE11/mdl3D/mdls/volei.glb", scale: 1.4 },
+  { name: "Tennis", path: "/ONCE11/mdl3D/mdls/tennis.glb", scale: 1.4 },
 ];
 
 const ModelDisplay: React.FC = () => {
@@ -148,30 +106,76 @@ const ModelDisplay: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentModelIndex((p) => (p + 1) % modelConfigs.length);
-    }, 7000);
+      setCurrentModelIndex((prev) => (prev + 1) % modelConfigs.length);
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
   const currentModel = modelConfigs[currentModelIndex];
 
   return (
-    <div style={{ width: "100%", height: "100%", minHeight: 300 }}>
-      <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[5, 5, 5]} intensity={0.8} />
-        <React.Suspense fallback={null}>
-          <PhysicsBall
-            key={currentModel.name}
-            path={currentModel.path}
-            scale={currentModel.scale}
-            radius={0.9}
-            restitution={0.95}
-            linearDamping={0.997}
+    <div className="model-display-wrapper">
+      <div className="model-canvas-container">
+        <Canvas shadows>
+          <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} />
+          
+          <ambientLight intensity={0.6} />
+          <directionalLight
+            position={[10, 10, 5]}
+            intensity={1.2}
+            castShadow
+            shadow-mapSize={[1024, 1024]}
           />
-        </React.Suspense>
-      </Canvas>
-      <Loader />
+          <directionalLight
+            position={[-10, -10, -5]}
+            intensity={0.4}
+            color="#a8ff3a"
+          />
+          <spotLight
+            position={[-10, 10, 5]}
+            angle={0.3}
+            penumbra={1}
+            intensity={0.6}
+            castShadow
+          />
+          <pointLight position={[0, 5, 0]} intensity={0.3} color="#ffffff" />
+          
+          <React.Suspense fallback={null}>
+            <InteractiveBall
+              key={currentModel.name}
+              path={currentModel.path}
+              scale={currentModel.scale}
+            />
+          </React.Suspense>
+        </Canvas>
+        <Loader
+          containerStyles={{
+            background: "rgba(0, 74, 173, 0.8)",
+          }}
+          innerStyles={{
+            background: "#a8ff3a",
+          }}
+          barStyles={{
+            background: "#a8ff3a",
+          }}
+        />
+      </div>
+      
+      <div className="model-indicator">
+        {modelConfigs.map((model, idx) => (
+          <button
+            key={model.name}
+            className={`indicator-dot ${idx === currentModelIndex ? "active" : ""}`}
+            onClick={() => setCurrentModelIndex(idx)}
+            aria-label={`Ver ${model.name}`}
+          />
+        ))}
+      </div>
+      
+      <div className="model-label">
+        <span className="model-name">{currentModel.name}</span>
+        <span className="model-hint">Arraste para interagir</span>
+      </div>
     </div>
   );
 };

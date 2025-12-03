@@ -17,7 +17,6 @@ export default function CartItem({ data }: CartItemProps) {
 
   const { removeFromCart, updateQuantity } = context;
 
-  // ⭐ IMPORTANTE: no seu backend o id é "_id"
   const { _id, image, name, price, quantity } = data;
 
   const [isRemoving, setIsRemoving] = useState(false);
@@ -41,20 +40,18 @@ export default function CartItem({ data }: CartItemProps) {
     }
   };
 
-  const productDetails = details || {
+  const productDetails = {
     proportions: '129cm (h) x 82cm (w)',
-    size: 'G',
-    color: 'Azul',
+    size: (data as any).size || 'M',
+    color: 'Produto Oficial',
   };
-
-  const hasOldPrice = oldPrice && oldPrice > price;
 
   return (
     <section className={`cart-item ${isRemoving ? 'removing' : ''}`}>
       
       {/* Parte de cima */}
       <div className="cart-item-top">
-        <img src={image} alt={name} className="cart-item-image" />
+        <img src={`/ONCE11/Products/${image}`} alt={name} className="cart-item-image" />
 
         <div className="cart-item-content">
           <h3 className="cart-item-title">{name}</h3>
@@ -106,14 +103,8 @@ export default function CartItem({ data }: CartItemProps) {
 
         {/* Preço */}
         <div className="cart-item-price-container">
-          {hasOldPrice && (
-            <span className="cart-item-old-price">
-              {`R$ ${oldPrice.toFixed(2)}`}
-            </span>
-          )}
-
           <h3 className="cart-item-price">
-            {`R$ ${(price * quantity).toFixed(2)}`}
+            {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price * quantity)}
           </h3>
         </div>
       </div>

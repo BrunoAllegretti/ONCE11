@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Colecoes.css';
 import { useLanguage } from '../../context/LanguageContext';
 // Assumindo que as imagens estão em ../../assets/img/
@@ -14,14 +15,16 @@ import playerH1 from '../../assets/img/hoquei1.jpeg';
 import playerH2 from '../../assets/img/hoquei2.jpeg';
 
 // Componente de um único slide
-function SlideColecao({ data, t }) {
+function SlideColecao({ data, t }: { data: any; t: (key: string) => string }) {
     return (
         <div className="slide-colecao">
             <div className="colecao-info">
                 <h1 className="colecao-titulo">{t('section_collections')}</h1>
                 <h2 className="colecao-subtitulo">{t(data.titleKey)}</h2>
                 <p className="colecao-descricao">{t(data.descKey)}</p>
-                <button className="colecao-botao">{t('button_view')}</button>
+                <Link to={data.route}>
+                    <button className="colecao-botao">{t('button_view')}</button>
+                </Link>
             </div>
             <div className="colecao-imagens">
                 <div className="imagem-container img1">
@@ -37,7 +40,6 @@ function SlideColecao({ data, t }) {
 
 export default function Colecoes() {
     const { t } = useLanguage();
-    
     const colecoesData = [
         {
             id: 1,
@@ -47,7 +49,8 @@ export default function Colecoes() {
             imagem2: PlayerBas,
             alt1Key: 'alt_text_lebron',
             alt2Key: 'alt_text_basketball_player',
-            className: 'slide-azul' 
+            className: 'slide-azul',
+            route: '/collections/colecao-basquete'
         },
         {
             id: 2,
@@ -57,17 +60,19 @@ export default function Colecoes() {
             imagem2: playerA2, 
             alt1Key: 'alt_text_athletics_player',
             alt2Key: 'alt_text_athletics_player',
-            className: 'slide-preto' 
+            className: 'slide-preto',
+            route: '/collections/colecao-atletismo'
         },
         {
             id: 3,
-            titleKey: 'collection_volleyball_title',
-            descKey: 'collection_volleyball_description',
+            titleKey: 'collection_beachtennis_title',
+            descKey: 'collection_beachtennis_description',
             imagem1: playerV1,
             imagem2: playerV2, 
-            alt1Key: 'alt_text_volleyball_player',
-            alt2Key: 'alt_text_volleyball_player',
-            className: 'slide-roxo' 
+            alt1Key: 'alt_text_beachtennis_player',
+            alt2Key: 'alt_text_beachtennis_player',
+            className: 'slide-roxo',
+            route: '/collections/colecao-beachtennis'
         },
         {
             id: 4,
@@ -77,7 +82,8 @@ export default function Colecoes() {
             imagem2: playerF2, 
             alt1Key: 'alt_text_football_player',
             alt2Key: 'alt_text_football_player',
-            className: 'slide-vermelho' 
+            className: 'slide-vermelho',
+            route: '/collections/colecao-reds'
         },
         {
             id: 5,
@@ -87,7 +93,8 @@ export default function Colecoes() {
             imagem2: playerH2, 
             alt1Key: 'alt_text_hockey_player',
             alt2Key: 'alt_text_hockey_player',
-            className: 'slide-branco' 
+            className: 'slide-branco',
+            route: '/collections/colecao-hoquei'
         }
     ];
 

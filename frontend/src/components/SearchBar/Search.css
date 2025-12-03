@@ -17,8 +17,15 @@
   font-style: normal;
 }
 
+/* Container principal da página de busca */
+.search-page {
+    background-color: #004aad;
+    min-height: 90vh;
+    padding-bottom: 2rem;
+}
+
 .busque {
-    margin-top: 150px;
+    padding-top: 150px;
     width: 100%;
     text-align: center;
     font-size: 60px;
@@ -212,26 +219,40 @@
   background: #073207;
 }
 
-/* Grid de Produtos */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 4 colunas em telas grandes, responsivo */
-  gap: 20px;
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 2rem;
+/* Mensagens de Loading e No Results */
+.loading-message,
+.no-results-message {
+  text-align: center;
+  font-family: 'commons', Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+  color: #ffffff;
+  margin: 4rem auto;
+  padding: 2rem;
+  max-width: 600px;
 }
 
-@media (min-width: 1024px) {
-  .products-grid {
-    grid-template-columns: repeat(4, 1fr); /* Força 4 colunas em telas maiores */
+.loading-message {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }
 
+.no-results-message {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
 /* Grid de Produtos */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 4 colunas em telas grandes, responsivo */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   max-width: 1200px;
   margin: 2rem auto;
@@ -240,7 +261,7 @@
 
 @media (min-width: 1024px) {
   .products-grid {
-    grid-template-columns: repeat(4, 1fr); /* Força 4 colunas em telas maiores */
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -269,17 +290,24 @@
   
   .busque {
     font-size: 40px;
-    margin-top: 100px;
+    padding-top: 100px;
+  }
+
+  .loading-message,
+  .no-results-message {
+    font-size: 1.5rem;
+    margin: 3rem auto;
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .busque {
     font-size: 30px;
-    margin-top: 80px;
+    padding-top: 80px;
   }
   
-  .filter-option {
+  .filter-option span {
     padding: 10px 12px;
     font-size: 0.9rem;
   }
@@ -291,5 +319,12 @@
   .search-bar {
     width: 95%;
     margin-left: 2.5%;
+  }
+
+  .loading-message,
+  .no-results-message {
+    font-size: 1.2rem;
+    margin: 2rem auto;
+    padding: 1rem;
   }
 }

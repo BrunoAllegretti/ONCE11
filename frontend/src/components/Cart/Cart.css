@@ -31,10 +31,10 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    background-color: #f4f4f4; /* Fundo mais claro para a página */
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* Garante que o container ocupe toda a altura */
+    min-height: 100vh;
 }
 
 /* SEÇÃO DO CARRINHO (Coluna Esquerda) */
@@ -42,9 +42,10 @@
     min-height: 88vh;
     height: auto;
     width: 60%;
-    background-color: #004aad; /* Fundo claro para a lista de itens */
-    padding: 30px;
-    color: #ffffff; /* Texto escuro */
+    background-color: #004aad;
+    padding: 40px 30px;
+    color: #ffffff;
+    overflow-y: auto;
 }
 
 .cart-items {
@@ -66,16 +67,16 @@
 .cart-resume {
     width: 40%;
     background-color: #ffffff;
-    padding: 30px;
+    padding: 40px 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    position: relative;
+    position: sticky;
     right: 0;
     top: 0;
     height: 88vh;
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
-    border-radius: 10px 0 0 10px; /* Borda arredondada no lado esquerdo */
+    border-radius: 10px 0 0 10px;
 }
 
 /* Para garantir que não tenha margens extras */
@@ -162,40 +163,41 @@ body, html {
 .row {
     z-index: 20;
     width: 100%;
-    height: 1px; /* Linha mais fina */
-    background-color: #eee; /* Cor mais suave */
+    height: 1px;
+    background-color: #eee;
     border: none;
+    margin: 10px 0;
 }
 
 .cart-summary-row {
-    margin-right: 0; /* Removendo margem direita */
-    margin-top: 0; /* Removendo margem superior */
+    margin-right: 0;
+    margin-top: 0;
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: none; /* Removendo a borda inferior duplicada */
-    font-size: 1.1rem; /* Tamanho de fonte ajustado */
+    padding: 12px 0;
+    border-bottom: none;
+    font-size: 1.1rem;
     font-family: 'norms', Arial, Helvetica, sans-serif;
     color: #333;
 }
 
 .cart-summary-row span:first-child {
     font-weight: normal;
-    font-size: 1rem; /* Tamanho de fonte ajustado */
+    font-size: 1rem;
     color: #555;
 }
 
 .cart-summary-row span:last-child {
     font-weight: bold;
-    color: #333; /* Cor mais neutra */
+    color: #333;
 }
 
 .cart-summary-row.total {
     font-weight: bold;
-    font-size: 1.5rem; /* Tamanho de fonte maior para o total */
-    border-top: 2px solid var(--primary-blue); /* Linha de destaque para o total */
-    padding-top: 15px;
-    margin-top: 15px;
+    font-size: 1.5rem;
+    border-top: 2px solid var(--primary-blue);
+    padding-top: 20px;
+    margin-top: 20px;
     color: var(--primary-blue);
     text-shadow: none;
 }
@@ -206,7 +208,7 @@ body, html {
 }
 
 .cart-summary-row.total span:last-child {
-    font-size: 1.8rem; /* Tamanho de fonte ajustado */
+    font-size: 2rem;
     color: var(--primary-blue);
 }
 

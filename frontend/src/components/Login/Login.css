@@ -51,23 +51,105 @@ body {
 
 .left-column {
     height: 88vh;
-    width: 50%; /* 40% para o bloco 3D */
-    background-color: #004aad; /* Alterado para a cor de fundo principal */
+    width: 50%;
+    background-color: #004aad; /* match login background color */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0; /* Removido o padding para o canvas preencher */
-    overflow: hidden; /* Garante que nada transborde */
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.model-display-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-20px); /* lift the 3D models slightly up */
+}
+
+.model-canvas-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+}
+
+.model-canvas-container:active {
+    cursor: grabbing;
+}
+
+.model-indicator {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.indicator-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+}
+
+.indicator-dot.active {
+    background: #a8ff3a;
+    border-color: #a8ff3a;
+    box-shadow: 0 0 10px rgba(168, 255, 58, 0.6);
+}
+
+.model-label {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 10;
+}
+
+.model-name {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'commons', Arial, Helvetica, sans-serif;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.model-hint {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-family: 'spa', Arial, Helvetica, sans-serif;
 }
 
 .right-column {
     width: 50%;
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
+    background-color: #004aad; /* match login background */
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 40px;
+    align-items: flex-start; /* push content higher */
+    padding: 24px; /* tighter padding */
 }
 
 /* Ajuste para quando o Register estiver ativo, ocupando 100% da tela */
@@ -92,9 +174,9 @@ body {
 }
 
 .login-form {
-    margin-left: 7.5%;
+    margin-left: 5%;
     width: 80%;
-    padding: 20px;
+    padding: 12px; /* reduce inner padding */
 }
 
 /* Estilos para o Register.tsx */
@@ -201,7 +283,8 @@ body {
     color: white;
     font-size: 6.25rem;
     font-weight: bold;
-    margin-bottom: 100px;
+    margin-bottom: 40px; /* bring heading closer to top */
+    margin-top: 0; /* ensure no extra top spacing */
     text-align: left;
 }
 
@@ -210,7 +293,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 18px; /* inputs closer together */
     text-align: left;
 }
 
@@ -223,7 +306,7 @@ body {
 }
 
 .passwordLabel {
-    margin-top: 50px;
+    margin-top: 24px; /* reduce gap before password */
 }
 
 .login-input {
@@ -250,7 +333,7 @@ body {
     flex-direction: column;
     gap: 10px;
     align-items: flex-end;
-    margin-top: 30px;
+    margin-top: 16px; /* bring button closer */
 }
 
 .no-account-link, .forgot-password-link {
@@ -273,13 +356,13 @@ body {
 
 .login-button {
     width: 40%;
-    padding: 20px 20px;
+    padding: 14px 16px; /* smaller button height */
     background-color: #a8ff3a;
     color: #004aad;
     border: none;
-    border-radius: 40px;
+    border-radius: 32px;
     font-family: 'commons',Arial, Helvetica, sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
@@ -342,14 +425,11 @@ input[type="checkbox"] {
 /* TABLETS (600px a 768px) */
 @media (min-width: 600px) and (max-width: 768px) {
     .login-content {
-        flex-direction: column; /* Empilha as colunas no tablet */
+        flex-direction: column;
     }
 
     .left-column {
-        width: 100%;
-        height: 150px; /* Altura menor para o bloco 3D */
-        writing-mode: horizontal-tb;
-        font-size: 1.5rem;
+        display: none; /* Hide 3D models on tablet for cleaner layout */
     }
 
     .right-column {
@@ -399,20 +479,18 @@ input[type="checkbox"] {
 /* MOBILE (<= 600px) */
 @media (max-width: 600px) {
     .login-content {
-        flex-direction: column; /* Empilha as colunas no mobile */
+        flex-direction: column;
     }
 
     .left-column {
-        width: 100%;
-        height: 100px; /* Altura menor para o bloco 3D */
-        writing-mode: horizontal-tb;
-        font-size: 1.2rem;
+        display: none; /* Hide 3D models on mobile */
     }
 
     .right-column {
         width: 100%;
-        padding: 20px;
-        justify-content: center; /* Centraliza o formulário no mobile */
+        padding: 16px;
+        justify-content: flex-start; /* keep content higher */
+        align-items: flex-start;
     }
 
     .login-form {
@@ -443,7 +521,8 @@ input[type="checkbox"] {
 
     .login-title {
         font-size: 3rem;
-        margin-bottom: 30px;
+        margin-bottom: 20px; /* tighter spacing on mobile */
+        margin-top: 0;
     }
 
     .form-group {
@@ -477,8 +556,8 @@ input[type="checkbox"] {
 
     .login-button {
         width: 100%;
-        padding: 12px 15px;
-        font-size: 1.2rem;
+        padding: 12px 14px;
+        font-size: 1.1rem;
     }
 
     .no-account-link {

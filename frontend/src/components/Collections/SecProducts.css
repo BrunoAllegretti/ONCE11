@@ -7,12 +7,12 @@
 
 
 .sec-products-container {
-    width: 80%;
-    border-radius: 30px;
-    padding: 40px 20px;
-    background-color: #ecececef;
+    width: 90%;
+    border-radius: 24px;
+    padding: 40px 24px;
+    background-color: transparent;
     font-family: 'Jost', sans-serif;
-    margin: 100px 10%;
+    margin-left: 5%;
 }
 
 .sec-products-container h2 {
@@ -25,15 +25,48 @@
 }
 
 .products-grid {
-    display: grid;
-    /* Configuração de grid responsivo: 
-       - Repete automaticamente as colunas.
-       - minmax(280px, 1fr) garante que cada coluna tenha no mínimo 280px e ocupe o espaço restante (1fr).
-       - Isso cria o layout de "quadrilátero" (grid) que o usuário solicitou. */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px; /* Espaçamento entre os cards */
-    max-width: 1200px; /* Largura máxima para centralizar o grid */
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    max-width: 1800px;
     margin: 0 auto;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.load-more-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.load-more-btn {
+    background: #ffffff10;
+    color: #fff;
+    border: 1px solid #ffffff33;
+    border-radius: 999px;
+    padding: 12px 22px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.load-more-btn:hover {
+    transform: translateY(-1px);
+    background: #ffffff20;
+    border-color: #ffffff66;
+}
+
+.load-more-btn.secondary {
+    background: #ffffff08;
+    border-color: #ffffff22;
+}
+
+.load-more-btn.secondary:hover {
+    background: #ffffff14;
+    border-color: #ffffff55;
 }
 
 /* Estilos para o Card.css (apenas para garantir que o card se ajuste ao grid) */
@@ -47,8 +80,14 @@
     .sec-products-container h2 {
         font-size: 28px;
     }
-    
     .products-grid {
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

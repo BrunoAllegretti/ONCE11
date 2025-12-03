@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 
@@ -9,64 +9,53 @@ import 'swiper/css/pagination';
 
 import Card from '../Card/Card';
 import './Carousel.css';
+import { fetchProducts, Product } from '../../services/api';
 
-// Mock Product interface based on Card.tsx usage
-// Em um projeto real, esta interface viria de um arquivo de tipos compartilhado
-interface Product {
-  _id: string;
-  name: string;
-  image: string;
-  description: string;
-  price: number;
+interface CarouselProps {
+  filter?: string; // Filtro opcional para carregar produtos específicos
 }
 
-// Mock data para 6 produtos
-const mockProducts: Product[] = [
-  {
-    _id: '1',
-    name: 'Tênis Basquete A',
-    image: 'https://via.placeholder.com/400x500/0000FF/FFFFFF?text=Produto+1',
-    description: 'O melhor tênis para quadras indoor.',
-    price: 499.90,
-  },
-  {
-    _id: '2',
-    name: 'Camisa Time B',
-    image: 'https://via.placeholder.com/400x500/FF0000/FFFFFF?text=Produto+2',
-    description: 'Camisa oficial da temporada 2024.',
-    price: 199.90,
-  },
-  {
-    _id: '3',
-    name: 'Bola Oficial C',
-    image: 'https://via.placeholder.com/400x500/00FF00/FFFFFF?text=Produto+3',
-    description: 'Bola de basquete com grip profissional.',
-    price: 149.90,
-  },
-  {
-    _id: '4',
-    name: 'Shorts D',
-    image: 'https://via.placeholder.com/400x500/FFFF00/000000?text=Produto+4',
-    description: 'Shorts leve e respirável para jogos.',
-    price: 99.90,
-  },
-  {
-    _id: '5',
-    name: 'Meia E',
-    image: 'https://via.placeholder.com/400x500/FF00FF/FFFFFF?text=Produto+5',
-    description: 'Meias de compressão para alta performance.',
-    price: 49.90,
-  },
-  {
-    _id: '6',
-    name: 'Protetor F',
-    image: 'https://via.placeholder.com/400x500/00FFFF/000000?text=Produto+6',
-    description: 'Protetor bucal essencial para o jogo.',
-    price: 29.90,
-  },
-];
+export default function Carrossel3D({ filter }: CarouselProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export default function Carrossel3D() {
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        const allProducts = await fetchProducts();
+        
+        let filtered = allProducts;
+        
+        // Se tiver filtro, aplicar filtro
+        if (filter) {
+          filtered = allProducts.filter(product => 
+            product.filters.some(f => f.toLowerCase() === filter.toLowerCase()) &&
+            product.isBestSeller === true &&
+            !product.name.toLowerCase().includes('wilson evolution') &&
+            product.name !== 'Bola de Basquete Wilson NCAA Oficial'
+          );
+        }
+        
+        // Limitar a 5 produtos
+        setProducts(filtered.slice(0, 5));
+      } catch (error) {
+        console.error('Erro ao carregar produtos do carrossel:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, [filter]);
+
+  if (loading) {
+    return <div className="carousel-3d-wrapper">Carregando produtos...</div>;
+  }
+
+  if (products.length === 0) {
+    return <div className="carousel-3d-wrapper">Nenhum produto disponível.</div>;
+  }
   const swiperParams = {
     effect: "coverflow" as const,
     loop: true,
@@ -78,7 +67,7 @@ export default function Carrossel3D() {
       stretch: 0,
       depth: 100,
       modifier: 1,
-      slideShadows: true
+      slideShadows: false
     },
     pagination: {
       clickable: true,
@@ -110,9 +99,8 @@ export default function Carrossel3D() {
   return (
     <div className="carousel-3d-wrapper">
       <Swiper {...swiperParams} className="swiper-3d-carousel">
-        {mockProducts.map((product, index) => (
-          <SwiperSlide key={index} className="swiper-slide-card">
-            {/* O Card.tsx já tem a estrutura de um slide */}
+        {products.map((product) => (
+          <SwiperSlide key={product._id} className="swiper-slide-card">
             <Card product={product} />
           </SwiperSlide>
         ))}

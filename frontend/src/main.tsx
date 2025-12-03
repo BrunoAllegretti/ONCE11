@@ -13,6 +13,7 @@ import Error404 from './components/404/error404';
 import Colecoes from './components/Collections/Colecoes';
 import { UserProvider } from './context/UserContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { CartProvider } from './context/CartContext';
 import BeachTennis from './components/Coleções/BeachTennis';
 import Reds from './components/Coleções/Reds';
 import Hoquei from './components/Coleções/Hoquei';
@@ -57,9 +58,11 @@ ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <UserProvider>
       <LanguageProvider>
-        <Provider>
-          <RouterProvider router={router} />
-        </Provider>
+        <CartProvider>
+          <Provider>
+            <RouterProvider router={router} />
+          </Provider>
+        </CartProvider>
       </LanguageProvider>
     </UserProvider>
   </React.StrictMode>

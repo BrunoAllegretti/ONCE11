@@ -84,12 +84,12 @@ export default function Search() {
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-    if (!searchValue.trim()) {
-      alert(t('placeholder_search_products'));
+    // Se não há texto mas há filtros, faça busca por filtros
+    if (!searchValue.trim() && (filters.selectedFilters.length > 0 || filters.priceRange)) {
+      await handleFilterSearch();
       return;
     }
-    
+
     setLoading(true);
 
     try {
@@ -108,7 +108,8 @@ export default function Search() {
     setLoading(true);
 
     try {
-      const prod = await fetchProducts(searchValue || '');
+      // Para filtros, buscamos todos os produtos (sem termo) e aplicamos filtros locais
+      const prod = await fetchProducts('');
       const filtered = applyFilters(prod);
       setProducts(filtered);
     } catch (error) {
@@ -147,7 +148,7 @@ export default function Search() {
   };
 
   return (
-    <>
+    <div className="search-page">
       <h2 className="busque">{t('heading_search')}</h2>
 
       <form className="search-bar" onSubmit={handleSearch}>
@@ -249,6 +250,6 @@ export default function Search() {
       {products && products.length === 0 && !loading && (
         <p className="no-results-message">{t('message_no_results')}</p>
       )}
-    </>
+    </div>
   );
 }

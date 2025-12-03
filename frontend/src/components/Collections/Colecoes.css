@@ -1,172 +1,503 @@
 /* Estilos para o componente Colecoes */
 
 .colecoes-carrossel {
-    /* O background-color será definido por slide no TSX */
     color: white;
     width: 100%;
-    height: 100vh; /* Altura total da viewport */
+    min-height: 100vh;
     overflow: hidden;
     position: relative;
-    transition: background-color 0.5s ease-in-out; /* Transição de cor de fundo */
+    transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
 }
 
 .carrossel-wrapper {
     display: flex;
     height: 100%;
-    /* A transição do transform será controlada pelo TSX */
-    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide-colecao {
     flex-shrink: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 0 10%; /* Aumentando o padding lateral */
+    justify-content: space-between;
+    padding: 4rem 8%;
+    gap: 4rem;
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Estilos para a seção de informações (texto) */
 .colecao-info {
-    width: 45%;
+    flex: 1;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-right: 20px;
+    z-index: 2;
 }
 
 .colecao-titulo {
-    font-size: 5rem; /* Aumentando o tamanho para Coleções */
-    font-weight: 900; /* Peso de fonte mais alto */
-    margin-bottom: 10px;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .colecao-subtitulo {
-    font-size: 2.5rem; /* Aumentando o tamanho para COLEÇÃO BASQUETE */
-    font-weight: 700; /* Peso de fonte mais alto */
-    margin-bottom: 20px;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    background: linear-gradient(135deg, var(--cor-destaque, #99FF33) 0%, rgba(255, 255, 255, 0.9) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: slideInLeft 0.9s ease-out;
 }
 
 .colecao-descricao {
-    font-size: 1.3rem; /* Aumentando um pouco a descrição */
-    line-height: 1.5;
-    font-style: italic; /* Adicionando itálico para a descrição */
-    margin-bottom: 40px;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    font-weight: 300;
+    max-width: 500px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    animation: slideInLeft 1s ease-out;
 }
 
 .colecao-botao {
-    background-color: var(--cor-destaque, #99FF33); /* Cor de destaque, padrão verde limão */
+    background: linear-gradient(135deg, var(--cor-destaque, #99FF33) 0%, var(--cor-destaque-hover, #B2FF66) 100%);
     color: black;
     border: none;
-    padding: 15px 40px;
-    font-size: 1.3rem;
-    font-weight: bold;
+    padding: 1rem 3rem;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 700;
     border-radius: 50px;
     cursor: pointer;
     width: fit-content;
-    transition: background-color 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: slideInLeft 1.1s ease-out;
+}
+
+.colecao-botao::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.colecao-botao:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .colecao-botao:hover {
-    background-color: var(--cor-destaque-hover, #B2FF66);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.colecao-botao:active {
+    transform: translateY(-1px) scale(1.02);
 }
 
 /* Estilos para a seção de imagens */
 .colecao-imagens {
-    width: 45%;
-    height: 70%; 
+    flex: 1;
+    max-width: 600px;
+    height: 70vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
 }
 
 .imagem-container {
     height: 100%;
-    width: 40%;
-    padding: 10px;
-    border: 5px solid var(--cor-destaque, #99FF33); 
-    background-color: transparent;
+    flex: 1;
+    padding: 12px;
+    border: 4px solid var(--cor-destaque, #99FF33);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
     box-sizing: border-box;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.imagem-container:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-width: 5px;
 }
 
 .img1 {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .img2 {
-    margin-top: 3rem;
+    margin-top: 4rem;
+    animation: slideInRight 1s ease-out;
 }
 
 .imagem-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+}
+
+.imagem-container:hover img {
+    transform: scale(1.1);
 }
 
 /* Estilos para os botões de navegação */
 .carrossel-nav {
-
     position: absolute;
-    top: 50%;
-    right: 7.5%; 
-    transform: translateY(-50%);
+    bottom: 3rem;
+    right: 50%;
+    transform: translateX(50%);
     display: flex;
-    flex-direction: row; 
-    gap: 10px;
+    gap: 1rem;
+    z-index: 10;
 }
 
 .nav-button {
-    background-color: rgba(0, 0, 0, 0.904); 
-    color: white;
-    border: none;
-    width: 50px;
-    height: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--cor-destaque, #99FF33);
+    border: 2px solid var(--cor-destaque, #99FF33);
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    font-size: 1.8rem;
+    font-size: 2rem;
+    font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s;
-}
-
-.prev-button {
-    margin-top: 3rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .nav-button:hover {
-    background-color: rgba(255, 255, 255, 0.4);
+    background: var(--cor-destaque, #99FF33);
+    color: black;
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.nav-button:active {
+    transform: scale(1.05);
 }
 
 /* Classes para cores de fundo e destaque (serão aplicadas no TSX) */
 .slide-azul {
-    background-color: #0044CC; 
+    background: linear-gradient(-45deg, #0033aa, #0055dd, #0044cc, #0066ff);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     --cor-destaque: #99FF33;
     --cor-destaque-hover: #B2FF66;
 }
 
 .slide-preto {
-    background-color: #000000; 
-    --cor-destaque: #d8ff3d; 
+    background: linear-gradient(-45deg, #000000, #1a1a1a, #0a0a0a, #2a2a2a);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    --cor-destaque: #d8ff3d;
     --cor-destaque-hover: #ceff0a;
 }
 
 .slide-roxo {
-    background-color: #760ded;
+    background: linear-gradient(-45deg, #5a0bc4, #760ded, #8b1fff, #9b3dff);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     --cor-destaque: #dbff3c;
-    --cor-destaque-hover: #dbff3c;
+    --cor-destaque-hover: #f0ff6a;
 }
 
 .slide-vermelho {
-    background-color: #ac0000 ;
+    background: linear-gradient(-45deg, #8b0000, #ac0000, #c50000, #d60000);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     --cor-destaque: #d5e3e7;
-    --cor-destaque-hover: #d5e3e7;
+    --cor-destaque-hover: #ffffff;
 }
 
 .slide-branco {
-    background-color: #F1F9F9  ;
-    --cor-destaque: #750d0d ;
-    --cor-destaque-hover: #750d0d;
+    background: linear-gradient(-45deg, #e8f5f5, #F1F9F9, #ffffff, #f5fcfc);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    --cor-destaque: #750d0d;
+    --cor-destaque-hover: #a01515;
     color: black;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ============================================
+   RESPONSIVIDADE - MOBILE (≤ 600px)
+   ============================================ */
+@media screen and (max-width: 600px) {
+    .slide-colecao {
+        flex-direction: column;
+        padding: 2rem 5%;
+        gap: 2rem;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .colecao-info {
+        max-width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .colecao-titulo {
+        font-size: clamp(2rem, 10vw, 3rem);
+        margin-bottom: 0.5rem;
+    }
+
+    .colecao-subtitulo {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        margin-bottom: 1rem;
+    }
+
+    .colecao-descricao {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        margin-bottom: 1.5rem;
+        max-width: 100%;
+    }
+
+    .colecao-botao {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .colecao-imagens {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 400px;
+        flex-direction: row;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .imagem-container {
+        height: 250px;
+        padding: 8px;
+        border-width: 3px;
+        border-radius: 15px;
+    }
+
+    .img1 {
+        margin-bottom: 0;
+        margin-right: 0;
+    }
+
+    .img2 {
+        margin-top: 0;
+        margin-left: 0;
+    }
+
+    .carrossel-nav {
+        bottom: 1.5rem;
+        gap: 0.8rem;
+    }
+
+    .nav-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        border-width: 2px;
+    }
+}
+
+/* ============================================
+   RESPONSIVIDADE - TABLET (601px - 768px)
+   ============================================ */
+@media screen and (min-width: 601px) and (max-width: 768px) {
+    .slide-colecao {
+        flex-direction: column;
+        padding: 3rem 6%;
+        gap: 3rem;
+        justify-content: center;
+    }
+
+    .colecao-info {
+        max-width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .colecao-titulo {
+        font-size: clamp(3rem, 8vw, 4.5rem);
+        margin-bottom: 0.8rem;
+    }
+
+    .colecao-subtitulo {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+        margin-bottom: 1.2rem;
+    }
+
+    .colecao-descricao {
+        font-size: clamp(1.1rem, 3vw, 1.3rem);
+        margin-bottom: 2rem;
+        max-width: 600px;
+    }
+
+    .colecao-botao {
+        padding: 1rem 2.5rem;
+        font-size: 1.2rem;
+    }
+
+    .colecao-imagens {
+        width: 100%;
+        max-width: 550px;
+        height: 50vh;
+        gap: 1.5rem;
+    }
+
+    .imagem-container {
+        padding: 10px;
+        border-radius: 18px;
+    }
+
+    .img1 {
+        margin-bottom: 2rem;
+    }
+
+    .img2 {
+        margin-top: 2rem;
+    }
+
+    .carrossel-nav {
+        bottom: 2rem;
+    }
+
+    .nav-button {
+        width: 55px;
+        height: 55px;
+        font-size: 1.8rem;
+    }
+}
+
+/* ============================================
+   RESPONSIVIDADE - DESKTOP (≥ 1024px)
+   ============================================ */
+@media screen and (min-width: 1024px) {
+    .slide-colecao {
+        padding: 4rem 10%;
+    }
+
+    .colecao-titulo {
+        font-size: clamp(4rem, 6vw, 6rem);
+    }
+
+    .colecao-subtitulo {
+        font-size: clamp(2.2rem, 3vw, 3rem);
+    }
+
+    .colecao-descricao {
+        font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+    }
+
+    .colecao-imagens {
+        max-width: 700px;
+        height: 75vh;
+    }
+
+    .imagem-container {
+        border-radius: 20px;
+    }
+}
+
+/* ============================================
+   RESPONSIVIDADE - LARGE DESKTOP (≥ 1440px)
+   ============================================ */
+@media screen and (min-width: 1440px) {
+    .slide-colecao {
+        padding: 5rem 12%;
+        gap: 5rem;
+    }
+
+    .colecao-info {
+        max-width: 700px;
+    }
+
+    .colecao-imagens {
+        max-width: 800px;
+        height: 80vh;
+    }
 }

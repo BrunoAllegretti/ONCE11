@@ -38,20 +38,48 @@
 .banner-button {
   background-color: white;
   border: none;
-  color: black;
+  color: #004aad;
   font-family: 'norms', Arial, Helvetica, sans-serif;
   font-size: clamp(16px, 1.5vw, 28px);
+  font-weight: 600;
   border-radius: 50px;
   margin-top: 50px;
   padding: 1.5vw 4vw;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.banner-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(0, 74, 173, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.banner-button:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .banner-button:hover {
-  background-color: #f0f0f0;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #47ca00;
+  color: white;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(71, 202, 0, 0.4);
+}
+
+.banner-button:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 15px rgba(71, 202, 0, 0.3);
 }
 
 .banner-image {
@@ -68,7 +96,7 @@
   
   .banner-image {
     max-width: 45%;
-    margin-left: 3%;
+    margin-left: 15%;
   }
   
   .escr {
@@ -84,27 +112,57 @@
 @media (max-width: 768px) {
   .banner-section {
     flex-direction: column;
+    justify-content: center;
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 3rem 1.5rem;
+    height: auto;
+    min-height: 100vh;
   }
   
   .banner-title {
-    font-size: 8vw;
+    font-size: 10vw;
     margin-bottom: 2rem;
+    line-height: 1.2;
   }
   
   .banner-image {
-    max-width: 60%;
+    max-width: 70%;
+    width: 70%;
     margin: 2rem auto 0 auto;
+    order: -1;
   }
   
   .escr {
     margin-left: 0;
+    width: 100%;
   }
   
   .banner-button {
-    font-size: clamp(12px, 4vw, 18px);
-    padding: 3vw 8vw;
+    font-size: 16px;
+    padding: 14px 40px;
     margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-section {
+    padding: 2rem 1rem;
+  }
+  
+  .banner-title {
+    font-size: 12vw;
+    margin-bottom: 1.5rem;
+  }
+  
+  .banner-image {
+    max-width: 80%;
+    width: 80%;
+    margin: 1.5rem auto 0 auto;
+  }
+  
+  .banner-button {
+    font-size: 14px;
+    padding: 12px 32px;
+    margin-top: 1.5rem;
   }
 }

@@ -12,10 +12,12 @@
     padding: 0;
     color: white;
     width: 100%;
-    height: 90vh;
+    min-height: 90vh;
+    background-color: #004aad;
     /* Adicionado: Layout de duas colunas */
     display: flex;
     flex-direction: row;
+  align-items: center; /* Centraliza verticalmente as colunas */
 }
 
 .errorText {
@@ -24,9 +26,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
+  height: 100%; /* Preenche a altura do contêiner para centrar verticalmente */
     width: 50%;
-    position: relative; /* Para posicionar a bola */
+    position: relative; 
 }
 
 .h404 {
@@ -40,8 +42,8 @@
 }
 
 .bola404 {
-    /* Estilo para a bola no centro do 404 */
-    width: 12rem; /* Ajuste conforme o tamanho do 404 */
+
+    width: 12rem; 
     height: 12rem;
     border: none;
     object-fit: cover;
